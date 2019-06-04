@@ -1,0 +1,6 @@
+package com.ch9;
+
+public abstract class Unit {
+	public Unit() {}
+	public abstract void move();
+}

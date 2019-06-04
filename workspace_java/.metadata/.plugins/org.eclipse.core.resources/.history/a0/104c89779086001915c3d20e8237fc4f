@@ -1,0 +1,10 @@
+package com.ch9;
+
+public class StarCraftTest {
+
+	public static void main(String[] args) {
+		Unit myUnit = new Marine();
+		myUnit = new Tank();
+		myUnit = new DropShip();
+	}
+}

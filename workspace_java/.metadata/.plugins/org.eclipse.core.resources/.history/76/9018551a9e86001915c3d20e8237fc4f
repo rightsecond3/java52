@@ -1,0 +1,21 @@
+package com.ch10;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+public class ListTest {
+
+	public static void main(String[] args) {
+		//싱글 스레드에서 안전함. - 대신 읽고 쓰기 속도는 빠르다.
+		ArrayList<String> deptList = new ArrayList<String>();
+		//멀티 스레드에서 안전함. - 대신 읽고 쓰기가 느리다.
+		Vector<String> v_deptList = new Vector<String>();
+		List<String> a_list = new ArrayList<String>();
+		a_list.add("사과");
+		a_list.add("딸기");
+		a_list.add("수박");
+		List<String> v_list = new Vector<String>();
+	}
+
+}

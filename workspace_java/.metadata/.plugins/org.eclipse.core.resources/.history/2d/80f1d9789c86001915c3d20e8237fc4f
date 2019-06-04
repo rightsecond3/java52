@@ -1,0 +1,9 @@
+package com.ch10;
+/*
+ * 추상클래스보다 더 추상적이다.
+ */
+public interface Movable {
+	final int _I=0;
+	abstract void move(int x, int y);
+	public void back();
+}

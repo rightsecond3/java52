@@ -1,0 +1,20 @@
+package com.ch9;
+
+public class DropShip extends Unit {
+
+	@Override
+	void move(int x, int y) {
+		// TODO Auto-generated method stub
+
+	}
+	void load() {
+		
+	}
+	void unload() {
+		
+	}
+	@Override
+	void display() {
+		System.out.println("나는 드랍쉽입니다.");
+	}
+}
