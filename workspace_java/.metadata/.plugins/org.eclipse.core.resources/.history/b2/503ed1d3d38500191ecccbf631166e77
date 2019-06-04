@@ -1,0 +1,12 @@
+package com.ch8;
+
+public class FigureAreaSimulation {
+
+	public static void main(String[] args) {
+		FigureArea fa = new FigureArea() ;
+		fa.area(4);
+		fa.area(30, 2);
+		fa.area(20, 10);
+	}
+
+}

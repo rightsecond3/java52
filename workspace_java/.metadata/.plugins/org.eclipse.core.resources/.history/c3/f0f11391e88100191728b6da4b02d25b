@@ -1,0 +1,16 @@
+package com.quiz0529;
+
+import javax.swing.JButton;
+
+public class Question1 {
+
+	public static void main(String[] args) {
+		int []x = {1,2,3,4,5};
+		int y[] = x;
+		System.out.println(y[2]);//3번째
+		JButton jbtn_save = new JButton("저장");
+		JButton jbtn_imsi = null;
+		jbtn_imsi = jbtn_save;
+		System.out.println(jbtn_imsi.getText());//저장
+	}
+}

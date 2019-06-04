@@ -1,0 +1,15 @@
+package com.ch8;
+
+public class Son extends Father{
+	String book = "성경책";
+	public Son() {
+		System.out.println("Son 디폴트 생성자 호출");
+	}
+	public Son(String book) {
+		this.book=book;
+	}
+
+	public void walk() {
+		System.out.println("아빠는 걷는 중....");
+	}
+}

@@ -1,0 +1,14 @@
+package quiz0510;
+
+public class SingleTon {
+	static SingleTon st= null;
+	public void methodA() {
+		System.out.println("집에가라");
+	}
+	public static SingleTon getInstance(){
+		if(st==null) {
+			st = new SingleTon();
+		}
+		return st;
+	}
+}

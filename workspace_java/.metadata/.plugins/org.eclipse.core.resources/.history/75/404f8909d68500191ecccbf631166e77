@@ -1,0 +1,9 @@
+package com.ch8;
+
+public class SupNSubSumulation {
+	
+	public static void main(String[] args) {
+	Sup sup1 = new Sub();
+	//methodA와 methodB를 호출하시오.
+	}
+}

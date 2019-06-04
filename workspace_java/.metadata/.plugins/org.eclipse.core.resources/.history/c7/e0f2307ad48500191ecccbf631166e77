@@ -1,0 +1,16 @@
+package com.ch8;
+
+public class FigureAreaSimulation {
+
+	public static void main(String[] args) {
+		FigureArea fa = new FigureArea() ;
+		//원
+		System.out.println(fa.area(10));
+		//삼각형
+		System.out.println(fa.area(10, 10));
+		//사각형
+		double = r_area = fa.area(10, 10);
+		System.out.println(r_area);
+	}
+
+}

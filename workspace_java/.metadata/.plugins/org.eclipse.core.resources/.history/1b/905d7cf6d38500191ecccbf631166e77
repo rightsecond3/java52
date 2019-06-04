@@ -1,0 +1,19 @@
+package com.ch8;
+
+public class FigureArea {
+	//삼각형의 면적을 구해줄래?
+	public double area(float width, double height) {
+		double t_area = width*height/2;
+		return t_area;
+	}
+	//사각형의 면적을 구해볼까?
+	public double area(double width, double height) {
+		double r_area = width*height;
+		return r_area;
+	}
+	//원의 면적은 얼마니?
+	public double area(double radius) {
+		double c_area = 3.14*(radius*radius);
+		return c_area;
+	}
+}

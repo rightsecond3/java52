@@ -1,0 +1,9 @@
+package com.ch8;
+
+public class Car {
+	int wheel = 0;
+	String color = null;
+	int speed = 0;
+	
+	private 
+}

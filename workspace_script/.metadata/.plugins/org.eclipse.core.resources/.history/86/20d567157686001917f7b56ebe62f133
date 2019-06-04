@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<!-- head영역에는 CSS소스를 추가하거나 JavaScript 소스를 추가할 수 있다.
+head영역에는 title 태그를 사용할 수 있다.
+ -->
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 화면처리 내용을 볼 수 있다. -->
+html<br>
+css<br>
+javascript
+<h1>처음보는 html</h1>
+문 &nbsp;&nbsp;&nbsp;자&nbsp;열<!-- 태그이름은 없고 값이긴 하다. -->
+<li><font color="red">문 자      열</font></li>
+</body>
+</html>

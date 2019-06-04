@@ -1,0 +1,20 @@
+package com.address;
+
+import javax.swing.JFrame;
+
+public class AddressBook extends JFrame {
+	SubBook subBook = new SubBook();
+	//싱글톤 선언
+	static AddressBook aBook = null;
+	public void initDisplay() {
+		this.setSize(600, 500);
+		this.setVisible(true);
+	}
+	public static void main(String[] args) {
+		if(aBook==null) {
+			aBook = new AddressBook();
+		}
+		aBook.initDisplay();
+	}
+
+}

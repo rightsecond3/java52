@@ -1,0 +1,8 @@
+package com.ch8;
+
+public class Father {
+	int leg;
+	public Father(int leg) {
+		this.leg=leg;
+	}
+}

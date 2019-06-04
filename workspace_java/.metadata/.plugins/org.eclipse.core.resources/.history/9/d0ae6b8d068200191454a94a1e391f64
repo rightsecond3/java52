@@ -1,0 +1,11 @@
+package quiz0510;
+
+public class SingleTon {
+	static SingleTon st= null;
+	public SingleTon getInstance(){
+		if(st==null) {
+			st = new SingleTon();
+		}
+		return st;
+	}
+}

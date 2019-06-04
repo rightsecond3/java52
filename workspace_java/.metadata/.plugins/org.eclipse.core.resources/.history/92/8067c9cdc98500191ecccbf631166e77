@@ -1,0 +1,7 @@
+package com.ch8;
+
+public class Son extends Father{
+	public Son() {
+		System.out.println("Son 디폴트 생성자 호출");
+	}
+}

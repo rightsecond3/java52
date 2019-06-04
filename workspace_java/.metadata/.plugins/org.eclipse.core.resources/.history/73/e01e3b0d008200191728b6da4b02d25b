@@ -1,0 +1,10 @@
+package com.myquiz0529;
+
+public class myQ18 {
+	public static void main(String[] args) {
+		 String test = "Thisisatest";
+		 String[] tokens = test.split("\\s");  //test.split(\\s);
+		 System.out.println(tokens.length);
+
+	}
+}

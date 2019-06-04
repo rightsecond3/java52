@@ -1,0 +1,10 @@
+package com.ch8;
+
+public class FatherSimulation {
+
+	public static void main(String[] args) {
+		Father fa = new Father();
+		Son mySon = new Son();
+	}
+
+}

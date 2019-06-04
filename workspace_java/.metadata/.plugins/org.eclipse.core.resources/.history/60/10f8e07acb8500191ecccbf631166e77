@@ -1,0 +1,11 @@
+package com.ch8;
+
+public class FatherSimulation {
+
+	public static void main(String[] args) {
+		Father fa = new Father();
+		Son mySon = new Son("오라클 데이터베이스 11g");
+		System.out.println(mySon.book);
+	}
+
+}
