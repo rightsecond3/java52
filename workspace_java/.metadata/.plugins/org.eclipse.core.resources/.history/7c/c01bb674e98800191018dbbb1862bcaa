@@ -1,0 +1,14 @@
+package com.quiz0607;
+interface Foo {}
+class Question2 implements Foo {}
+class Beta extends Question2 {}
+class Delta extends Beta {
+	public static void main(String[] args) {
+		Beta x = new Beta();
+		Question2 q = x;
+		Foo f = (Delta)x;
+//		Foo f = (Question2)x;
+		Beta b = (Beta)(Question2)x;
+	}
+}
+

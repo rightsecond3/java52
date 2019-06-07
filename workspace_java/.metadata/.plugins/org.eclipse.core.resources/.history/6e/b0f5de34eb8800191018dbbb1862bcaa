@@ -1,0 +1,13 @@
+package com.quiz0607;
+
+public class Question7 {
+	public static void main(String[] args) {
+		int x = 5;
+		Question7 p = new Question7();
+		p.doStuff(x);
+		System.out.println("main x = "+x);
+	}
+	void doStuff(int x) {
+		System.out.println("doStuff x = "+ ++x);
+	}
+}

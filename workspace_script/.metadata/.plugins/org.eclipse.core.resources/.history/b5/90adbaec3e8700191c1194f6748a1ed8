@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body scroll = "yes" background="../images/TOMAHAWK STEAK.jpg" 
+      bgcolor="yellowgreen" leftmargin="20px" topmargin="30px"
+      marginwidth="0" marginheight="0">
+<pre>
+    브라우저의 문서 영역에 출력할 내용을 모두 감싸고 있는 핵심적인 태그로
+    head태그가 선언적 의미로 사용되던 것과 달리 문서 전체에 영향을 미치는
+    글시의 색이나 배경, 여백 속성을 가지고 있다.
+</pre>
+</body>
+</html>

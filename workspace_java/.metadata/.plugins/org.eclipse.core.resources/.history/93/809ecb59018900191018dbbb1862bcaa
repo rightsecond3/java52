@@ -1,0 +1,10 @@
+package com.design;
+
+public class Rubber extends Duck {
+
+	@Override
+	public void display() {
+		System.out.println("나는 고무오리입니다.");
+	}
+
+}

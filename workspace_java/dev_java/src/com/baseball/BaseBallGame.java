@@ -9,19 +9,21 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class BaseBallGame implements ActionListener{
+public class BaseBallGame extends JFrame implements ActionListener{
 	//선언부
 	//컴터가 채번한 숫자 3개를 담을 배열을 선언하기
 	int com[] = new int[3];//현재 3개 방에는 0(Default)이 담겨있다.
 	//사용자가 입력한 숫자를 담을 배열도 같이 선언하기
 	int my[] = new int[3];
+	//기회값을 담을 변수 선언
+	int count = 0;
 	//jf는 전역 변수 이고 선언 및 초기화 완료
-	JFrame    jf           = new JFrame();
 	//jp_center속지의 중앙면적 = jta_display
 	//jp_center속지의 남쪽면적 = jtf_user
 	//jta_display->jp_center속지->JFrame배치
@@ -39,6 +41,11 @@ public class BaseBallGame implements ActionListener{
 	JButton    jbtn_dap     = new JButton("정답"); //버튼 추가
 	JButton    jbtn_clear   = new JButton("지우기"); //버튼 추가
 	JButton    jbtn_exit    = new JButton("나가기"); //버튼 추가
+	///생성자 선언하기
+	public BaseBallGame() {
+		initDisplay();
+		ranCom();
+	}
 	//새게임을 눌렀을 떄 임의의 숫자를 채번하는 메소드 선언해보자.
 	public void ranCom() {
 		Random r = new Random();
@@ -82,15 +89,15 @@ public class BaseBallGame implements ActionListener{
 		jta_display.setBackground(new Color(255,255,255)); //setBackground 배경 바꿔줌
 		jp_center.add("South",jtf_user);
 		//JFrame 중앙에 jp_center 속지를 붙히고 동쪽에는 jp_east속지 붙이기	
-		jf.add("Center",jp_center);
+		this.add("Center",jp_center);
 		jp_east.add(jbtn_new);
 		jp_east.add(jbtn_dap);
 		jp_east.add(jbtn_clear);
 		jp_east.add(jbtn_exit);
-		jf.add("East",jp_east);
-		jf.setTitle(title);
-		jf.setSize(width, height);
-		jf.setVisible(true);//true : 화면에 띄워줌
+		this.add("East",jp_east);
+		this.setTitle(title);
+		this.setSize(width, height);
+		this.setVisible(true);//true : 화면에 띄워줌
 	}
 	//판정하는 메소드
 	/**************************************************************
@@ -131,33 +138,66 @@ public class BaseBallGame implements ActionListener{
 				}
 			}///////////end of inner for
 		}///////////////end of outter for
-		return "1스 0볼";
+		if (strike==3) {
+			//보충해야함 텍스트도 막고싶고
+			JOptionPane.showMessageDialog(this, "축하합니다!!"
+                    , "정답", JOptionPane.ERROR_MESSAGE);
+			jtf_user.setVisible(false);
+			return "정답입니다. 축하합니다.^^";
+		}
+		// Integer.toString(strike)+"스트라이크"+Integer.toString(ball)+"볼"
+		// int + Sting = String
+		return strike+"스트라이크 "+ball+"볼";
 	}	
 	//메인메소드 - entry point - callback method - 시스템이 알아서 부르는 메소드
 	public static void main(String[] args) {
 		BaseBallGame bbg = new BaseBallGame();
-		bbg.initDisplay();
 	}
 	//콜벡메소드 - 개발자가 호출하는것이 아니라 시스템에서 자동 호출
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();//이벤트소스(jtf_user)에 대한 주소번지를 일기
 		System.out.println("obj : "+obj);
+		// 너 정답을 보고 싶은거야?
+		if (obj==jbtn_dap) {
+			jta_display.append(com[0]+""+com[1]+""+com[2]+" 입니다. \n");
+		}
 		// 너 엔터 친거니?
-		if(obj==jtf_user) { //래퍼런스 타입의 비교는 값의 비교가 아닌 주소번지의 비교를 말하는것!
+		else if(obj==jtf_user) { //래퍼런스 타입의 비교는 값의 비교가 아닌 주소번지의 비교를 말하는것!
 			//System.out.println("엔터쳤넹...");
+			count++;
 			String userInput = jtf_user.getText();
-			jta_display.append(userInput+"\n");
+			if (userInput.length() != 3) { //유저가 입력한 숫자가 3자리가 아니니? 
+				JOptionPane.showMessageDialog(this, "3자리 숫자를 입력 하세요"
+						                     , "오류", JOptionPane.ERROR_MESSAGE);	
+				jtf_user.setText("");
+				return; //actionPerformed 탈출
+			}
+			else if (count==9) {
+				JOptionPane.showMessageDialog(this, "9번째 기회는 없습니다."
+	                     , "게임오버", JOptionPane.ERROR_MESSAGE);
+				jtf_user.setText("");
+				return;
+			}
+			jta_display.append(count+"."+userInput+" : "+account(userInput)+"\n");
 			jtf_user.setText("");
 		}
 		//새게임 할거니?
 		else if(obj==jbtn_new) {
 			ranCom();
+			//유저 텍스트 창을 다시 열어라
+			jtf_user.setVisible(true);
 			jta_display.append(com[0]+""+com[1]+""+com[2]+"\n");
+			count = 0;
+			jta_display.setText(""); //새 게임을 눌렀을 때 창을 다 지워주는 메소드
 		}
 		//너 지우기 버튼 누른거야?
 		else if(obj==jbtn_clear) {
 			jta_display.setText("");
+		}
+		//너 나가기 버튼 누룬거야?
+		else if(obj==jbtn_exit) {
+			System.exit(0);
 		}
 		
 	}

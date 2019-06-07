@@ -18,7 +18,9 @@ import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
 public class EmpJDBC {
+	//Connection : 인터페이스
 	Connection 		   con = null;//연결통로확보
+	//CallableStatement : 인터페이스
 	CallableStatement cstmt =null;//프로시저를 호출,요청
 	OracleCallableStatement ocstmt = null; //커서사용
 	//객체배열
@@ -28,6 +30,7 @@ public class EmpJDBC {
 		DBConnectionMgr dbMgr = DBConnectionMgr.getInstance();
 		try {
 			//예외가 발생할 가능성이 있는 코드
+			//직접 인스턴스화 하지 않는 결합도가 낮은 코드
 			con = dbMgr.getConnection();
 			con.setAutoCommit(false);
 			cstmt = con.prepareCall("{call my_proc(?)}");
@@ -191,9 +194,12 @@ public class EmpJDBC {
 	public String getProc_empnoUpdate() {
 		String msg = null;
 		//DBConnectionMgr dbMgr = new DBConnectionMgr과 밑 행의 차이를 확실히 아는가?
+		//싱글톤 패턴으로 가져오기
 		DBConnectionMgr dbMgr = DBConnectionMgr.getInstance();
 		try {
+			//Connection 인터페이스 con에 DBmgr의 getConnection 메소드의 con값을 넣어라
 			con = dbMgr.getConnection();
+			//오토커밋을 하지마라
 			con.setAutoCommit(false);
 			cstmt = con.prepareCall("{call proc_empnoUpdate(?,?)}");
 			System.out.println("사원번호를 입력하세요.");

@@ -1,0 +1,14 @@
+package com.quiz0607;
+
+public class Question3 {
+
+	private String cardID="001";
+	private Integer limit=789;
+	public String ownerName="박상범";
+	
+	public void setCardInformation(String cardID, String ownerName, Integer limit) {
+		this.cardID=cardID;
+		this.ownerName=ownerName;
+		this.limit=limit;
+	}
+}

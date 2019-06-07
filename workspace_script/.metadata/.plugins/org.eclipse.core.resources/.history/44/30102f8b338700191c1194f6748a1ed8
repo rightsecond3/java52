@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>InnerHTML에 관해서...</title>
+</head>
+<body>
+    <!-- 인라인속성과 블럭속성 -->
+    aaa
+    <div id="d_msg"></div>
+    bbb
+    111
+    <span></span>
+    222
+</body>
+</html>

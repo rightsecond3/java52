@@ -12,6 +12,7 @@ public class DBConnectionMgr {
 	static DBConnectionMgr dbMgr = null;
 	//EmpJDBC.java에서 직접 인스턴스화 하지않는다.(결합도 낮아진다)
 	//결합도가 낮고 응집도가 높은 것이 좋다.
+	//싱글톤 패턴
 	public static DBConnectionMgr getInstance() {
 		if(dbMgr ==  null) {
 			dbMgr = new DBConnectionMgr();
@@ -30,4 +31,7 @@ public class DBConnectionMgr {
 		}
 		return con;
 	}
+//	public static void main(String[] args) {
+//		System.out.println(DBConnectionMgr.getConnection()); 
+//	}
 }

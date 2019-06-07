@@ -1,0 +1,32 @@
+package com.quiz0607;
+
+public class Father {
+	public void methodA() {
+		System.out.println("Father method 호출 성공");
+	}
+	public static void main(String args[]) {
+		Father fa1 = new Father();
+		//타입은 Father이지만 실제로 가리키는 곳은 Son
+		Father fa2 = new Son();
+		Son so2 = new Son();
+		fa1.methodA();
+		fa2.methodA();
+		so2.methodB();
+		//java.lang.ClassCastException
+		//부모의 객체가 자식의 객체에 들어갈 수 없다.
+		//큰타입이 더 작은 타입에 들어 갈 수없다.
+//		so2 = (Son)fa1; //so2 = new Father();
+		so2 = new Son();
+		so2=  (Son)fa2;
+		
+	}
+}
+class Son extends Father{
+	@Override
+	public void methodA() {
+		System.out.println("Son methodA 호출 성공");
+	}
+	public void methodB() {
+		System.out.println("Son methodB 호출 성공");
+	}
+}

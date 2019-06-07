@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<!-- head영역에는 CSS소스를 추가하거나 JavaScript 소스를 추가할 수 있다.
+head영역에는 title 태그를 사용할 수 있다.
+ -->
+<head>
+<!-- metatag : 검색엔진에서 사용되는 태그 화면에는 보이지 않음 -->
+<meta charset="EUC-KR">
+<meta name="title" content="처음 보는 html">
+<meta name="date" content="2019-06-04">
+<meta name="author" content="김유신">
+<meta name="keyword" content="html,css,javascript">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 화면처리 내용을 볼 수 있다. -->
+html<br>
+css<br>
+javascript
+<h1>처음 보는 html</h1>
+문 &nbsp;&nbsp;&nbsp;자&nbsp;열<!-- 태그이름은 없고 값이긴 하다. -->
+<li><font color="red" size="12" face="궁서체">
+뭘봐요
+</font></li>
+<hr>
+특수문자
+&lt; - &gt; - &quot; - &amp;
+<a href="http://www.naver.com">네이버</a>
+<a href="http://192.168.0.20:8000/index.html">서버테스트페이지</a>
+<a href="http://192.168.0.211:8000/index.html">상대경로</a>
+<!-- dev_html/WebContent/index.html -->
+<a href="../index.html">상대경로2</a>
+<a href="http://192.168.0.20:8000/html_day1/basicEl.html">정원형</a>
+</body>
+</html>

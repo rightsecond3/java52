@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="myQuiz20"/>
+		<item key="selection" value="Prepared"/>
 		<list key="findhistory">
+			<item value="prepared"/>
 			<item value="Hello"/>
 			<item value="”"/>
 			<item value="“"/>
