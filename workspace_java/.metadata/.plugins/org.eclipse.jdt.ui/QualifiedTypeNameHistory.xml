@@ -27,7 +27,6 @@
 <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
 <fullyQualifiedTypeName name="com.ch10.Movable"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="javax.sound.midi.SysexMessage"/>
 <fullyQualifiedTypeName name="java.sql.DriverManager"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
@@ -43,4 +42,6 @@
 <fullyQualifiedTypeName name="com.design.Rubber"/>
 <fullyQualifiedTypeName name="com.design.WoodDuck"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javax.sound.midi.SysexMessage"/>
+<fullyQualifiedTypeName name="com.address.AddressBookInterface"/>
 </qualifiedTypeNameHistroy>

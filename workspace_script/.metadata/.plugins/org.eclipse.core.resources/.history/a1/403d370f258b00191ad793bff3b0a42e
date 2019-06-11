@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주소록</title>
+</head>
+<body>
+	<table border="1" width="800px" height="600px">
+		<!-- 테이블의 이름 지정 -->
+		<caption>주소록</caption>
+		<thead></thead>
+			<!-- 로우 -->
+			<tr>
+				<!-- 컬럼 -->
+				<th>아이디</th>
+				<th>이름</th>
+				<th>주소</th>
+				<th>전화번호</th>
+			</tr>
+		<tbody></tbody>
+		<tfoot></tfoot>
+	</table>
+</body>
+</html>

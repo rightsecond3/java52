@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 응답 메타 태그 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>부트스트랩 API를 활용한 네비게이션구현</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body>
+<style type="text/css">
+/* 스타일시트를 추가하는 방법 1 - 인라인방식(직접처리) */
+</style>
+<!--=========================== [[  NAV 시작  ]] ==================================-->
+    <nav>
+
+    </nav>
+<!--=========================== [[ 콘텐츠 시작 ]] =================================-->
+    <div class="container">
+
+    </div>
+<!--=========================== [[ 푸터 시작 ]] ===================================-->
+    <footer>
+
+    </footer>
+</body>
+</html>

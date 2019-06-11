@@ -1,0 +1,29 @@
+package com.myDVD;
+
+public class DVDCtrl {
+	public static final String _SEL = "select"; 
+	public static final String _DEP = "delete";
+	public static final String _INS = "insert";
+	public static final String _UPD = "update";
+	public static final String _DEL = "delete";
+	
+	public DVDVO send(DVDVO paVO) throws Exception {
+		DVDVO raVO = null;
+		String command = paVO.getCommand();
+		if(_INS.equals(command)) { //입력
+			
+		}
+		else if (_UPD.equals(command)) { //수정버튼을 누른거야?
+			
+		}
+		else if (_DEL.equals(command)) { //삭제하니?
+			
+		}
+		else if (_DET.equals(command)) { //상세조회
+			
+		}else {
+			throw new Exception("잘못된 command명 입니다.");
+		}
+		return raVO;
+	}
+}

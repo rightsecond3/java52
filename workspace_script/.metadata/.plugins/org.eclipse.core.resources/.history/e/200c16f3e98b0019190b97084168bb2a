@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 응답 메타 태그 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>부트스트랩 API를 활용한 네비게이션구현</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+<body>
+<style type="text/css">
+/* 스타일시트를 추가하는 방법 1 - 인라인방식(직접처리) */
+</style>
+<!--=========================== [[  NAV 시작  ]] ==================================-->
+    <nav class="navbar navbar-defalut">
+        <div class="container-fruid">
+            <div class="navbar-header">
+                <a href="#">김유신의 수업노트</a>
+            </div>
+        </div>
+        <div class="collapse navabr-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">소개<span class="sr-only"></span></a></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">수업노트<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">오라클노트</a></li>
+                    <li><a href="#">자바노트</a></li>
+                    <li><a href="#">HTML5노트</a></li>
+                </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<!--=========================== [[ 콘텐츠 시작 ]] =================================-->
+    <div class="container">
+		<div class="row">
+        <!-- 12개 범위에서 맞추어 씀 -->
+        <div class="col-sm-4"><h4>오라클 노트</h4></div>
+        <div class="col-sm-4"><h4>자바 노트</h4></div>
+        <div class="col-sm-4"><h4>HTML5 노트</h4></div>
+    </div>
+    </div>
+<!--=========================== [[ 푸터 시작 ]] ===================================-->
+    <footer>
+
+    </footer>
+</body>
+</html>

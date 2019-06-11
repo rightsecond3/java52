@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>부트스트랩 API를 활용한 네비게이션 구현 </title>
+<link rel="stylesheet" href="../css/bootstrap.css?1">
+<link rel="stylesheet" href="../css/bootstrap_1.css?1">
+
+</head>
+<body>
+<style type="text/css">
+/* 스타일시트를 추가하는 방법1 - 인라인방식*/
+</style>
+<!-- ===========================[[NAV 시작]]======================= -->
+   <nav class="navbar navbar-default">
+      <div class="container-fruid"> <!--긴 막대기 바가 생김-->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">김유신 수업노트</a>
+            </div>
+        <div id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">소개<span class="sr-only"></span></a></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                aria-expanded="false" >수업노트<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">오라클노트</a></li>
+                    <li><a href="#">자바노트</a></li>
+                    <li><a href="#">HTML5노트</a></li>
+                </ul>
+            </li>
+            </ul>
+            <!--폼태그 추가 하기 시작-->
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="내용을 입력하세요">
+                </div>
+                <button type="submit" class="btn btn-default">검색</button>
+            </form>
+            <!---->
+        </div>
+    </div>
+   </nav>
+<!-- ===========================[[콘텐츠 시작]]====================== -->
+   <div class="container">
+        <div class="row">
+            <!-- 12개 범위에서 맞추어 씀-->
+            <div class="col-sm-4"><h4>오라클노트</h4></div>
+            <div class="col-sm-4"><h4>자바노트</h4></div>
+            <div class="col-sm-4"><h4>HTML5</h4></div>
+        </div>
+   </div>
+<!-- ===========================[[푸터 시작]]========================-->
+    <footer style="background-color: #000000; color: #ffffff">
+        <!--class속성은 css적용할 때 사용하는 값
+            container속성은 부트스트랩에서 화면을 구성하는 기본 단위
+            row속성은 한 개 로우를 추가할 때 사용- 컬럼을 12개로 분할-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <!--css를 태그안에 직접 추가할 수 있다.(style:속성이름:값-->
+                <div class="col-sm-8" style="text-align:center;"><h5>회사소개 | 회사연혁 | 회원가입 | 오시는길</h5></div>
+                <div class="col-sm-2">
+                <h5>Copyright &copy; 2019&nbsp;&nbsp;by&nbsp;박상범</h5>
+            </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+</body>

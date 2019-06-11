@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>정의 목록(ex_Naver사전에서...) </title>
+</head>
+<body>
+	<dl>
+		<dt>HTML5</dt>
+		<dd>Multimedia Tag</dd>
+		<dd>Connectivity</dd>
+		<dd>Animation</dd>
+	</dl>
+</body>
+</html>

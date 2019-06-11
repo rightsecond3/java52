@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>입력태그 - (폼전송:서버로 전송)</title>
+</head>
+<body>
+<!-- 폼태그 -->
+    <form name="f_addr" method="GET" action="./addressBookAction.html">
+        <table align="center" width="700px" border="1" borderColor="orange"> 
+            <tr>
+                <td><label>아이디</label></td>
+                <td><input type="text" id="mem_id" size="12" readonly></td>
+            </tr>
+            <tr>
+                <td><label>비밀번호</label></td>
+                <td><input type="password" id="mem_pw" size="12"></td>
+            </tr>
+            <tr>
+                <td><label>파일추가</label></td>
+                <td><input type="file" id="mem_file"></td>
+            </tr>
+            <tr>
+                <td><label>체크박스</label></td>
+                <td><input type="checkbox" id="mem_hobby"></td>
+            </tr>
+            <tr>
+                <td><label>라디오버튼</label></td>
+                <!-- value="XX" 서버로 넘길 값을 명시해줌 -->
+                <td>
+                <input type="radio" id="gender" value="m"> 남자
+                <input type="radio" id="gender" value="w"> 여자
+                </td>
+            </tr>
+            <tr>
+                <td><label>나이</label></td>
+                <td><input type="number" placeholder="나이를 입력하세요." required></td>
+            </tr>
+            <tr>
+                <td><label>hidden</label></td>
+                <td><input type="hidden" id="h_temp" value="값"></td>
+            </tr>
+            <tr>
+                <td><label>select</label></td>
+                <td>
+                    <select id="sel" multiple>
+                        <option value="돈가스">돈가스</option>
+                        <option value="부대찌개">부대찌개</option>
+                        <option selected>백반</option>
+                        <option>떡볶이</option>
+                        <option>냉면</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>비고</label></td>
+                <td>
+                    <textarea id="comments" cols="30" rows="10"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

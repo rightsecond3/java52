@@ -1,0 +1,10 @@
+package com.address;
+
+public class RegisterLogic {
+
+	public AddressVO addressInsert(AddressVO paVO) {
+		System.out.println("RegisterLogic addressInsert 호출 성공");
+		return null;
+	}
+
+}

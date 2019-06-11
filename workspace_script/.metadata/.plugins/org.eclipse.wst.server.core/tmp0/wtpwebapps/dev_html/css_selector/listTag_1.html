@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>목록태그</title>
+<!-- head영역에 쓸 때 [변수, 함수 선언] -->
+</head>
+<body>
+	<style type="text/css">
+		#ol_id>li {
+			border: 1px solid red;
+			color: pink;
+		}
+		ul li {
+			color:orange;
+			text-decoration: underline;
+		}	
+		.h1_sel {
+			color: red;
+		}
+		#h1_id {
+			text-decoration: line-through;
+			font-size: 40px;
+		}
+	</style>
+	<h1 class="h1_sel">ol tag</h1>
+	<ol>
+		<li>오라클</li>
+		<li>JAVA</li>
+		<li>HTML5</li>
+		<li>번호 태그</li>
+	</ol>
+	<h1 id="h1_id">ul tag</h1>
+	<ul>
+		<li>오라클</li>
+		<li>JAVA</li>
+		<ol id="ol_id">
+				<li>변수</li>
+				<li>제어문</li>
+				<li>클래스</li>
+			</ol>
+		<li>HTML5</li>
+		<li>점 태그</li>
+	</ul>
+</body>
+</html>

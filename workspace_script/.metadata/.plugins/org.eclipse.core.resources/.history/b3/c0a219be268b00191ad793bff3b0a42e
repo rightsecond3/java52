@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주소록</title>
+</head>
+<body>
+	<table align="center" borderColor="#AA8239" border="1" width="800px" height="300px">
+		<!-- 테이블의 이름 지정 -->
+		<caption>주소록</caption>
+		<thead>
+			<!-- 로우 -->
+			<tr bgColor="#236267">
+				<!-- 컬럼 -->
+				<th>아이디</th>
+				<th>이름</th>
+				<th>주소</th>
+				<th>전화번호</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>test</td>
+				<td>김유신</td>
+				<td>서울시 금천구 가산동</td>
+				<td>02-2563-4589</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<!-- colspan:셀병합, align : 정렬상태 -->
+				<td colspan="4" align="center">여기는 푸터입니다.</td>
+			</tr>
+		</tfoot>
+	</table>
+</body>
+</html>

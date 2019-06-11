@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주소록</title>
+</head>
+<body>
+	<table border="1" width="800px" height="600px">
+		<caption>주소록</caption>
+		<thead></thead>
+		<tbody></tbody>
+		<tfoot></tfoot>
+	</table>
+</body>
+</html>
