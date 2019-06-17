@@ -1,0 +1,40 @@
+package com.DVD;
+
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class DVD extends JFrame {
+	// 선언부
+	JPanel jp_north = new JPanel();
+	JPanel jp_center = new JPanel();
+	JButton jbtn_member = new JButton("회원관리");
+	JButton jbtn_dvd = new JButton("DVD목록");
+	// 테이블에 들어갈 객체들 선언
+	String cols[] = {"ID","이름","HP"};
+	String data[][] = new String[0][3];
+	
+	///*** 생성자 ***//
+	public DVD() {
+		
+	}
+	
+	//** 화면 처리부 **//
+	private void initDisplay() {
+		jp_north.setLayout(new FlowLayout(FlowLayout.LEFT));
+		jp_north.add(jbtn_member);
+		jp_north.add(jbtn_dvd);
+		this.add("North", jp_north);
+		this.add("Center", jp_center);
+		this.setSize(700, 500);
+		this.setVisible(true);
+	}
+	
+	// *메인메소드* //
+	public static void main(String[] args) {
+		DVD dvd = new DVD();
+		dvd.initDisplay();
+	}
+}

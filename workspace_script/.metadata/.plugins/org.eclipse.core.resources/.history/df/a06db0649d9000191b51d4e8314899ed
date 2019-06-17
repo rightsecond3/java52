@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM-속성처리</title>
+<script>
+    function methodA() {
+        //함수 이름이 있는경우
+    }
+</script>
+</head>
+<body onload="methodA()">
+<!-- document.write(역할),기능,왜? -->
+<script type="text/javascript">
+    window.onload = function() { //익명함수
+        var image = document.createElement("img");
+        //속성 추가(지정) setAttribute([1],[2])
+        //[1] 속성 :src, [2] : 값
+        image.setAttribute("src","../images/food.jpg");
+        image.setAttribute("width","300");
+        image.setAttribute("height","200");
+        //body태그에 image element 추가하기
+        document.body.appendChild(imag);
+    }
+</script>
+<img src="XXX.jpg" width="300px" height="200px">
+</body>
+</html>

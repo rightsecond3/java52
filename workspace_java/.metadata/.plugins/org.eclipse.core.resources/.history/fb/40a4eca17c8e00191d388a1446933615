@@ -1,0 +1,22 @@
+package com.DVD;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
+public class DVDManager extends JPanel {
+	String cols[] = {"ID","이름","HP"};
+	String data[][] = new String[3][3];
+	DefaultTableModel dtm_member = new DefaultTableModel(data,cols);
+	//생성자의 파라미터에 DefaultTableModel주소번지를 넘겨서 화면과 테이블을 동기화
+	JTable			  jt_member  = new JTable(dtm_member);
+	JTableHeader  	  jth_member = jt_member.getTableHeader();
+	JScrollPane       jsp_member = new JScrollPane(jt_member);// 최종속지
+	
+	///*** 생성자 ***//
+	public DVDManager() {
+		initDisplay;
+	}
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQurey코드로변경 - 매초마다 갱신처리</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+        <h1 id='news'></h1> <!--id를 체크하려면 script보다 -->
+        <script type="text/javascript">
+            window.onload = function(){
+                var news = $('#news');
+                //매 1초마다 함수를 실행한다.
+                setInterval(function(){
+                    news.html(new Date().toString());
+                },1000);//([1],[2]) [2] :밀리세컨드
+    
+            }
+        
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+
+   window.onload = function(){
+   document.getElementById('f_test').onsubmit = function(){
+   }
+      </script>
+    <form id="f_test" method="GET" action="test.jsp">
+            <label for="name">이름</label>
+            <!--id와 name의 사용용도 id는 ajax에서 또는 화면,jsp에서 접근할때 
+                ,name은 서버로 전달할때,서버에서 요청할때-->
+            <input type="text" name="mem_name" id="mem_name"/><br>
+            <label for= "name">비밀번호</label>
+            <!-- 태그안에 별도의 자식태그가 없으면 열린태그와 닫힌 태그를 한번에 작성가능 -->
+            <input type ="password" name="mem_pw" id="mem_pw"/><br>
+            <label for="name">비밀번호확인</label>
+            <input type ="password" name="pw_check" id="pw-check"/><br>
+            <!-- submit의 경우 즉시전송이 일어남.(유효성 검사를 할 수 없다.) -->
+            <input type = "submit" value="제출"/><!--제출버튼을 눌렀을때..-->
+    </form>
+   
+</body>
+</html>

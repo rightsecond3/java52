@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="msg"></div>
+    <form id="f_test" method="GET">
+            <label for="name">이름</label>
+			<!-- id : ajax값 접근, 화면접근, js -->
+			<!-- name : 서버에서 요청할 때 -->
+            <input type="text" name="mem_name" id="mem_name"/><br>
+            <label for= "name">비밀번호</label>
+            <!-- 태그안에 별도의 자식태그가 없으면 열린태그와 닫힌 태그를 한번에 작성가능 -->
+            <input type ="password" name="mem_pw" id="mem_pw"/><br>
+            <label for="name">비밀번호확인</label>
+            <input type ="password" name="pw-check" id="pw-check"/><br>
+            <!-- submit의 경우 즉시전송이 일어남.(유효성 검사를 할 수 없다.) -->
+            <input type = "submit" value="제출"/><!--제출버튼을 눌렀을때..-->
+    </form>
+	<script>
+	   window.onload = function(){
+	   document.getElementById('f_test').onsubmit = function(){
+		   //사용자가 입력한 비번을 담기
+		   var u_pw = document.getElementById('mem_pw').value;//.value 값을 가져올 때
+		   //사용자가 입력한 비번확인정보를 담기
+		   var pw_check = document.getElementById("pw-check").value
+		   //비밀번호가 같은지 확인 확인
+		   if(u_pw==pw_check) {
+			   document.getElementById("msg").innerHTML=
+				            "<font color='blue'>비번이 일치합니다.</font>";
+		   }else{
+			   document.getElementById("msg").innerHTML=
+		            "<font color='re'>다시입력하세요.</font>";
+		       //비번확인창에 문자열을 초기화
+		       document.getElementById("pw-check").value="";
+		       //비번확인창에 커서를 가져다 줌.
+		       document.getElementById("pw-check").focus();
+		   }
+	   }
+	}
+	</script>
+</body>
+</html>

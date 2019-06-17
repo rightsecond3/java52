@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>생성자 함수와 객체활용</title>
+    <script>
+        // 전역변수 - super, this 사용가능
+        var speed=0;
+        var carName="";
+        var wheelNum=0;
+        ///*** 생성자 ***///
+        function Sonata() {
+            this.speed = 50;
+            this.carName = "2019년형 소나타";
+            this.wheelNum = 4;
+        }
+    </script>
+</head>
+<body>
+    <script>
+        // 인스턴스화
+        var myCar = new Sonata();
+        var herCar = new Sonata();
+        herCar.speed = 100;
+        document.write("내 자동차 "+"<br>"+myCar.carName);    
+        document.write("현재 내 차 속도 "+"<br>"+myCar.speed);    
+        document.write("그녀 차의 속도 "+"<br>"+herCar.speed);    
+    </script>
+</body>
+</html>

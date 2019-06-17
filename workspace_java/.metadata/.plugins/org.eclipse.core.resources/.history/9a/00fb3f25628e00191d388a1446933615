@@ -1,0 +1,7 @@
+package com.myDVD;
+
+import javax.swing.JDialog;
+
+public class memDVD extends JDialog {
+
+}

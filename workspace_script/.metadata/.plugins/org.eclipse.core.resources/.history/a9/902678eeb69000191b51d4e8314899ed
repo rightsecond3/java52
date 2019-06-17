@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery API를 활용하여 CSS적용하기</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <style type="text/css">
+        .hight-light-0{
+            background: yellow;
+        }
+        .hight-light-1{
+            background: brown;
+        }
+        .hight-light-2{
+            background: orange;
+        }
+        .hight-light-3{
+            background: green;
+        }
+        .hight-light-4{
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // css : id는 # , class는 . , tag는 tagname
+            $('h1').each(function(index, item){ //each(index, item)
+	            $(this).addClass('high-light-'+index); //addClass 클래스 속성을 붙여줌
+            });
+        });
+    </script>
+    <h1>item - 0</h1>
+    <h1>item - 1</h1>
+    <h1>item - 2</h1>
+    <h1>item - 3</h1>
+    <h1>item - 4</h1>
+</body>
+</html>

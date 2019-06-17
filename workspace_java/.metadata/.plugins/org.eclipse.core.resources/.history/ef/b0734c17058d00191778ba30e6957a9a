@@ -1,0 +1,44 @@
+package com.myDVD;
+
+public class DVDVO {
+	/////***** DVD 테이블 VO 추가 *****//////
+	private String serialnum     = null;// 시리얼넘버
+	private String genre         = null;// 장르
+	private String mov_class     = null;// 영화등급
+	private String mov_title     = null;// 영화제목
+	private String maker         = null;// 배급사
+	private String nation        = null;// 국가
+	private String leadingactor  = null;// 주연배우
+	private String director      = null;// 감독
+	private String mov_date      = null;// 개봉일
+	private String v_date        = null;// 비디오 개봉일
+	private String damage        = null;// 파손여부
+	private String r_check       = null;// 대여여부
+	private int    r_fee         = 0;   // 대여료
+	/////***** MEM 테이블 VO 추가 *****//////
+	private String memid         = null;// 회원아이디
+	private String memname       = null;// 회원이름
+	private String tel           = null;// 회원집번호
+	private String phonenum      = null;// 회원핸드폰번호
+	private String zipcode       = null;// 회원도시명코드
+	private String address       = null;// 회원주소
+	private String resistdate    = null;// 회원등록일
+	private String mempw         = null;// 회원비밀번호
+	/////***** RENTAL 테이블 VO 추가 *****//////
+	private String r_num       = null;// 렌탈번호
+	private String r_date      = null;// 렌탈한날짜
+	private String returndate  = null;// 반납일
+	private int    latefee     = 0;   // 연체료
+	private String duedate     = null;// 반납예정일
+//	private String memid       = null; -> MEM테이블의 memid를 외래키로 받아옴.
+	/////***** RENDTAIL 테이블 VO 추가 *****//////
+	private String r_detailnum = null;// 랜탈디테일번호
+//	private String serialnum   = null; -> DVD테이블의 왜래키
+//	private String r_num       = null; -> RENTAL테이블의 왜래키
+	
+	/////***** 업무에 대한 구분을 위한 변수 선언 *****//////
+	private String command     = null;
+	
+	
+	
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+    html태그 경우 같은 이름이 두개 이상이면 자동으로 배열전환됨.
+    체크를 하는 경우 true 체크를 하지 않으면 false -> 확인 하는 메소드 cheked
+    반드시 두 개 이상 일때만 배열로 접근가능하다.
+ -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <script>
+        function clearAll() {
+            for(var i=0; i<document.f_list.check.length;i++) {
+                if(document.f_list.check[i].checked == 1) {
+                    document.f_list.check[i].checked=0;
+                }
+            }
+        }
+        function checkBoxAll() {
+            // 전체체크박스를 선택했을 때
+            // jsp는 name으로 접근한다.
+            if(document.f_list.checkAll.checked == 1) {
+                clearAll();
+                for(var j=0; j<document.f_list.check.length; j++) {
+                    document.f_list.check[j].checked = 1;
+                }
+            }
+            // 전체체크박스를 해제했을 때
+            else{
+                for(var j=0; j<document.f_list.check.length; j++) {
+                        document.f_list.check[j].checked = 0;
+                }
+            }
+        }
+    </script>
+
+    <table align="center" borderColor="#AA8239" border="1" width="800px" height="300px">
+        <form name="f_list">
+        <caption>배열을 활용해서 테이블 만들기</caption>
+        <!-- thead와 tbody는 생략해도 되지만 시각적으로 식별하기 위해 사용한다. -->
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="checkAll" name="checkAll" onclick="checkBoxAll()">체크박스</th>
+                <th>제목</th>
+                <th>날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            	<td align="center"><input type="checkbox" id="check" name="check"></td>
+                <td>JAVA</td>
+                <td>06/13</td>
+            </tr>
+            <tr>
+                <td align="center"><input type="checkbox" id="check" name="check"></td>
+                <td>오라클</td>
+                <td>07/01</td>
+            </tr>
+            <tr>
+                    <td align="center"><input type="checkbox" id="check" name="check"></td>
+                    <td>HTML5</td>
+                    <td>11/02</td>
+                </tr>
+        </tbody>
+        </form>
+    </table>
+</body>
+</html>

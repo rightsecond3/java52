@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배열</title>
+</head>
+<body>
+<script>
+	// 1차원 배열
+    var days = ["월","화","수","목","금","토","일",];
+    for(var i=0; i<days.length;i++) {
+        document.write(days[i],"<br>");
+    }
+    // 2차원 배열
+    var result = [
+                    ["김유신", "이순신", "이성계"]
+                   ,["오라클", "자바", "HTML"]
+                   ,[80,90,70]
+                ];
+    for(var i=0; i<result.length; i++) {
+        for(var j=0; j<result[i].length; j++) {
+            document.write("result[",i,"][",j,"]",result[i][j],"<br>");
+        }
+    }
+    // 형전환 함수
+    var jumsu1 = "90";
+    var name = new String("100");
+    document.write("<hr>");
+    document.write("<h2>형전환함수</h2>");
+    document.write(parseInt(jumsu1)+50);
+    document.write("<br>");
+    document.write(name.toString());
+    var isView = new Boolean(false);
+    var bool = isView.valueOf();
+    if (!bool) {
+        document.write("참입니다.")
+    }
+</script>
+
+</body>
+</html>

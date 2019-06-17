@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQurey코드로변경 - 매초마다 갱신처리</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+<h1 id='news'></h1>
+<script type="text/javascript">
+	//아이디 사용시 아이디명 앞에 반드시 #추가할 것.
+	//$을 사용하려면 반드시 jquery-3.4.1.js 임포트할 것.
+     var news = $('#news');
+     setInterval(function(){
+         news.html(new Date().toString());
+     },1000);//([1],[2]) [2] :밀리세컨드
+</body>
+</html>

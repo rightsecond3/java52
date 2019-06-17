@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.DVD.RSOracleServer;
+import com.myDVD.RSOracleServer;
 
 public class DVDManagerView {
 	///선언부- 선언부에서 메소드 호출 불가

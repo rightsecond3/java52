@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배열 : 초성검색</title>
+    <script>
+        function search() {
+
+        }
+        function hangulCheck(temp) {
+            var cho = [
+                        "ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ"
+                        ,"ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"
+                         ] ;
+            var code;
+            code = "정".charCodeAt(0);
+            alert("사용자가 입력한 값"+code)
+            // 아이디로 접근할 때는 폼이 필요 없다
+            //console.log("hangulCheck호출 "+document.getElementById("word").value);
+            // alert("사용자가 입력한 값: "+temp.value);
+        }
+    </script>
+</head>
+<body>
+<input type="text" id="word" name="word" onkeyup="hangulCheck(this)">
+<button onclick="search()">조회</button>
+</body>
+</html>

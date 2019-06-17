@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 반응형웹(다양한 디바이스에 적응해서 한번에 만드는 것) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<!-- CSS를 외부에서 참조할 때 쓰는 방식 -->
+<!-- CSS 뒤에 ? 붙인 이유 get방식은 인터셉트(버퍼캐시를 다시 사용함)가 일어남 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- ================ [[네비게이션]] ==================-->
+<!-- 
+navbar-default, navbar-header 미정(부트스태랩 지원X)
+container-fluid, navbar-brand 부트 스트랩 지원
+-->
+<!-- class 속성은 스타일 속성을 줄 때 사용한다 -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">김유신 수업노트</a>
+            </div>
+        </div>
+        <!-- 스페이스바 앞에있는 이름은 알리아스명 -->
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Documentation</a></li>
+            </ul>
+        </div>
+    </nav>
+<!-- ================= [[점보트론]] ===================-->
+
+<!-- ================== [[콘텐츠]] ====================-->
+
+<!-- =================== [[푸터]]  ====================-->
+
+</body>
+</html>

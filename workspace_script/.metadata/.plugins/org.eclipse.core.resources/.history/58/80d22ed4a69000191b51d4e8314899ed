@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM활용 - 매초마다 갱신처리</title>
+</head> <!-- 지금하고 있는것이 부트스트랩 아작스등을 활용한 프로젝트 선수학습 -->
+<body>
+    <h1 id='news'></h1> <!--id를 체크하려면 script보다 -->
+    <script type="text/javascript">
+        window.onload = function(){
+            var news = document.getElementById('news');
+            //매 1초마다 함수를 실행한다.
+            setInterval(function(){
+                news.innerHTML = new Date().toString();
+            },2000);//([1],[2]) [2] :밀리세컨드
+
+        }
+    
+    </script>
+</body>
+</html>

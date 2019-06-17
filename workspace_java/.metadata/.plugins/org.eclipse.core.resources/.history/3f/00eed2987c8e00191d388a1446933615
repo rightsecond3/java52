@@ -1,0 +1,7 @@
+package com.DVD;
+
+import javax.swing.JPanel;
+
+public class DVDManager extends JPanel {
+
+}

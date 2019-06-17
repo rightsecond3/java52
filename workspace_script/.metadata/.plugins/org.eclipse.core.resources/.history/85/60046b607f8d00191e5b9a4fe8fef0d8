@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배열</title>
+</head>
+<body>
+<script>
+    var days = ["월","화","수","목","금","토","일",];
+    for(var i=0; i<days.length;i++) {
+        document.writeln(days[i]);
+    }
+</script>
+
+</body>
+</html>

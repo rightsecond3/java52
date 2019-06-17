@@ -1,0 +1,12 @@
+package com.myDVD;
+
+import java.util.List;
+
+public class RetrieveLogic {
+	//조건검색을 처리할 메소드 구현
+	public List<DVDVO> getRentList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

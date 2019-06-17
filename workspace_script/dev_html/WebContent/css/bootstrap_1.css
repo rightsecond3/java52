@@ -1,6 +1,8 @@
 @charset "UTF-8";
-/* 클래스는 앞에 . */
+/* 
+클래스는 앞에 "." 를 붙여준다
+앞에 있는 속성이 부모 속성 
+*/
 .navbar-default .navbar-brand {
 	color: #CCCCCC;
-
 }

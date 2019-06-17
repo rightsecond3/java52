@@ -6,29 +6,26 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Prepared"/>
+		<item key="selection" value="txtId"/>
 		<list key="findhistory">
-			<item value="prepared"/>
-			<item value="Hello"/>
-			<item value="”"/>
-			<item value="“"/>
-			<item value="Bootchy"/>
-			<item value="canc"/>
-			<item value="jbtn_save"/>
-			<item value="user"/>
-			<item value="my"/>
-			<item value="hap1"/>
-			<item value="&gt;="/>
-			<item value="&quot;소프트웨어인재개발원&quot;"/>
-			<item value="소프트웨어인재개발원"/>
+			<item value="txtId"/>
+			<item value="txtName"/>
+			<item value="aVO"/>
+			<item value="member"/>
+			<item value="scrollPane"/>
+			<item value="repain"/>
+			<item value="re"/>
+			<item value="새로고침"/>
 		</list>
 		<list key="replacehistory">
+			<item value="dvd"/>
+			<item value="HP"/>
+			<item value="H"/>
 			<item value="myQuiz20"/>
 			<item value="&quot;"/>
 			<item value="Question3_2"/>
 			<item value="hap2"/>
 			<item value="&lt;="/>
-			<item value="name"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

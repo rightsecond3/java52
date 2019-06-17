@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <script>
+        function send() {
+        var days = new Array(7);
+        days[0] = "일요일";
+        days[1] = "월요일";
+        days[2] = "화요일";
+        days[3] = "수요일";
+        days[4] = "목요일";
+        days[5] = "금요일";
+        days[6] = "토요일";
+        for(var i=0; i<days.length; i++) {
+            document.write(days[i]+"<br>");
+        }
+        document.write(days[1+2]);
+        }
+    </script>
+</head>
+<body>
+<!-- 
+XXX.html 문서는 서버에 요청을 하면 로컬PC(사용자 컴퓨터)에 다운로드 된다.
+브라우저가 해석 - 태그는 사라짐.
+함수를 호출해서 그 안에 document를 사용하면 DOM 트리를 다시 스캔
+ -->
+    여기
+    <script>
+        document.write("저기");
+    </script>
+    <!-- <script>
+        var days = new Array(7);
+        days[0] = "일요일";
+        days[1] = "월요일";
+        days[2] = "화요일";
+        days[3] = "수요일";
+        days[4] = "목요일";
+        days[5] = "금요일";
+        days[6] = "토요일";
+        for(var i=0; i<days.length; i++) {
+            document.write(days[i]+"<br>");
+        }
+        document.write(days[1+2]);
+    </script> -->
+    <hr>
+    <button onclick="send()">전송</button>
+</body>
+</html>

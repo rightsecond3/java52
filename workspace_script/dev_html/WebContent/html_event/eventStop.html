@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <style type="text/css">
+        /* [*]는 모든속성이라는 뜻 */
+        *{ border : 3px solid red;}
+    </style>
+</head>
+<body>
+    <h1 id="header">
+        <p id="contents">내용</p>
+    </h1>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById("header").onclick=function() {
+                alert("header");
+            }
+            document.getElementById("contents").onclick=function() {
+                alert("contents");
+            }
+            //아래 코드는 이벤트 전달을 막는 코드
+            //인터넷익스플로러:cancelBubble속성을 true 변경
+            //그 외 브라우저 : stopPropagation()사용함.
+            document.getElementById("contents").onclick=function(e) {
+                //이벤트 객체를 처리하기
+                var event = e||window.event;
+                //이벤트 발생 알림
+                alert('contetnts호출 성공');
+                //이벤트 전달을 제거하기
+                event.cancelBubble = true;
+                //자바스크립트에서는 0만 false이고 나머지는 모두 true
+                if(event.stopPropagation) {//0이 아니기만 하면 모두 true
+                    event.stopPropagation();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Event - onClick</title>
+</head>
+<body>
+   <h1 id="header">Click</h1>
+    <script type="text/javascript">
+        window.onload=function(){   
+            var header = document.getElementById("header");//h1태그 정보를 담을 변수선언
+            header.onclick=function(){ //이벤트 연결확인
+                alert("클릭~~");
+            //이벤트 제거용 header.onclick=null;
+            }
+        }
+    </script>
+</body>
+</html>

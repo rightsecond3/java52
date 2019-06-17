@@ -1,0 +1,11 @@
+package com.ch12;
+
+public class RealizationSimulation {
+
+	public static void main(String[] args) {
+		InterfaceParent ip = new Realization();
+		Realization r = new Realization();
+		
+	}
+
+}

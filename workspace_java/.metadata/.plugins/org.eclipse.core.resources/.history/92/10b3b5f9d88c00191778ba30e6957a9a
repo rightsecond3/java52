@@ -1,0 +1,50 @@
+package com.address;
+
+import java.util.List;
+
+
+public class AddressBookDao implements AddressBookInterface {
+	java.sql.Connection          con   = null; 
+	java.sql.PreparedStatement   pstmt = null;
+	java.sql.ResultSet           rs    = null;
+	com.util.DBConnectionMgr     dbMgr = null;
+	
+	@Override
+	public AddressVO getAddressDetail(AddressVO paVO) {
+		System.out.println("DAO getAddressDetail 호출성공");
+		return null;
+	}
+
+	@Override
+	public AddressVO addressInsert(AddressVO paVO) {
+		System.out.println("DAO addressInsert 호출성공");
+		dbMgr=com.util.DBConnectionMgr.getInstance();
+		try {
+			
+		} catch (SQLException se) { //ORA-XXXX
+			// TODO: handle exception
+		} finally { // 에러가 나던 말던 무조건 닫아줘라
+			dbMgr.freeConnection(con, cstmt);
+		}
+		return null;
+	}
+
+	@Override
+	public AddressVO addressUpdate(AddressVO paVO) {
+		System.out.println("DAO addressUpdate 호출성공");
+		return null;
+	}
+
+	@Override
+	public AddressVO addressDelete(AddressVO paVO) {
+		System.out.println("DAO addressDelete 호출성공");
+		return null;
+	}
+
+	@Override
+	public List<AddressVO> getAddress(AddressVO paVO) {
+		System.out.println("DAO getAddress 호출성공");
+		return null;
+	}
+
+}

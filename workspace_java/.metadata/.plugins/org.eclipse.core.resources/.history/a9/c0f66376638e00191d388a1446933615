@@ -1,0 +1,63 @@
+package com.myDVD;
+
+import java.awt.Color;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class memDVD extends JDialog {
+	///////////////////// 입력 화면 추가하기 시작////////////////////
+	private JLabel labelId;// 아이디 라벨
+	private JTextField txtId;// 아이디를 입력하는 컴포넌트
+	private JLabel labelName;// 이름라벨
+	private JTextField txtName;// 이름을 입력하는 컴포넌트
+	private JLabel labelTel;
+	private JTextField txtTel;
+	private JLabel labelPhonenum;
+	private JTextField txtPhonenum;
+	private JLabel labelZipcode;
+	private JTextField txtZipcode;
+	private JLabel labelAddress;
+	private JTextField txtAddress;
+	private JLabel labelResistdate;
+	private JTextField txtResistdate;
+	private JLabel labelPw;
+	private JTextField txtPw;
+	///////////////////// 입력 화면 추가하기 끝 ////////////////////
+	JPanel jp_center = new JPanel();
+	JPanel jp_south = new JPanel();
+	JButton jbtn_save = new JButton("저장");
+	JButton jbtn_cancel = new JButton("취소");
+
+	//** 뷰를 구현할 메소드 **//
+	public void initDisplay() {
+		// jp_center속지에 레이아웃을 초기화
+		jp_center.setLayout(null);
+		jp_center.setBackground(new Color(212,140,106));
+		jbtn_save.setBackground(new Color(85,28,0));
+		jbtn_save.setForeground(Color.white);
+		jbtn_cancel.setBackground(new Color(85,28,0));
+		jbtn_cancel.setForeground(Color.white);
+		// 화면 객체 생성하기
+		labelId = new JLabel("아이디(필수입력)");
+		labelPw = new JLabel("비밀번호");
+		labelName = new JLabel("이름");
+		labelTel = new JLabel("전화번호");
+		labelPhonenum = new JLabel("휴대폰");
+		labelZipcode = new JLabel("Zipcode");
+		labelAddress = new JLabel("주소");
+		labelResistdate = new JLabel("등록일");
+		// 데이터를 보여줄 텍스트 필드 정의
+		txtId = new JTextField(20);
+		txtPw = new JTextField(20);
+		txtName = new JTextField(20);
+		txtTel = new JTextField(20);
+		txtPhonenum = new JTextField(20);
+		txtZipcode = new JTextField(20);
+		txtAddress = new JTextField(20);
+		txtResistdate = new JTextField(20);
+	}
+}

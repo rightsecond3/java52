@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>변수의 활용</title>
+    <script>
+        function login() {
+            var db_id = 'test';
+            var db_pw = '123';
+            var db_name = "김유신";
+            var u_id = document.getElementById("mem_id").value;
+            var u_pw = document.getElementById("mem_pw").value;
+            if(u_id==db_id) {
+                if(u_pw==db_pw) {
+                    document.write(db_name);
+                } else {
+                    alert("비번이 틀립니다");
+                    return;
+                }
+            } else {
+                alert("아이디가 존재하지 않습니다.");
+                return;//login함수 탈출
+            }
+        }
+    </script>
+</head>
+<body>
+    <from>
+        <style>
+            /* css 선택자 주는 것!! */
+            input[type=text] { background: green }
+            /* 두개 이상 주고 싶을 경우에는 세미 콜론을 생략할 수 없다 */
+            input[type=password] {
+                background: red;
+                color : white;
+            }
+        </style>
+        <header>변수의 활용(시맨틱태그)</header>
+        <section>
+            <article>
+                <h1>제목</h1>
+                <pre>
+                    띄어 쓰기 줄바꿈도 알아서 해주는 내용 태그!
+                    사용자가 입력한 값을 자바스크립트로 출력해보자.
+                </pre>
+            </article>
+        </section>
+        <!-- id와 name은 같은 이름을 써도 상관없다. -->
+        <!-- id는 클라이언트에서 사용 name은 서버단에서 사용 -->
+        <input type="text" id="mem_id" name="mem_id">
+        <input type="password" id="mem_pw" name="mem_pw">
+        <button onclick="login()">로그인</button>
+
+    </from>
+</body>
+</html>

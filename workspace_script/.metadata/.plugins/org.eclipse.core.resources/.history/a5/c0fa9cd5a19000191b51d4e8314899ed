@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 
+DOM을 지원하는 API학습
+DOM API를 활용하여 html태그를 추가,삭제,변경 처리할 수 있다.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM-textContect</title>
+</head>
+<body>
+<style>
+    div {
+       border : 1px solid red; 
+    }
+</style>
+<script>
+    window.onload = function() {
+        var output='';
+        output+= '<ul>';
+        output+= '<li>메뉴1</li>';
+        output+= '<li>메뉴2</li>';
+        output+= '<li>메뉴3</li>';
+        output+= '</ul>';
+        //document.body.textContent = output;
+        //document.body.textContent = "<h1>Document Object Model</h1>";
+        //위의 두행은 Text로 나오기 때문에 innerhtml을 사용하자
+        //div의 id에 접근
+        document.getElementById("d_menu").innerHTML = output;
+    }
+</script>
+<div id="d_menu">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- 
+위치와 그에 따른 차이점에 대해 말할 수 있다.
+실제 프로젝트에서 어떤 API를 사용하게 될지 모른다. - 
+html
+css 1, 2번
+javascript 1번(선언- 변수,함수,객체), 2번
+ajax 스크립트기반으로 처리 - DOM에 대한 사전지식필요 - 비동기처리지원기술
+bootstrap 태그와 병행해서 사용, 태그안에 속성으로 위치
+jquery 크로스브라우징서비스때문에 사용(표준API)
+jeasyui 태그안에 속성으로써 위치
+ -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM-element 생성하기</title>
+<!-- 1번 -->
+</head>
+<body>
+<!-- 2번 -->
+<script type="text/javascript">
+    window.onload = function() {
+        //변수선언
+        //createElement : 태그를 생성할 때 쓰는 함수
+        var header = document.createElement("h1");//h1태그를 생성,추가
+        //텍스트 노드(태그,노드,element) 추가하기
+        //텍스트 노드는 태그 이름은 없다. 태그에 대한 값은 있다.
+        var textNode = document.createTextNode("news title");
+        //노드를 연결하자.
+        //var header element에 자식 element로 textNode 추가
+        header.appendChild(textNode);
+        //body태그안에 header 연결해주기
+        document.body.appendChild(header);
+    }
+</script>
+<h1>뉴스제목</h1>
+</body>
+</html>
+<!-- 3번 -->

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 외부의 jsp를 가져올 것이면 헤더 태그에 사용 -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js">
+    // html태그를 자바스크립트 코드를 통해서 접근하고 제어 할 수 있다.
+    // 자바스크립트도 오픈소스(자바스크립트 프레임워크 발전 - node.js, angular.js
+    //                                                 ,react.js, vue.js)가 있다
+    // document는 모든 태그의 최상위 객체이다.- documnet_1.html
+    function send() {
+        // div id="msg"에 대한 주소번지를 같게 됨
+        var temp = document.getElementById("msg");
+        // div의 주소번지를 알림
+        alert(temp);
+        //innerHTML, ex.네이버 자동완성 기능..
+        //페이지에 대한 새로고침 없이 새로운 정보를 추가로 보여주는 태그
+        //div msg 태그의 요기를 innerHTML로 테이블 형태로 바꿔줌
+        temp.innerHTML = "<table border='1'><tr><td>저기</td></tr></table>";
+    }
+    </script>
+</head>
+<body>
+<!-- 내부에서만 사용할 것이면 바디에서 사용 -->
+<!-- style과 script의  순서를 바꾸어도 document는 DOM트리의 최상위기 때문에 접근 가능-->
+    <style>
+    	#parent {
+            /* solid : 단선 */
+    		border : 1px solid red;
+    	}
+    </style>
+    <script>
+    /* 자바 스크립트를 이용 document 객체의 API를 이용해서 div를 실행시킬 수 잇다. */
+    // write -> 브라우저에 문자열을 출력해줌.
+    // + 연산자 대신 , 를 사용할 수도 있다.
+        document.write("<div id='parent'>");
+        document.write("document","<font color='red'>","html5","</font>","CSS");
+        document.write("</div>");
+    </script>
+    <div id="msg"> <!-- 시각적인 변화가 없는 태그 : 공간분할에 쓰여지는 태그 span태그 또한 해당 -->
+    요기    
+    </div>
+    <!-- onClick -> ActionPerformed -->
+    <button onClick="send()">클릭</button>
+</body>
+</html>

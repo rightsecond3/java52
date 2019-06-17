@@ -2,6 +2,8 @@ package com.address;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 /* View계층과 Model계층 사이에서 인터페이스 역할
  *  : 삼성서비스센터, 은행방문
  * 고려사항
@@ -40,7 +42,7 @@ import java.util.List;
  */
 public class AddressBookCtrl {
 	private static final String _SEL = "select";
-	private static final String _DET = "delete";
+	private static final String _DET = "detail";
 	private static final String _INS = "insert";
 	private static final String _UPD = "update";
 	private static final String _DEL = "delete";
@@ -79,6 +81,7 @@ public class AddressBookCtrl {
 			raVO = retLogic.addressDetail(paVO);
 		}else {
 			throw new Exception("잘못된 command명 입니다.");
+			
 		}
 		return raVO;
 	}
@@ -90,7 +93,8 @@ public class AddressBookCtrl {
 	public List<AddressVO> send(String command) {
 		List<AddressVO> addrList = null;
 		if (_SEL.equals(command)) {
-			
+			RetrieveLogic retLogic = new RetrieveLogic();
+			addrList = retLogic.getAddressList();
 		}
 		return addrList;
 	}

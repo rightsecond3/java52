@@ -1,0 +1,17 @@
+
+다음에 접속됨: Oracle Database 11g Enterprise Edition Release 11.1.0.7.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+KO16MSWIN949 문자 설정과 AL16UTF16 NCHAR 문자 설정에서 익스포트가 종료되었습니다
+
+지정된 테이블을 익스포트하려고 합니다 via 규정 경로...
+. .                             DVD 테이블 익스포트 중
+                                                           36개의 행이 엑스포트되었습니다
+. .                             MEM 테이블 익스포트 중
+                                                            4개의 행이 엑스포트되었습니다
+. .                           POINT 테이블 익스포트 중
+                                                           10개의 행이 엑스포트되었습니다
+. .                       RENDETAIL 테이블 익스포트 중
+                                                           14개의 행이 엑스포트되었습니다
+. .                          RENTAL 테이블 익스포트 중
+                                                            9개의 행이 엑스포트되었습니다
+익스포트가 경고 없이 정상적으로 종료되었습니다.

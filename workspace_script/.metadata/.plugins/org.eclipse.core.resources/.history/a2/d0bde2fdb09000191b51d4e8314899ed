@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1 id="header">
+        <p id="contents">내용</p>
+    </h1>
+    <script type="text/javascript">
+        document.getElementById("header").onclick=function() {
+            alert("header");
+        }
+        document.getElementById("header").onclick=function() {
+            alert("contents");
+        }
+    </script>
+</body>
+</html>

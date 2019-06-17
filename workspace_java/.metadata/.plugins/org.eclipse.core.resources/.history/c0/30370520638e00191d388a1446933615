@@ -1,0 +1,37 @@
+package com.myDVD;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class memDVD extends JDialog {
+	///////////////////// 입력 화면 추가하기 시작////////////////////
+	private JLabel labelId;// 아이디 라벨
+	private JTextField txtId;// 아이디를 입력하는 컴포넌트
+	private JLabel labelName;// 이름라벨
+	private JTextField txtName;// 이름을 입력하는 컴포넌트
+	private JLabel labelTel;
+	private JTextField txtTel;
+	private JLabel labelPhonenum;
+	private JTextField txtPhonenum;
+	private JLabel labelZipcode;
+	private JTextField txtZipcode;
+	private JLabel labelAddress;
+	private JTextField txtAddress;
+	private JLabel labelResistdate;
+	private JTextField txtResistdate;
+	private JLabel labelPw;
+	private JTextField txtPw;
+	///////////////////// 입력 화면 추가하기 끝 ////////////////////
+	JPanel jp_center = new JPanel();
+	JPanel jp_south = new JPanel();
+	JButton jbtn_save = new JButton("저장");
+	JButton jbtn_cancel = new JButton("취소");
+	
+	
+	public void initDisplay() {
+		
+	}
+}

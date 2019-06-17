@@ -1,0 +1,4 @@
+FILE="C:\Users\kosmo_15\Desktop\dump\dump.dmp"
+LOG="C:\Users\kosmo_15\Desktop\dump\exp_dump.log"
+TABLES=('SCOTT.DVD', 'SCOTT.MEM', 'SCOTT.POINT', 'SCOTT.RENDETAIL', 'SCOTT.RENTAL')
+FEEDBACK=1000

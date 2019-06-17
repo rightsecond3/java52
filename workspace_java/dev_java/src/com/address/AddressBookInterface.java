@@ -14,5 +14,5 @@ public interface AddressBookInterface {
 	//삭제처리를 위한 추상 메소드 선언
 	public AddressVO addressDelete(AddressVO paVO);
 	//전체조회를 위한 추상 메소드 선언
-	public List<AddressVO> getAddress(AddressVO paVO);
+	public List<AddressVO> getAddress();
 }

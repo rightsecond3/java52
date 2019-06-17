@@ -1,0 +1,15 @@
+package com.myDVD;
+
+public class DVDCtrl {
+	private static final String _SEL = "select";
+	private static final String _DET = "detail";
+	private static final String _INS = "insert";
+	private static final String _UPD = "update";
+	private static final String _DEL = "delete";
+	
+	public DVDVO send(DVDVO paVO) thorw Exception {
+		DVDVO raVO = null;
+		String command = paVO.getCommand();
+	}
+	
+}

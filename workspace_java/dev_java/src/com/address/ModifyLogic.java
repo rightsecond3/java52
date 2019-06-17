@@ -6,8 +6,7 @@ public class ModifyLogic {
 		AddressVO raVO = null;
 		System.out.println("ModifyLogic addressUpdate() 호출 성공");
 		//insert here
-		raVO = new AddressVO();
-		raVO.setStatus(0);
+		raVO = aBookInterface.addressUpdate(paVO);
 		return raVO;
 	}
 

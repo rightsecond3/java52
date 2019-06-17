@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>생성자 함수와 객체활용</title>
+    <script>
+        // 전역변수 - super, this 사용가능
+        var speed=0;
+        var carName="";
+        var wheelNum=0;
+        var carColor= "#000000";
+        ///*** 생성자 ***///
+        function Sonata() {
+            this.speed = 50;
+            this.carName = "2019년형 소나타";
+            this.wheelNum = 4;
+        }
+        function Tivoli() {
+            this.carColor = "#CCCCCC";
+            this.carName = "2019년형 티볼리";
+            this.wheelNum = 4;
+        }
+        function speedUp() {
+            speed = speed+1
+            console.log("speedUp 호출 성공")
+        }
+        function Tivoli(carColor,carName,whellNum) {
+            this.carColor = carColor;
+            this.carName = carName;
+            this.wheelNum = whellNum;
+            this.method = speedUp; // 괄호 생략가능
+            this.method2 = fucntion() {
+                document.write("익명 함수를 실행");
+            }
+        }
+    </script>
+</head>
+<body>
+    <script>
+        // 인스턴스화
+        var myCar = new Sonata();
+        var herCar = new Sonata();
+        var himCar = new Tivoli("pink","티볼리",4);
+        //insert here : 메소드 호출
+        himCar.method();
+        himCar.method2();// 익명함수 호출 - 재사용불가
+        document.write("speepUp 호출 후 =====>"+himCar.speed)
+        for(pro in himCar) {
+            //himcar["carName"] => himCar.carNAme
+            document.write(pro+"="+himCar[pro])+"<br>";
+        }
+
+ //       herCar.speed = 100;
+ //       document.write("내 자동차 "+myCar.carName+"<br>");    
+ //       document.write("현재 내 차 속도 "+myCar.speed+"<br>");    
+ //      document.write("그녀 차의 속도 "+herCar.speed+"<br>");    
+    </script>
+</body>
+</html>

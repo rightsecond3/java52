@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <h1>jquery적용</h1>
+<script>
+    // 새로 뿌려준다 위의 h1태그는 나오지 않는다.
+    // ready : DOM 구성이 완료되었을때
+/* & = jquery(document) */
+    $(document).ready(function() {
+        document.write("<span>테스트</span>");
+    }); 
+    
+</script>
+</body>
+</html>

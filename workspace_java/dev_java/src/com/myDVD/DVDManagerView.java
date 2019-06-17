@@ -88,7 +88,6 @@ public class DVDManagerView implements ActionListener, MouseListener, KeyListene
 	//바닥속지->JTable->DefaltTableModel->cols, data이용
 	JScrollPane jsp_rent = new JScrollPane(jt_rent,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 			                               JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	
 /*****************************************************************************************************
  * 학습목표
  * 나는 인스턴스화를 할 때 적절한 생성자를 사용할 수 있다. -파라미터와 타입맞추기
@@ -119,7 +118,6 @@ public class DVDManagerView implements ActionListener, MouseListener, KeyListene
 		sql.append(" WHERE m.memid = r.memid                                     ");
 		sql.append("    AND rd.serialnum = d.serialnum                           ");
 		sql.append("    AND r.r_num = rd.r_num                                   ");
-		sql.append("AND mov_title LIKE '%'||'"+keyword+"'||'%'");
 		sql.append(" ORDER BY r_date DESC                                        ");
 		try {
 			Class.forName(RSOracleServer._DRIVER);
@@ -235,6 +233,7 @@ public class DVDManagerView implements ActionListener, MouseListener, KeyListene
 			getDVDList(keyword);
 		}
 		else if(e.getSource()==jtf_keyword) {
+			getDVDList(keyword);
 		}
 	}
 	@Override
@@ -277,7 +276,7 @@ public class DVDManagerView implements ActionListener, MouseListener, KeyListene
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if(e.getKeyChar() == KeyEvent.VK_ENTER) {
-
+			System.out.println("엔터키입력");
 		}
 	}
 
