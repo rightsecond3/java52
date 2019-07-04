@@ -1,0 +1,78 @@
+package com.project;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.util.DBConnectionMgr;
+
+public class RentDao {
+	Connection 		con   = null;
+	PreparedStatement 	pstmt = null;
+	CallableStatement cstmt =null;
+	ResultSet          rs    = null;
+	DBConnectionMgr    dbMgr = null;
+
+	public List<Map<String, Object>> getRentMap(RentVO paVO) {
+		String gubun = null;
+		String keyword = paVO.getKeyword();
+		if("DVD명".equals(paVO.getCombobox())) {
+			gubun = "mov_title";
+		} else if("이름".equals(paVO.getCombobox())) {
+			gubun = "memname";
+		} else if("대여일".equals(paVO.getCombobox())) {
+			gubun = "r_date";
+		}
+		List<Map<String, Object>> list = new ArrayList();
+		dbMgr = DBConnectionMgr.getInstance();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT serialnum, r_num ||'_'|| r_detailnum as rnum,mov_title,memname,r_date,returndate,r_fee||'원' ");
+		sql.append("   FROM dvd natural join MEM natural join Rental natural join RenDetail                 ");
+		sql.append("  WHERE " +gubun+ " LIKE '%' || ? ||'%'                                                  ");
+		sql.append("  ORDER BY serialnum desc ");
+		try {
+			con = dbMgr.getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, keyword);
+			rs = pstmt.executeQuery();
+			Map<String,Object> rMap = null;
+			while (rs.next()) {
+				rMap = new HashMap();
+				rMap.put("serialnum", rs.getString("serialnum"));
+				rMap.put("rnum", rs.getString("rnum"));
+				rMap.put("mov_title", rs.getString("mov_title"));
+				rMap.put("memname", rs.getString("memname"));
+				rMap.put("r_date", rs.getString("r_date"));
+				rMap.put("returndate", rs.getString("returndate"));
+				rMap.put("r_fee||'원'", rs.getString("r_fee||'원'"));
+				list.add(rMap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			dbMgr.freeConnection(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+
+	public RentVO Delete(RentVO paVO) {
+		dbMgr = DBConnectionMgr.getInstance();
+		String u_rnum = paVO.getR_num();
+		try {
+			con = dbMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_renDelete(?)}");
+			cstmt.setString(1, u_rnum);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+}

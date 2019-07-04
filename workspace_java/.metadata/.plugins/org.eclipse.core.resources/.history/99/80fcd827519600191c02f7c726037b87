@@ -1,0 +1,14 @@
+package com.project;
+
+import java.util.List;
+import java.util.Map;
+
+public class RenDetailRetrieveLogic {
+
+	public List<Map<String, Object>> getRenDetailMap(RenDetailVO paVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}

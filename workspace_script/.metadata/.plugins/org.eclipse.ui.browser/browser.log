@@ -58,3 +58,65 @@
 6월 17, 2019 13:56:03.58 [8224:10072:0617/135603.583:ERROR:browser_process_sub_thread.cc(221)] Waited 18 ms for network service
 6월 17, 2019 13:56:03.64 
 6월 17, 2019 13:56:03.64 KLIB_SelfTest return : KLR_OK
+
+6월 19, 2019 11:37:39.19 NEW SESSION
+6월 19, 2019 11:37:39.19 [11340:18648:0619/113739.188:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 19, 2019 11:37:39.23 [11340:11660:0619/113739.236:ERROR:browser_process_sub_thread.cc(221)] Waited 18 ms for network service
+6월 19, 2019 11:37:39.29 
+6월 19, 2019 11:37:39.29 KLIB_SelfTest return : KLR_OK
+6월 19, 2019 13:53:16.92 [20228:11296:0619/135316.921:ERROR:platform_sensor_reader_win.cc(244)] NOT IMPLEMENTED
+6월 19, 2019 13:53:20.94 [20228:11296:0619/135320.944:ERROR:platform_sensor_reader_win.cc(244)] NOT IMPLEMENTED
+
+6월 20, 2019 09:45:24.54 NEW SESSION
+6월 20, 2019 09:45:24.54 [14708:9976:0620/094524.545:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 20, 2019 09:45:24.59 [14708:10768:0620/094524.597:ERROR:browser_process_sub_thread.cc(221)] Waited 19 ms for network service
+6월 20, 2019 09:45:24.65 
+6월 20, 2019 09:45:24.65 KLIB_SelfTest return : KLR_OK
+6월 20, 2019 09:47:24.29 [12860:11172:0620/094724.292:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 20, 2019 09:47:24.33 [12860:13148:0620/094724.339:ERROR:browser_process_sub_thread.cc(221)] Waited 21 ms for network service
+6월 20, 2019 09:47:24.39 
+6월 20, 2019 09:47:24.40 KLIB_SelfTest return : KLR_OK
+6월 20, 2019 09:48:01.87 [2604:19560:0620/094801.874:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 20, 2019 09:48:01.92 [2604:16592:0620/094801.926:ERROR:browser_process_sub_thread.cc(221)] Waited 20 ms for network service
+6월 20, 2019 09:48:01.99 
+6월 20, 2019 09:48:01.99 KLIB_SelfTest return : KLR_OK
+6월 20, 2019 09:48:20.92 [7772:11200:0620/094820.923:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 20, 2019 09:48:20.97 [7772:21368:0620/094820.975:ERROR:browser_process_sub_thread.cc(221)] Waited 18 ms for network service
+6월 20, 2019 09:48:21.03 
+6월 20, 2019 09:48:21.03 KLIB_SelfTest return : KLR_OK
+6월 20, 2019 09:49:26.56 [19468:20780:0620/094926.564:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 20, 2019 09:49:26.61 [19468:16960:0620/094926.617:ERROR:browser_process_sub_thread.cc(221)] Waited 21 ms for network service
+6월 20, 2019 09:49:26.68 
+6월 20, 2019 09:49:26.68 KLIB_SelfTest return : KLR_OK
+
+6월 21, 2019 13:18:45.62 NEW SESSION
+6월 21, 2019 13:18:45.62 [3544:10380:0621/131845.621:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 21, 2019 13:18:45.67 [3544:10576:0621/131845.671:ERROR:browser_process_sub_thread.cc(221)] Waited 15 ms for network service
+6월 21, 2019 13:18:45.75 
+6월 21, 2019 13:18:45.75 KLIB_SelfTest return : KLR_OK
+6월 21, 2019 13:57:07.79 [13772:13484:0621/135707.799:ERROR:platform_sensor_reader_win.cc(244)] NOT IMPLEMENTED
+
+6월 25, 2019 12:18:43.86 NEW SESSION
+6월 25, 2019 12:18:43.86 [15232:16952:0625/121843.861:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 25, 2019 12:18:43.91 [15232:13772:0625/121843.914:ERROR:browser_process_sub_thread.cc(221)] Waited 24 ms for network service
+6월 25, 2019 12:18:43.98 
+6월 25, 2019 12:18:43.98 KLIB_SelfTest return : KLR_OK
+6월 25, 2019 13:20:26.07 [13720:5432:0625/132026.074:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 25, 2019 13:20:26.11 [13720:12324:0625/132026.119:ERROR:browser_process_sub_thread.cc(221)] Waited 17 ms for network service
+6월 25, 2019 13:20:26.19 
+6월 25, 2019 13:20:26.19 KLIB_SelfTest return : KLR_OK
+
+6월 26, 2019 14:08:16.14 NEW SESSION
+6월 26, 2019 14:08:16.15 [18028:8220:0626/140816.144:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 26, 2019 14:08:16.18 [18028:14948:0626/140816.183:ERROR:browser_process_sub_thread.cc(221)] Waited 9 ms for network service
+6월 26, 2019 14:08:16.24 
+6월 26, 2019 14:08:16.25 KLIB_SelfTest return : KLR_OK
+
+6월 27, 2019 13:56:26.07 NEW SESSION
+6월 27, 2019 13:56:26.07 [6632:10144:0627/135626.071:ERROR:http_bridge.cc(110)] NOT IMPLEMENTED
+6월 27, 2019 13:56:26.10 [6632:11484:0627/135626.107:ERROR:browser_process_sub_thread.cc(221)] Waited 15 ms for network service
+6월 27, 2019 13:56:26.16 
+6월 27, 2019 13:56:26.16 KLIB_SelfTest return : KLR_OK
+
+6월 28, 2019 12:28:12.17 NEW SESSION
+6월 28, 2019 12:28:12.17 [2492:3980:0628/122812.157:ERROR:socket_stream.cc(219)] Closing stream with result -2

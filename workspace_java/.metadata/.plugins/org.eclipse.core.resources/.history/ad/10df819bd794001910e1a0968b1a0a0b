@@ -1,0 +1,7 @@
+package com.project;
+
+public class RentalDetailVO {
+	private String r_detailnum = null;// 랜탈디테일번호
+	private String serialnum   = null; // -> DVD테이블의 왜래키
+	private String r_num       = null; // -> RENTAL테이블의 왜래키
+}

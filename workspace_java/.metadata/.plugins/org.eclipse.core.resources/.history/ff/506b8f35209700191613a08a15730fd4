@@ -1,0 +1,10 @@
+package com.network1;
+
+public class StringTokenizerTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

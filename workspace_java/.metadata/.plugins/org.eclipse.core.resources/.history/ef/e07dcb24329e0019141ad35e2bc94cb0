@@ -1,0 +1,9 @@
+package com.helpme2;
+
+public class FriendGroupLayout {
+	JPanel jp_first = new JPanel();
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../demo/demo.css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        //하나 : ready함수는 DOM구성이 완료되었을 때 뭐뭐해주세요 하고싶을 때 사용함.
+        // 둘 : function안에서 구현하고 싶은 내용을 작성함. 그런데 이름이 없으므로 호출은 불가
+        $(document).ready(function() {
+            //생성자 호출, 생성자 안에서 직접 정의
+            //dg_dept는 아이디값이고 datagrid는 테이블을 지원하는 객체 생성자 호출하는 문장
+            //좌중괄호와 우중괄호 안에 datagrid안에 처리하고 싶은 기능들을 담을 수 있음.
+            $("#dg_dept").datagrid({//구현부- 이벤트처리가능
+                columns:[[
+                     {field:'deptno',title:'부서번호',width:100,align:'center'}
+                    ,{field:'dname',title:'부서명',width:150,align:'center'}
+                    ,{field:'loc',title:'지역',width:150,align:'center'}
+                ]]
+                //datagrid 객체 안에 링크버튼을 갖는 툴바 붙이기
+                ,toolbar:'#tb_dept'
+            });
+        });
+    </script>
+<!-- 
+학습목표
+나는 easyui API를 활용하여 화면을 구성할 수 있다.
+나는 easyui에서 지원하는 태그 속성들을 자바스크립트 언어를 활용하여 조작할 수있다.
+나는 웹페이지 처리에 필요한 html,css,javascript위치와 역할에 대해 설명할 수 있다.
+ -->
+    <table id="dg_dept" title="부서관리시스템" style="width:700px;height:250px">
+    </table>
+    <div id="tb_dept" style="padding:2px 5px;">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+    </div>
+</body>
+</html>

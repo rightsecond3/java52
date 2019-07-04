@@ -4,9 +4,9 @@ public class ModifyLogic {
 	AddressBookInterface aBookInterface = new AddressBookDao();
 	public AddressVO addressUpdate(AddressVO paVO) {
 		AddressVO raVO = null;
-		System.out.println("ModifyLogic addressUpdate() 호출 성공");
-		//insert here
-		raVO = aBookInterface.addressUpdate(paVO);
+		System.out.println("ModifyLogic addressUpdate()호출");
+		// insert here
+		raVO = aBookInterface.addresssUpdate(paVO);
 		return raVO;
 	}
 

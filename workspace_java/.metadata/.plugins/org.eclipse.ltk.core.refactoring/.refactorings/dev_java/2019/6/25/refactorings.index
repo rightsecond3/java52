@@ -1,2 +1,18 @@
 1560769532583	Rename type 'memDVD'
 1560772633034	Rename package 'DVDproject'
+1560936626465	Delete element
+1560936629199	Delete element
+1560939804261	Delete element
+1560941207810	Rename type 'SubSup'
+1560948188900	Rename type 'RetriveLogic'
+1560948217426	Rename type 'DVDCtrl'
+1560948353716	Rename type 'DVDMemDao'
+1560948365277	Rename type 'DVDMemVO'
+1560948373500	Rename type 'DVDMem'
+1560948383898	Rename type 'DVDRent'
+1560948391964	Rename type 'DVDList'
+1561022770958	Rename type 'List'
+1561026956633	Rename type 'RetriveLogic'
+1561199504800	Rename type 'RentalVO'
+1561199515522	Rename type 'RentalDetailVO'
+1561199531286	Rename type 'RentlVO'

@@ -1,0 +1,5 @@
+[
+    {"id":"greatGuy","name":"박상범","address":"전주시 덕진구 송천동","hp":"01077778888","status":-1}
+    ,{"id":"sexyGuy","name":"정원형","address":"서울시 영등포구 도림동","hp":"01012345678","status":-1}
+    ,{"id":"test","name":"김유신","address":"서울시 마포구 공덕동","hp":"010-2222-2256","status":-1}
+]

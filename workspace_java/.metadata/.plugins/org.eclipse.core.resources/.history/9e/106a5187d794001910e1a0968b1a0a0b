@@ -1,0 +1,10 @@
+package com.project;
+
+public class RentalVO {
+	private String r_num       = null;// 렌탈번호
+	private String r_date      = null;// 렌탈한날짜
+	private String returndate  = null;// 반납일
+	private int    latefee     = 0;   // 연체료
+	private String duedate     = null;// 반납예정일
+	private String memid       = null; // -> MEM테이블의 memid를 외래키로 받아옴.
+}

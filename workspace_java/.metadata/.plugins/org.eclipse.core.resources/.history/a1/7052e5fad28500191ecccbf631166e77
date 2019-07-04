@@ -1,8 +1,0 @@
-package com.ch8;
-
-public class TriangleArea extends Area {
-	public double area(double weight, double height) {
-		
-	}
-
-}

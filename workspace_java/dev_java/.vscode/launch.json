@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DVDSup",
+            "request": "launch",
+            "mainClass": "com.project.DVDSup",
+            "projectName": "dev_java"
+        }
+    ]
+}

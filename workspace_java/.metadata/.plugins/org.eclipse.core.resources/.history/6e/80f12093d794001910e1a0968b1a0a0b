@@ -1,0 +1,19 @@
+package com.project;
+
+public class RentalVO {
+	private String r_num       = null;// 렌탈번호
+	private String r_date      = null;// 렌탈한날짜
+	private String returndate  = null;// 반납일
+	private int    latefee     = 0;   // 연체료
+	private String duedate     = null;// 반납예정일
+	private String memid       = null; // -> MEM테이블의 memid를 외래키로 받아옴.
+	
+	/////***** 업무에 대한 구분을 위한 변수 선언 *****//////
+	private String command     = null;// select|insert|update|delete
+	/////***** 오라클서버에서 반환되는 값을 담을 변수 *****//////
+	private int    status      = -1;
+	/////***** 사용자가 입력한 키워드 값을 담을 변수 *****/////
+	private String keyword     = null;
+	/////***** 사용자가 선택한 콤보박스 값을 담을 변수 *****/////
+	private String combobox     = null;
+}

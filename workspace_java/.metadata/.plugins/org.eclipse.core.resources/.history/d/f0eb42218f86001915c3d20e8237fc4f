@@ -1,9 +1,0 @@
-package com.ch9;
-
-public abstract class Unit {
-	public Unit() {}
-	public abstract void move();
-	public abstract void hold();
-	public abstract void stop();	
-	public abstract void attack();	
-}

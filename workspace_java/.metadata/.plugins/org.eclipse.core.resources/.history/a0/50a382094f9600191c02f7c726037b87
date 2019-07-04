@@ -1,0 +1,41 @@
+package com.thread;
+class ATMTwo implements Runnable {
+	class ATM implements Runnable {
+		private long depositMoney = 10000;
+		//지연, 경합, 순서처리
+		@Override
+		public void run() {
+			//두개의 스레드가 돈을 뽑기 위해 ATM기를 공유하는 상황
+			//서로 인터셉트를 하거나 당할 수 있다.
+			//먼저 선점한 스레드가 사용중이면 다른 스레드는 진입해서는 안됨.
+			//그런 상황을 예방할 수 있는 예약어가 동기화 코드-synchronized(this)
+			synchronized (this) {
+				//10번의 인출을 진행
+				for(int i=0; i<10; i++) {//지연처리
+					try {
+						Thread.sleep(1000);//지연처리
+					} catch (InterruptedException e) {//인터셉트발생시
+						System.out.println("어 내 차례아닌가요?");
+						e.printStackTrace();
+					}
+					//잔고 부족 for문 탈출
+					if(getDepositMoney()<=0) {
+						break;
+					}
+					withDraw(1000);
+				}///////////end of for
+			}///////////////end of synchronized
+		}
+}
+public class WaitNotifyEx{
+
+}
+	public static void main(String[] args) {
+		ATMTwo atm = new ATMTwo();
+		// insert here - 엄마와 아들 스레드 추가하기
+		Thread mother = new Thread(atm, "엄마");
+		Thread son = new Thread(atm, "아들");
+		mother.start();
+		son.start();
+	}
+}

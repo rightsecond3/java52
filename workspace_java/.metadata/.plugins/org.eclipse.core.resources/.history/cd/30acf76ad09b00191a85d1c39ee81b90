@@ -1,0 +1,38 @@
+package com.network2;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.util.DBConnectionMgr;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+import oracle.jdbc.oracore.OracleType;
+
+public class ChatDao {
+	DBConnectionMgr         dbMgr = null;
+	Connection              con   = null;
+	CallableStatement       cstmt = null;//query
+	PreparedStatement       pstmt = null;//procedure
+	OracleCallableStatement ostmt = null;//refcursor
+	ResultSet               rs    = null;
+	
+	public String login(String memid, String mempw) {
+		String nick = null;
+		try {
+			con = DBConnectionMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_chatlogin(?,?,?)}");
+			cstmt.setString(1, memid);
+			cstmt.setString(2, mempw);
+			cstmt.registerOutParameter(3, OracleTypes.CURSOR);
+			cstmt.execute();
+			ostmt = (OracleCallableStatement) cstmt;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return nick;
+	}
+	
+}

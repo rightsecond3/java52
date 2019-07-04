@@ -1,0 +1,19 @@
+package com.project;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class RentDao {
+	java.sql.Connection 		con   = null;
+	java.sql.PreparedStatement 	pstmt = null;
+	java.sql.ResultSet          rs    = null;
+	com.util.DBConnectionMgr    dbMgr = null;
+
+	public List<Map<String, Object>> getRentMap(RentVO paVO) {
+		List<Map<String, Object>> list = new ArrayList();
+		
+		return null;
+	}
+
+}

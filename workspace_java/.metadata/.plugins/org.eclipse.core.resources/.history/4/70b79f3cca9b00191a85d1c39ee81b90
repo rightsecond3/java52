@@ -1,0 +1,5 @@
+package com.network2;
+
+public class ChatMemberVO {
+
+}

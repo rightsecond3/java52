@@ -1,0 +1,9 @@
+package com.helpme2;
+
+public class FriendGroupLayout {
+
+	public static void main(String[] args) {
+
+	}
+
+}

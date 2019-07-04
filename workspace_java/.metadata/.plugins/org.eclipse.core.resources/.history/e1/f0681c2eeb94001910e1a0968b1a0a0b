@@ -1,0 +1,10 @@
+package com.project;
+
+public class RentDeleteLogic {
+
+	public RentVO Delete(RentVO paVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

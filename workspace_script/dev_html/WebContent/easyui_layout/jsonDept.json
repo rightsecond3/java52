@@ -1,0 +1,5 @@
+[
+    {"deptno":10, "dname":"인사부"}
+    ,{"deptno":20, "dname":"영업부"}
+    ,{"deptno":30, "dname":"총무부"}
+]

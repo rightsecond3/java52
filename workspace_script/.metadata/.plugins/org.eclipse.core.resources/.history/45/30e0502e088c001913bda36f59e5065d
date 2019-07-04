@@ -1,6 +1,0 @@
-@charset "UTF-8";
-/* 클래스는 앞에 . */
-.navbar-default.navbar-brand {
-	color: #CCCCCC;
-
-}

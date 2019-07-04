@@ -1,0 +1,13 @@
+package com.network2;
+
+import java.util.List;
+import java.util.Vector;
+
+public class Room {
+	List<TalkServerThread> userList = new Vector<>();
+	List<String>           nameList = new Vector<>();
+	String title   = null;//단톡방의 이름
+	String state   = null;//대기 | 참여중...
+	int    max     = 0;//정원 수
+	int    current = 0;//현재원
+}

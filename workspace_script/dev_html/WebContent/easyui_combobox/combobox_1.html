@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/demo/demo.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.easyui.min.js"></script>    
+
+    <script type="text/javascript">
+        function send() {
+
+        }
+    </script>
+</head>
+<body>
+    <script>
+        // 돔구성이 완료 되었을 떄
+        $(document).ready(function() {
+            $("#cb_dname").combobox({
+                url : '../easyui_layout/jsonDept.json'
+                // data: [
+		        //         {deptno:'10', dname:'ACCOUNTING'}
+		        //         ,{deptno:'20', dname:'RESEARCH'}
+		        //         ,{deptno:'30', dname:'SALES'}
+		        //         ,{deptno:'40', dname:'OPERATION'}
+	            //       ]
+                ,valueField:'deptno'
+                ,textField:'dname'
+            });
+        });
+    </script>
+    <form id="f_combo">
+        <input class="easyui-combobox" id="cb_dname" name="cb_dname">
+        <button onclick="send()">전송</button>
+    </form>
+</body>
+</html>

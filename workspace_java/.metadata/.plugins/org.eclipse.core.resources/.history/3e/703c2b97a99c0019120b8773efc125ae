@@ -1,0 +1,24 @@
+package com.network2;
+
+import java.util.List;
+import java.util.Vector;
+
+public class RoomSimulation {
+	
+	public static void main(String[] args) {
+		List<Room> roomList = new Vector<>();
+		Room room = new Room("자바 52기", 28);
+		roomList.add(room);
+		room = new Room("자바 51기", 10);
+		roomList.add(room);
+		room = new Room("자바 50기", 15);
+		roomList.add(room);
+		for (int i = 0; i < roomList.size(); i++) {
+			Room rm = roomList.get(i);
+			if ("자바 52기".equals(rm.title)) {
+				System.out.println(rm.current);
+			}
+		}
+	}
+
+}

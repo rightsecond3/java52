@@ -1,0 +1,120 @@
+package com.network1;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+public class TalkServerThread extends Thread {
+	TalkServer ts = null;
+	ObjectOutputStream oos = null;
+	ObjectInputStream ois = null;
+	String nickName = null;//사용자의 닉네임
+	
+	///*** 생성자 ***///
+	public TalkServerThread(TalkServer ts) {
+		this.ts = ts;
+		try {
+			oos = new ObjectOutputStream(ts.client.getOutputStream());//말하기
+			ois = new ObjectInputStream(ts.client.getInputStream());//듣기
+			String msg = (String) ois.readObject(); //oos.writeObject 메세지 넣기
+			ts.jta_log.append(msg+"\n");
+			//자동으로 스크롤바 이동시켜주기
+			ts.jta_log.setCaretPosition(ts.jta_log.getDocument().getLength());
+			StringTokenizer st = null;
+			if(msg!=null) {
+				st = new StringTokenizer(msg, Protocol.seperator);
+			}
+			st.nextToken();//100
+			nickName = st.nextToken();//닉네임 담기
+/*
+ * 스레드가 가진 이름을 가지고 전송하게 되므로 나중에 들어온 나에게
+ * 나 이전에 들어와 있는 친구들의 닉네임을 담아주게 됨
+ * tst.send를 하는 건 내게 보내는 것이 아니라 다른 사람에게 메시지를 전송하는 것임.
+ */
+			for(TalkServerThread tst : ts.chatList) {// 그전 이용자들의 정보를 가져오기 위한 for
+				String currentName = tst.nickName;
+				//이전 사용자의 정보를 받음
+				this.send(Protocol.ROOM_IN+Protocol.seperator+currentName);//2번
+			}
+			//입장한 내 스레드 추가하기
+			ts.chatList.add(this);
+			//현재 서버에 접속해 있는 모든 사람들에게 메세지 전송
+			this.broadCasting(msg); //3번
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	//** 서버에 접속한 모든 사용자들에게 메세지를 전송 처리 **//
+	public void broadCasting(String msg) {//200|누가|누구에게|오늘 스터디할까?
+		for(TalkServerThread tst:ts.chatList) { //전 이용자들에게 접근하기 위해 for
+			//this.send(msg), tst.send(msg) 차이
+			tst.send(msg); // 내정보를줌
+		}
+	}
+	//** 메세지 전송부 **//
+	public void send(String msg) {//반복문은 필요없다.
+		try {
+			oos.writeObject(msg);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	//run 메소드 안에서는 무엇을 구현해야 되는가?-!듣기!
+	@Override
+	public void run() {
+		boolean isStop = false;
+		try {
+			run_start://break run_start - 라벨이 붙어있는 구역 전체를 빠져나감
+			while(!isStop) {
+				String msg = (String) ois.readObject();
+				ts.jta_log.append(msg+"\n");
+				ts.jta_log.setCaretPosition(ts.jta_log.getDocument().getLength());
+				int protocol = 0;
+				StringTokenizer st = null;
+				if(msg!=null) {
+					st = new StringTokenizer(msg,"|");
+					protocol = Integer.parseInt(st.nextToken());
+				}
+				switch(protocol) {
+				case Protocol.MESSAGE: {
+					String nickName = st.nextToken();
+					String message = st.nextToken();
+					String imgChoice = "";
+					while(st.hasMoreTokens()) { //남아있는 것이 있냐?
+						imgChoice = st.nextToken();//받아온 이모티콘이있을 때 짤라줌
+					}
+					this.broadCasting(Protocol.MESSAGE
+							+Protocol.seperator+nickName
+							+Protocol.seperator+message
+							+Protocol.seperator+imgChoice
+							);
+					
+				}break;
+				case Protocol.WHISPER: {
+					String nickName = st.nextToken();
+					String otherName = st.nextToken();
+					String message = st.nextToken();
+				    for(TalkServerThread tst : ts.chatList) {
+				    	if (isStop) {
+							
+						}
+				    }
+					
+				}break;
+				case Protocol.ROOM_OUT: {
+					String nickName = st.nextToken();
+					int index = ts.chatList.indexOf(this);
+					ts.chatList.remove(this);
+					this.broadCasting(Protocol.ROOM_OUT
+							+Protocol.seperator+nickName
+							+Protocol.seperator+index);
+				}break;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+}

@@ -1,0 +1,6 @@
+package com.network2;
+
+public class Room {
+	String title = null;//단톡방의 이름
+	
+}

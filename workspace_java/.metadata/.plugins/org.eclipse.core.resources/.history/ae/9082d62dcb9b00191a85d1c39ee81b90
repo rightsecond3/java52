@@ -1,0 +1,19 @@
+package com.network2;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.util.DBConnectionMgr;
+
+public class ChatDao {
+	DBConnectionMgr   dbMgr = null;
+	Connection        con   = null;
+	CallableStatement cstmt = null;
+	PreparedStatement pstmt = null;
+	ResultSet         rs    = null;
+	
+	
+	
+}

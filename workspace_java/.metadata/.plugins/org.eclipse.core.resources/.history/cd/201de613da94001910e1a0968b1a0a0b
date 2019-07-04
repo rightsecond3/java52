@@ -1,0 +1,10 @@
+package com.project;
+
+public class RentDao {
+
+	public List<Map<String, Object>> getRentMap(RentVO paVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

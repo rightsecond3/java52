@@ -1,0 +1,94 @@
+package com.helpme2;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dialog.ModalityType;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+	public class testDialog extends JDialog implements ActionListener {
+		 
+		 JButton btn,btn1,btn2;
+		 
+		    public testDialog(JPanel parent, String title, String btntext, String btntext1, String btntext2) {
+		        super();
+		        this.setUndecorated(true);
+		        //this.setBackground(new Color(250,236,197));
+
+		        initUI(parent,title, btntext, btntext1, btntext2);
+		        
+		    }
+
+		    private void initUI(Container parent,String title, String btntext, String btntext1, String btntext2) {
+
+
+		        JLabel name = new JLabel(title);
+		        //name.setBackground(new Color(250,236,197));
+		        name.setFont(new Font("굴림", Font.BOLD, 13));
+
+		        btn = new JButton(btntext);
+		        btn.addActionListener(this);
+		        
+		        btn1 = new JButton(btntext1);
+		        btn1.addActionListener(this);
+		        
+		        btn2 = new JButton(btntext2);
+		        btn2.addActionListener(this);
+
+		        createLayout(name, btn, btn1, btn2);
+
+		        setModalityType(ModalityType.APPLICATION_MODAL);
+
+		        //setTitle("About Notes");
+		       
+		        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		        setLocationRelativeTo(parent.getParent());
+
+		    }
+
+		    private void createLayout(JComponent... arg) {
+
+		        Container pane = getContentPane();
+		        GroupLayout gl = new GroupLayout(pane);
+		        
+		        pane.setBackground(new Color(250,236,197));
+		        pane.setLayout(gl);
+
+		        gl.setAutoCreateContainerGaps(true);
+		        gl.setAutoCreateGaps(true);
+		       
+
+		        gl.setHorizontalGroup(gl.createSequentialGroup()
+		          .addGroup(gl.createParallelGroup(CENTER)
+		           .addComponent(arg[0])
+		           .addGroup(gl.createSequentialGroup()
+		            //.addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+		                   .addComponent(arg[1])             
+		                   .addComponent(arg[2])
+		                   .addComponent(arg[3])))//)
+		                //.addGap(200)
+		        );
+
+		        gl.setVerticalGroup(gl.createSequentialGroup()
+		          .addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		           .addComponent(arg[0]))
+		           .addGap(30)
+		            // .addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+		              //.addGroup(gl.createSequentialGroup()
+		                .addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		                 .addComponent(arg[1])
+		              .addComponent(arg[2])
+		              .addComponent(arg[3]))//))
+
+		        );
+
+		        pack();
+		    }
+}
+

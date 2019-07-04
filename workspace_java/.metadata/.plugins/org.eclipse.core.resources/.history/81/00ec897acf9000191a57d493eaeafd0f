@@ -1,7 +1,0 @@
-package com.ch12;
-
-import javax.swing.JFrame;
-
-public class VectorTest extends JFrame {
-
-}

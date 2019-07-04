@@ -47,21 +47,22 @@ public class SubBook extends JDialog implements ActionListener {
 	String title = null;
 	AddressBook aBook = null;
 	JScrollPane jsp_line = new JScrollPane(jp_center);
-	AddressVO aVO = null;// set메소드에서 쓸  aVO 변수 선언
+	AddressVO aVO = null;
 	public SubBook() {
 		initDisplay();
 	}
-	/*****************************************************************************
+
+	/******************************************************************
 	 * 부모창에서 결정된 값(입력, aVO)
-	 * @param aVO - 입력버튼을 부모창에서 눌렀을 땐 null, 수정일 땐 aVO는 DB에서 읽어온 값을
-	 *              담고 있다.
+	 * @param aVO 입력버튼을 부모창에서 눌렀을 땐 null, 수정일 땐 aVO는 db에서 읽어온값을
+	 *            담고 있다.
 	 * @param title - 부모창에서 선택한 버튼의 라벨담기
 	 * @param aBook - 부모창(AddressBook)의 원본 주소번지를 담는 변수
-	 * @param isEdit - 자식창(SubBook)을 입력컴포넌트(TextField)를 활성화 시키기 위한 값.
-	 *                 true : 수정가능 false : 수정불가
-	 ********************************************************************************/
+	 * @param isEdit - 자식창(SubBook)에서 입력콤퍼넌트 활성화 시키기 위한 값
+	 * true:수정가능 false:수정불가
+	 ****************************************************************/
 	public void set(AddressVO aVO, String title, AddressBook aBook, boolean isEdit) {
-		this.aVO=aVO;
+		this.aVO = aVO;
 		this.title = title;
 		this.aBook = aBook;
 		this.setValue();
@@ -168,47 +169,50 @@ public class SubBook extends JDialog implements ActionListener {
 		this.setSize(400, 400);
 		this.setVisible(false);
 	}////////////////end of initDisplay
-	/************************************************************************
-	 *  이 메소드는 수정 혹은 상세조회인 경우 select한 결과를 화면에 출력하기 위한 메소드임.
-	 *  aVO는 AddressBook에서 set메소드 호출시 첫번째 파라미터로 넘어오는 변수를
-	 *  전변으로 초기화 하였으므로 파라미터가 없어도 전변으로 값을 꺼낼 수 있음.
-	 ************************************************************************/
+/*******************************************************************
+ * 	이 메소드는 수정 혹은 상세조회 인 경우 select한 결과를 화면에 출력하기 위한 메소드임.
+ *  aVO는 AddressBook에서 set메소드 호출시 첫번째 파라미터로 넘어오는 변수를
+ *  전변으로 초기화 하였으므로 파라미터가 없어도 전변으로 값을 꺼낼 수 있음.
+ *******************************************************************/
 	public void setValue() {
-		// 입력일 때
-		if(aVO==null) {
-			setID("");
-			setName("");
-			setHP("");
-			setGender("1");
-			setComment("");
-			setAddr("");
-			setBirth("");
-		}
-		// 상세조회나 수정시는 aVO에 있는 값으로 각 컴포넌트(txtID, txtName)를 초기화한다.
-		else {
-			//setID는 화면에 값을 출력, avO.getID() - DB에서 가져온 값
-			setID(aVO.getId());
-			setName(aVO.getName());
-			setHP(aVO.getHp());
-			setGender(aVO.getGender());
-			setAddr(aVO.getAddress());
-			setComment(aVO.getComments());
-			setBirth(aVO.getBirthday());
-			setRegDate(aVO.getRegdate());
-			
-		}
+		JOptionPane.showMessageDialog(aBook, "aVO:"+aVO);
+		//입력일 때
+		 if(aVO==null) {
+			 setId("");
+			 setName("");
+			 setHP("");
+			 setGender("1");
+			 setComment("");
+			 setAddr("");
+			 setBirth("");
+		 }
+		//상세조회나 수정시는 aVO에 있는 값으로 각 콤포넌트(txtId, txtName..)를 초기화한다.
+		 else {
+			 JOptionPane.showMessageDialog(aBook, "aVO:"+aVO.getId());
+			 //setId는 화면에 값을 출력, aVO.getId()-DB에서 가져온 값
+			 setId(aVO.getId());
+			 setName(aVO.getName());
+			 setHP(aVO.getHp());
+			 setGender(aVO.getGender());
+			 setAddr(aVO.getAddress());
+			 setComment(aVO.getComments());
+			 setBirth(aVO.getBirthday());
+			 setRegDate(aVO.getRegdate());
+		 }
 	}
 	//입력받는 컴포넌트의 활성화 혹은 비활성화 처리
 	public void setEditable(boolean isEdit) {
 		txtName.setEditable(isEdit);
 		txtAddress.setEditable(isEdit);
 		txtHP.setEditable(isEdit);
-		txtBirthDay.setEditable(isEdit);
 		txtId.setEditable(isEdit);
+		txtBirthDay.setEditable(isEdit);
 		txtComment.setEditable(isEdit);
 	}
-	/////// SubBook의 화면에서 입력받은 값 혹은 화면에 출력한 값 처리 getter/setter ////////
+	////////////////// 화면에서 입력받은 값 혹은 화면에 출력한 값 처리 getter/setter ////////////
 	/* 각 컬럼의 값들을 설정하거나 읽어오는 메소드 구현하기  */
+	public String getId() { return txtId.getText();}
+	public void setId(String id) { txtId.setText(id);}
 	public String getName() { return txtName.getText();}
 	public void setName(String name) { txtName.setText(name);}
 	public String getAddr() { return txtAddress.getText();}
@@ -219,10 +223,8 @@ public class SubBook extends JDialog implements ActionListener {
 	public void setBirth(String birth) { txtBirthDay.setText(birth);}
 	public String getComment() { return txtComment.getText();}
 	public void setComment(String comment) { txtComment.setText(comment);}
-	public String getID() { return txtId.getText();}
-	public void setID(String id) { txtId.setText(id);}
-	public String getRegDate() { return txtRegDate.getText(); }
-	public void setRegDate(String regdate) { txtRegDate.setText(regdate); }
+	public String getRegDate() { return txtRegDate.getText();}
+	public void setRegDate(String regdate) { txtRegDate.setText(regdate);}
 	public String getGender() {
 		if(comboGender.getSelectedItem().equals("남자")) return "1";
 		else return "0";
@@ -231,17 +233,24 @@ public class SubBook extends JDialog implements ActionListener {
 		if(gender.equals("1")) comboGender.setSelectedItem("남자");
 		else comboGender.setSelectedItem("여자");
 	}
-	
+	/*
+	public static void main(String[] args) { 
+		SubBook sBook = new SubBook();
+		sBook.initDisplay(); 
+	}
+	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String label = e.getActionCommand();
 		if ("저장".equals(label)) {
 			// dispose는 창만 닫게 해줄 뿐 메모리에 대해서까지 영향력이 없다.
-			if (aVO != null) {// 수정인 경우  : 기존 데이터가 있고 난후 실행된 경우
+			//aVO에는 select한 정보가 담겨 있고
+			//paVO에는 화면에서 새로 입력한 정보가 담겨 있음.
+			if(aVO !=null) {//수정인 경우
 				try {
 					AddressVO paVO = new AddressVO();
 					paVO.setCommand("update");
-					paVO.setId(aVO.getId());// PK는 수정 불가하므로 aVO의 값을 getter로 가져옴
+					paVO.setId(aVO.getId());
 					paVO.setName(getName());
 					paVO.setAddress(getAddr());
 					paVO.setHp(getHP());
@@ -249,47 +258,42 @@ public class SubBook extends JDialog implements ActionListener {
 					paVO.setComments(getComment());
 					paVO.setGender(getGender());
 					AddressBookCtrl aCtrl = new AddressBookCtrl();
-					aCtrl.send(paVO);			
+					aCtrl.send(paVO);					
 				} catch (Exception e2) {
 					// TODO: handle exception
 				}
+
 			}
-			else {// 입력인경우 : 기존 데이터(SELECT)가 없는경우
+			else {//입력인 경우
 				try {
 					AddressVO paVO = new AddressVO();
 					paVO.setCommand("insert");
-					//다이얼로그창으로 부터 입력된 값을 읽어서 paVO에 담기
-					// 입력은 입력 받아서 paVO에 넣고 오라클 DB에 넣어주는 거기 때문에 aVO의 getID가 아닌 해당 클래스의 getid로 넣는다
-					paVO.setId(getID()); 
+					//다이얼로그창으로 부터 입력된 값을 읽어서 paVO담기
+					paVO.setId(getId());
 					paVO.setName(getName());
 					paVO.setHp(getHP());
 					paVO.setAddress(getAddr());
 					paVO.setGender(getGender());
 					paVO.setBirthday(getBirth());
 					paVO.setComments(getComment());
-					//이 다음 컨트롤러 쪽으로 연결시켜 넘겨주면 된다.
-					//컨트롤 계층에 데이터 입력을 의뢰하고 입력이 성공되면 
-					//자식창은 닫고 부모창은 refresh(새로고침) 처리한다.
+					//컨트롤계층에 데이터 입력을 의뢰하고 입력이 성공되면
+					//자식창은 닫고 부모창은 새로고침 처리한다.
 					AddressBookCtrl aCtrl = new AddressBookCtrl();
 					AddressVO raVO = aCtrl.send(paVO);
 					if(raVO!=null) {
-						if(raVO.getStatus()==1) { //입력성공(Status가 1인경우)
-							//(부모클래스, "입력할텍스트")
+						if(raVO.getStatus()==1) {//입력 성공
 							JOptionPane.showMessageDialog(aBook, "입력성공");
 							this.dispose();
 							aBook.refreshData();
 						}else {
-							JOptionPane.showMessageDialog(aBook, "입력실패");							
+							JOptionPane.showMessageDialog(aBook, "입력실패");
+							return;
 						}
 					}
 				} catch (Exception e2) {
 					// TODO: handle exception
 				}
 			}
-		}
-		//취소버튼을 눌렀을때 창이 꺼지게해주는 코드 작성
-		if ("취소".equals(label)) {
-			this.dispose();
 		}
 
 	}
@@ -298,3 +302,7 @@ public class SubBook extends JDialog implements ActionListener {
 	 * sBook.initDisplay(); }
 	 */
 }
+
+
+
+

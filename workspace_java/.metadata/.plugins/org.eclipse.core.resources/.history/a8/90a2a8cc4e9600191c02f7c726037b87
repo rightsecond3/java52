@@ -1,0 +1,19 @@
+package com.thread;
+
+public class WaitNotifyEx implements Runnable {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static void main(String[] args) {
+		ATM atm = new ATM();
+		// insert here - 엄마와 아들 스레드 추가하기
+		Thread mother = new Thread(atm, "엄마");
+		Thread son = new Thread(atm, "아들");
+		mother.start();
+		son.start();
+	}
+}

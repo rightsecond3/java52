@@ -1,0 +1,46 @@
+package com.helpme2;
+
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class FriendGroupLayout extends JPanel {
+
+	public FriendGroupLayout() {
+		JPanel jp_first = new JPanel();
+		JPanel jp_second = new JPanel();
+		JPanel jp_third = new JPanel();
+		JLabel jl_first = new JLabel();
+		JLabel jl_second = new JLabel();
+		JLabel jl_third = new JLabel();
+
+		jl_first.setText("프사");
+		jl_second.setText("이름");
+		jl_third.setText("상메");
+		
+		jp_first.add(jl_first);
+		jp_second.add(jl_second);
+		jp_third.add(jl_third);
+		
+		GroupLayout gl = new GroupLayout(this);
+		this.setLayout(gl);
+
+		// 수평
+		gl.setVerticalGroup(gl.createSequentialGroup().addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addComponent(jl_first).addComponent(jp_second).addComponent(jp_third)
+
+		));
+
+		// 수직
+		gl.setHorizontalGroup(gl.createSequentialGroup().addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(jp_first).addComponent(jl_second).addComponent(jp_third)
+
+		));
+
+	}
+
+	public static void main(String[] args) {
+
+	}
+
+}

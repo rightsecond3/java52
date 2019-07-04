@@ -1,0 +1,13 @@
+package com.network2;
+
+public class ChatMemberVO {
+	  int    mem_num    = 0;
+	  String mem_id     = null;
+	  String mem_pw     = null;
+	  String mem_name   = null;
+	  String mem_nick   = null;
+	  String mem_email  = null;
+	  String mem_hp     = null;
+	  String mem_birth  = null;
+	  String reg_date   = null;
+}

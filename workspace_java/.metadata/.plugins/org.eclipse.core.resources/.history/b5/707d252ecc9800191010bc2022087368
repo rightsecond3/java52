@@ -1,0 +1,44 @@
+package com.helpme;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.StyledDocument;
+
+public class WispeView_1 {
+	///// 전역 변수 선언 부 /////
+	JPanel jp_first = new JPanel();
+	JTextField jtf_msg = new JTextField();
+	
+	StyledDocument sd_display = 
+			new DefaultStyledDocument();
+	JTextPane jtp_display = new JTextPane(sd_display);
+	JScrollPane jsp_display = new JScrollPane(jtp_display
+			,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
+			,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//수평스크롤X, 수직스크롤O
+	
+	JPanel jp_second = new JPanel();
+	String cols[] = { "닉네임" };
+	String data[][] = new String[0][1];
+	DefaultTableModel dtm_name = new DefaultTableModel(data, cols); //json
+	JTable jtb_name = new JTable(dtm_name); //datagrid
+	JScrollPane jsp_name = new JScrollPane(jtb_name
+			,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
+			,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	
+	JPanel jp_second_south = new JPanel();
+	JButton jbtn_whisper = new JButton("일대일 채팅");
+	JButton jbtn_change = new JButton("대화명 변경");
+	JButton jbtn_exit = new JButton("종료");
+	JButton jbtn_icon = new JButton("이모티콘");
+	
+	///*** 메인메소드 ***///
+	public static void main(String args[]) {
+		
+	}
+}

@@ -1,0 +1,10 @@
+package com.project;
+
+public class RenDetailModifyLogic {
+
+	public RenDetailVO Update(RenDetailVO rdpaVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

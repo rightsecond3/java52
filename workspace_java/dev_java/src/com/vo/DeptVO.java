@@ -4,6 +4,8 @@ public class DeptVO {
 	private int deptno=0;
 	private String dname ="";//NullPinterException을 피하기 위한 방법
 	private String loc   ="";//null이 스텐다드
+	private EmpVO empVO = null;
+	
 	public int getDeptno() {
 		return deptno;
 	}
@@ -22,4 +24,11 @@ public class DeptVO {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
+	public EmpVO getEmpVO() {
+		return empVO;
+	}
+	public void setEmpVO(EmpVO empVO) {
+		this.empVO = empVO;
+	}
+
 }

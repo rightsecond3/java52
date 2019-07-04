@@ -1,0 +1,20 @@
+package com.helpme2;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class FriendGroupLayout {
+	
+	public FriendGroupLayout() {
+		JPanel jp_first = new JPanel();
+		JPanel jp_second = new JPanel();
+		JPanel jp_third = new JPanel();
+		JLabel jl_first = new JLabel();
+		JLabel jl_second = new JLabel();
+		JLabel jl_third = new JLabel();
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,22 @@
+package com.network2;
+
+import javax.swing.JFrame;
+
+public class MessageRoom extends JFrame {
+	/////선언부
+	
+	//* 생성자 *//
+	public MessageRoom() {
+		
+	}
+	//*** 화면 처리부 ***//
+	public void initDisplay() {
+		
+	}
+	
+	//단위테스트 때문 추가 - TalkClientVer2에 붙힘
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.network1;
+
+import javax.swing.JDialog;
+
+public class ImoticonMessage extends JDialog {
+	TalkClient tc = null;
+	
+	//이미지 정보 담을 변수
+	String imgChoice = "defalut";
+	
+	public ImoticonMessage(TalkClient tc) {
+		this.tc = tc;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

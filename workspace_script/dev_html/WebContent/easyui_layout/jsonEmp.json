@@ -1,0 +1,5 @@
+[
+    {"empno":7566,"ename":"김유신","hiredate":"1999-10-24","deptno":10}
+    ,{"empno":7499,"ename":"이성계","hiredate":"1997-05-14","deptno":20}
+    ,{"empno":7566,"ename":"김춘추","hiredate":"1999-07-15","deptno":30}
+]

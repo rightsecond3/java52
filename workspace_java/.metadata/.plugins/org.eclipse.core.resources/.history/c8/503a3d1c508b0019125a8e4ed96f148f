@@ -1,6 +1,0 @@
-package com.address;
-
-public interface AddressBookInterface {
-	//상세조회 처리를 
-	public AddressVO getAddressDetail(AddresssVO paVO);
-}

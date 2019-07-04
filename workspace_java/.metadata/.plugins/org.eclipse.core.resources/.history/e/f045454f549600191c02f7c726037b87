@@ -1,0 +1,63 @@
+package com.project;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.util.DBConnectionMgr;
+
+public class RenDetailDao {
+	Connection 		con   = null;
+	PreparedStatement 	pstmt = null;
+	CallableStatement cstmt =null;
+	ResultSet          rs    = null;
+	DBConnectionMgr    dbMgr = null;
+	
+	public List<Map<String, Object>> getDetMap(RenDetailVO paVO) {
+		String gubun = null;
+		String keyword = paVO.getKeyword();
+		String u_rnum = paVO.getU_rnum();
+		if("대여상세번호".equals(paVO.getCombobox())) {
+			gubun = "r_detailnum";
+		} else if("시리얼번호".equals(paVO.getCombobox())) {
+			gubun = "serialnum";
+		} else if("DVD명".equals(paVO.getCombobox())) {
+			gubun = "mov_title";
+		}
+		List<Map<String, Object>> list = new ArrayList();
+		dbMgr = DBConnectionMgr.getInstance();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT r_detailnum, serialnum,mov_title,r_fee  ");
+		sql.append("   FROM dvd natural join rendetail natural join rental ");
+		sql.append("  WHERE   "+gubun+" LIKE '%' || ? ||'%'         ");
+		sql.append("  AND r_num = ?        ");
+		try {
+			con = dbMgr.getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, keyword);
+			pstmt.setString(2, u_rnum);
+			rs = pstmt.executeQuery();
+			Map<String,Object> rMap = null;			
+			while (rs.next()) {
+				rMap = new HashMap();
+				rMap.put("r_detailnum", rs.getString("r_detailnum"));
+				rMap.put("serialnum", rs.getString("serialnum"));
+				rMap.put("mov_title", rs.getString("mov_title"));
+				rMap.put("r_fee", rs.getString("r_fee"));
+				list.add(rMap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			dbMgr.freeConnection(con, pstmt, rs);
+		}
+		return list;
+	}
+
+}

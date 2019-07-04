@@ -1,0 +1,9 @@
+package com.network2;
+
+public class RoomSimulation {
+	
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,6 @@
+#Mon Jun 24 12:58:31 KST 2019
+__DEFAULT__=false
+org.eclipse.sdk.Eclipse.master=true
+org.eclipse.sdk.Google.master=true
+org.eclipse.help.ui.localSearch.master=true
+expression=ctrl+d

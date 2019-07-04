@@ -1,0 +1,20 @@
+package com.network2;
+
+import javax.swing.JFrame;
+
+public class TalkClientVer2 extends JFrame {
+	/////선언부
+	Login login = null;
+	
+	//* 생성자 *//
+	public TalkClientVer2() {}
+	//생성자를 통해서 앞 화면에서 처리된 결과인 nickName을 사용하려면 원본의 주소번지가 필요함.
+	public TalkClientVer2(Login login) {
+		this.login = login;
+	}
+	
+	//*** 화면 처리부 ***//
+	public void initDisplay() {
+		
+	}
+}

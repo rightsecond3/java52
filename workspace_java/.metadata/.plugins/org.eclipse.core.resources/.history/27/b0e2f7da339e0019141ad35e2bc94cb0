@@ -1,0 +1,53 @@
+package com.helpme2;
+
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class FriendGroupLayout {
+	
+	public FriendGroupLayout() {
+		JPanel jp_first = new JPanel();
+		JPanel jp_second = new JPanel();
+		JPanel jp_third = new JPanel();
+		JLabel jl_first = new JLabel();
+		JLabel jl_second = new JLabel();
+		JLabel jl_third = new JLabel();
+		
+		for(int i=0;i<5;i++) {
+			jl_first.setText("프사"+i);
+			jl_second.setText("이름"+i);
+			jl_third.setText("상메"+i);
+			
+			GroupLayout chat_rightLayout = new GroupLayout(jp_center);
+			jp_center.setLayout(chat_rightLayout);
+
+			// 수직
+			chat_rightLayout.setHorizontalGroup(chat_rightLayout.createSequentialGroup()
+					.addGroup(chat_rightLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(jp_center_first, 50, 50, GroupLayout.PREFERRED_SIZE)
+							.addComponent(jp_center_3, 50, 50, GroupLayout.PREFERRED_SIZE))
+					.addGroup(chat_rightLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.addComponent(jp_center_second, 158, 158, GroupLayout.PREFERRED_SIZE)
+							.addComponent(jp_center_4, 158, 158, GroupLayout.PREFERRED_SIZE))
+					.addGroup(chat_rightLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.addComponent(jp_center_5)
+							.addComponent(jp_center_6)));
+			// 수평
+			chat_rightLayout.setVerticalGroup(chat_rightLayout.createSequentialGroup()
+					.addGroup(chat_rightLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(jp_center_first, 50, 50, GroupLayout.PREFERRED_SIZE)
+							.addComponent(jp_center_second, 50, 50, GroupLayout.PREFERRED_SIZE)
+							.addComponent(jp_center_5, 50, 50, GroupLayout.PREFERRED_SIZE))
+					.addGroup(chat_rightLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(jp_center_3, 50, 50, GroupLayout.PREFERRED_SIZE)
+							.addComponent(jp_center_4, 50, 50, GroupLayout.PREFERRED_SIZE)
+							.addComponent(jp_center_6, 50, 50, GroupLayout.PREFERRED_SIZE)));
+		}
+	}
+	
+	public static void main(String[] args) {
+
+	}
+
+}

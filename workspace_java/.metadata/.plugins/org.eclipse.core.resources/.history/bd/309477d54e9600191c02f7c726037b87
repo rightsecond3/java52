@@ -1,0 +1,20 @@
+package com.thread;
+
+public class WaitNotifyEx implements Runnable {
+	private long depositMoney = 10000;
+	@Override
+	public void run() {
+		synchronized (this) {
+			
+		}
+	}
+
+	public static void main(String[] args) {
+		ATM atm = new ATM();
+		// insert here - 엄마와 아들 스레드 추가하기
+		Thread mother = new Thread(atm, "엄마");
+		Thread son = new Thread(atm, "아들");
+		mother.start();
+		son.start();
+	}
+}

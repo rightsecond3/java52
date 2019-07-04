@@ -1,0 +1,25 @@
+package com.network2;
+
+import javax.swing.JPanel;
+
+public class MessageRoom extends JPanel {
+	/////선언부
+	TalkClientVer2 tc2 = null;
+	//* 생성자 *//
+	public MessageRoom() {
+		
+	}
+	public MessageRoom(TalkClientVer2 talkClientVer2) {
+		this.tc2 = tc2;
+	}
+	//*** 화면 처리부 ***//
+	public void initDisplay() {
+		
+	}
+	
+	//단위테스트 때문 추가 - TalkClientVer2에 붙힘
+	public static void main(String[] args) {
+
+	}
+
+}

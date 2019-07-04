@@ -1,0 +1,16 @@
+package com.project;
+
+public class RenDetailVO {
+	private String r_detailnum = null;// 랜탈디테일번호
+	private String serialnum   = null; //-> DVD테이블의 왜래키
+	private String r_num       = null; //-> RENTAL테이블의 왜래키
+	
+	/////***** 업무에 대한 구분을 위한 변수 선언 *****//////
+	private String command     = null;// select|insert|update|delete
+	/////***** 오라클서버에서 반환되는 값을 담을 변수 *****//////
+	private int    status      = -1;
+	/////***** 사용자가 입력한 키워드 값을 담을 변수 *****/////
+	private String keyword     = null;
+	/////***** 사용자가 선택한 콤보박스 값을 담을 변수 *****/////
+	private String combobox     = null;
+}

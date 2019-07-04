@@ -1,0 +1,14 @@
+package com.network2;
+
+import javax.swing.JFrame;
+
+public class TalkClientVer2 extends JFrame {
+
+	//* 생성자 *//
+	public TalkClientVer2() {}
+	
+	//*** 화면 처리부 ***//
+	public void initDisplay() {
+		
+	}
+}

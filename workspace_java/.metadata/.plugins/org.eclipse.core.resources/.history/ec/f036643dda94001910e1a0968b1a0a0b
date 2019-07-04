@@ -1,0 +1,13 @@
+package com.project;
+
+import java.util.List;
+import java.util.Map;
+
+public class RentDao {
+
+	public List<Map<String, Object>> getRentMap(RentVO paVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

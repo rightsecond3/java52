@@ -1,0 +1,128 @@
+package com.project;
+
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class DVDSup extends JFrame implements ActionListener{
+	//대여관리 DVD관리가 들어갈 속지
+	JPanel jp_north = new JPanel();
+	JButton jbtn_dvdRent = new JButton("대여관리");
+	JButton jbtn_dvdMem = new JButton("회원관리");
+	JButton jbtn_dvdList = new JButton("DVD관리");
+	JPanel dvdView = null;
+	
+	static DVDSup dSup = null;
+	public static DVDSup getInstance() {
+		if(dSup==null) {
+			dSup = new DVDSup();
+		}
+		return dSup;
+	}
+	public void initDisplay() {
+		//JVM을 강제 종료시킬 윈도우 리스너
+		this.addWindowListener(new WindowListener() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		jbtn_dvdMem.addActionListener(this);
+		jbtn_dvdRent.addActionListener(this);
+		jbtn_dvdList.addActionListener(this);
+		jp_north.setLayout(new FlowLayout(FlowLayout.LEFT));
+		jp_north.add(jbtn_dvdRent);
+		jp_north.add(jbtn_dvdMem);
+		jp_north.add(jbtn_dvdList);
+		this.add("North", jp_north);
+		this.setSize(1500,800);
+		this.setVisible(true);
+	}
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String label = e.getActionCommand();
+		//회원관리
+		if("회원관리".equals(label)) {
+
+			Container cont = this.getContentPane();
+			if(dvdView!=null) {
+				cont.remove(dvdView);
+				dvdView = null;
+			}
+			dvdView = new Mem();
+			this.add("Center", dvdView);
+			cont.revalidate();
+		//대여관리
+		} else if ("대여관리".equals(label)) {
+			Container cont = this.getContentPane();
+			if(dvdView!=null) {
+				cont.remove(dvdView);
+				dvdView = null;
+			}
+			dvdView = new Rent();
+			this.add("Center", dvdView);
+			cont.revalidate();
+		//DVD관리
+		} else if ("DVD관리".equals(label)) {
+			Container cont = this.getContentPane();
+			if(dvdView!=null) {
+				cont.remove(dvdView);
+				dvdView = null;
+			}
+			dvdView = new ListDVD();
+			this.add("Center", dvdView);
+			cont.revalidate();
+			
+		}
+	}
+	public static void main(String[] args) {
+		DVDSup ds = new DVDSup();
+		ds.initDisplay();
+	}
+}

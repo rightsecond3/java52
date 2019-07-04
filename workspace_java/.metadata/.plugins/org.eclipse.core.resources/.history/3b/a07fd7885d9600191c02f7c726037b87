@@ -1,0 +1,18 @@
+package com.network1;
+
+import javax.swing.JFrame;
+
+public class TalkServer extends JFrame implements Runnable {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

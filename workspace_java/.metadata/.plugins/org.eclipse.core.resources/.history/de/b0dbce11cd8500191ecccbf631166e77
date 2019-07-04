@@ -1,7 +1,0 @@
-package com.ch8;
-
-public class Father {
-	public Father() {
-		System.out.println("Father 디폴트 생성자 호출");
-	}
-}

@@ -1,0 +1,11 @@
+package com.project;
+
+public class RentDeleteLogic {
+	RentDao Dao = new RentDao();
+	public RentVO Delete(RentVO paVO) {
+		RentVO raVO = null;
+		raVO = Dao.Delete(paVO);
+		return raVO;
+	}
+
+}

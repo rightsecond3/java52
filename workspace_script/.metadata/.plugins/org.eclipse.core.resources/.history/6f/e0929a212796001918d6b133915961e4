@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.easyui.min.js"></script>
+<meta charset="UTF-8">
+<title>Datagrid - data속성</title>
+</head>
+<body>
+<script>
+    $(document).ready(function(){
+        /*
+        * table 태그에 jquery가 지원하는 $()를 활용하여 접근가능
+        * .오브젝트이름(); -> 기존 table태그에 추가적인 기능, 속성들을 부여가능
+        * 위 오브젝트가 소유하고 있는 속성, 메소드, 이벤트핸들러들을 활용가능
+        * 테이블의 헤더영역도 태그가 아닌 스크립트로 처리가능
+        */
+        $("#dg_test").datagrid({
+            columns:[[
+                    {field:'f1',title:'f1이름',width:100},
+                    {field:'f2',title:'f2이름',width:100},
+                    ]]
+	        ,data: [
+		            {f1:'value11', f2:'value12'},
+	    	        {f1:'value21', f2:'value22'},
+	    	        {f1:'value31', f2:'value32'}
+                    ]
+        });////end of datagrid
+    });////////end of ready
+</script>
+<table id="dg_test" class='easyui-datagrid'>
+
+</table>
+</body>
+</html>

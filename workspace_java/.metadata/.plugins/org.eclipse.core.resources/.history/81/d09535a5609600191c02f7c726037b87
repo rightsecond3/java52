@@ -1,0 +1,5 @@
+package com.network1;
+
+public class Protocol {
+	public static final int ROOM_IN = 110;   
+}

@@ -1,0 +1,59 @@
+package com.project;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.util.DBConnectionMgr;
+
+public class RentDao {
+	java.sql.Connection 		con   = null;
+	java.sql.PreparedStatement 	pstmt = null;
+	java.sql.ResultSet          rs    = null;
+	com.util.DBConnectionMgr    dbMgr = null;
+
+	public List<Map<String, Object>> getRentMap(RentVO paVO) {
+		String gubun = null;
+		String keyword = paVO.getKeyword();
+		if("DVD명".equals(paVO.getCombobox())) {
+			gubun = "mov_title";
+		} else if("이름".equals(paVO.getCombobox())) {
+			gubun = "memname";
+		} else if("대여일".equals(paVO.getCombobox())) {
+			gubun = "r_date";
+		}
+		List<Map<String, Object>> list = new ArrayList();
+		dbMgr = DBConnectionMgr.getInstance();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT serialnum, r_num ||'_'|| r_detailnum,mov_title,memname,r_date,returndate,r_fee  ");
+		sql.append("   FROM dvd natural join MEM natural join Rental natural join RenDetail                 ");
+		sql.append("  WHERE mov_title LIKE '%' || '' ||'%'                                                  ");
+		try {
+			con = dbMgr.getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, keyword);
+			rs = pstmt.executeQuery();
+			Map<String,Object> rMap = null;
+			while (rs.next()) {
+				rMap = new HashMap();
+				rMap.put("serialnum", rs.getString("id"));
+				rMap.put("r_num ||'_'|| r_detailnum", rs.getString("r_num ||'_'|| r_detailnum"));
+				rMap.put("mov_title", rs.getString("mov_title"));
+				rMap.put("memname", rs.getString("memname"));
+				rMap.put("r_date", rs.getString("r_date"));
+				rMap.put("returndate", rs.getString("returndate"));
+				rMap.put("r_fee", rs.getString("r_fee"));
+				list.add(rMap);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			dbMgr.freeConnection(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+
+}

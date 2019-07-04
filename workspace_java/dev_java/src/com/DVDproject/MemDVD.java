@@ -113,7 +113,9 @@ public class MemDVD extends JDialog implements ActionListener {
 		this.setSize(400, 400);
 		this.setVisible(false);
 	}
-	
+	public MemDVD() {
+		initDisplay();
+	}
 	/*****************************************************************************
 	 * 부모창에서 결정된 값(입력, aVO)
 	 * @param dVO - 입력버튼을 부모창에서 눌렀을 땐 null, 수정일 땐 aVO는 DB에서 읽어온 값을
@@ -127,10 +129,10 @@ public class MemDVD extends JDialog implements ActionListener {
 		this.dVO=dVO;
 		this.title = title;
 		this.dRent = dRent;
-		//this.setValue();
+		this.setValue();
 		this.setTitle(title);
 		this.setVisible(true);
-		//this.setEditable(isEdit);
+		this.setEditable(isEdit);
 	}
 	
 	private void setValue() {
@@ -190,14 +192,17 @@ public class MemDVD extends JDialog implements ActionListener {
 	
 
 	//** 메인 메소드 **//
-	public static void main(String args[]) {
-		MemDVD md = new MemDVD();
-		md.initDisplay();
-	}
+//	public static void main(String args[]) {
+//		MemDVD md = new MemDVD();
+//		md.initDisplay();
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
+		if(obj==jbtn_save) {
+			
+		}
 		if(obj==jbtn_cancel) {
 			this.dispose();
 		}

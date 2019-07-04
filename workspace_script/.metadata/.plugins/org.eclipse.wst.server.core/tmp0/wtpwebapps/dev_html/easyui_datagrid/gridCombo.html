@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/demo/demo.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        //파라미터는 th태그(로우에 대한 오브젝트 값-target)
+        //리턴타입은 숫자타입이고 로우의 index값을 반환한다.
+        function getRowIndex(target) {
+            var tr = $(target).closest('tr.datagrid-row');
+            return parseInt(tr.attr('datagrid-row-index'));
+        }
+        function saverow(target) {
+            alert("saverow 호출성공"+target);
+        }
+        function cancelrow(target) {
+            //alert("cancelrow 호출성공"+target);
+            $("#dg").datagrid('cancelEdit',getRowIndex(target));
+        }
+        function editrow(target) {
+            alert("editrow 호출성공"+target);
+            $("#dg").datagrid("beginEdit",getRowIndex(target));
+        }
+        function deleterow(target) {
+            alert("deleterow 호출성공"+target);
+            $.messager.confirm('Confirm', '정말 삭제하시겠습니까?', function(r) {
+                if(r) {
+                    alert('ok');
+                    //datagrid 생성자 안에 {}는 필요없다
+                    //why - 실행문이 필요 하지 않으므로
+                    var rows = $("#dg").datagrid('getSelections');//속성 뒤에 -s가 있으면 배열이나 복수형
+                    if(rows==null) {
+                        alert("삭제할 사원을 선택하세요.");
+                        return;//deleterow함수를 탈출
+                    }
+                    for(var i=0;i<rows.length;i++) {
+                        alert(rows[i].ename);
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<!-- 
+Datagird에서는 테이블에 목록을 처리하는 부분이므로 jsonEmp.json에서 데이터를 가져오고
+combobox에서는 부서정보를 가져와서 부서번호 컬럼대신 콤보박스에 부서명을 출력줘야 하므로 jsonDept.json에서 가져와야함.
+ -->
+    <h2>Row Editing in DataGrid</h2>
+    <p>Click the row to start editing.</p>
+    <div style="margin:20px 0;"></div>
+    
+    <table id="dg" class="easyui-datagrid" title="사원목록" style="width:700px;height:auto"
+            data-options="
+                iconCls: 'icon-edit',
+                singleSelect: true,
+                toolbar: '#tb',
+                url: '../easyui_layout/jsonEmp.json',
+                method: 'get',
+                onEndEdit:function(index,row) {
+                    var ed = $(this).datagrid('getEditor',{
+                        index : index
+                    });
+                },
+                onBeforeEdit:function(index,row) {
+                    row.editing = true;
+                    $(this).datagrid('refreshRow',index);
+                },
+                onAfterEdit:function(index,row) {
+                    row.editing = false;
+                    $(this).datagrid('refreshRow',index);
+                },
+                onCancelEdit:function(index,row) {
+                    row.editing = false;
+                    $(this).datagrid('refreshRow',index);
+                }
+            ">
+        <thead>
+            <tr>
+                <th data-options="field:'empno',width:80,editor:{type:'text'}">사원번호</th>
+                <th data-options="field:'deptno',width:100,
+                        formatter:function(value,row){
+                            return row.deptno;
+                        },
+                        editor:{
+                            type:'combobox',
+                            options:{
+                                valueField:'deptno',
+                                textField:'dname',
+                                method:'get',
+                                url:'../easyui_layout/jsonDept.json',
+                                required:true
+                            }
+                        }">부서명</th>
+                <th data-options="field:'hiredate',width:150,align:'right',editor:{type:'text'}">입사날짜</th>
+                <th data-options="field:'ename',width:100,align:'right',editor:{type:'text'}">사원명</th>
+                <!-- easyui에서 이벤트 처리에 상태를 구분하기 위해 만든 컬럼 - DB에 있는 값이 아니다. -->
+                <th data-options="field: 'Action', width:100, align:'center',
+                    formatter:function(value,row,index){
+                        if(row.editing){
+                            var s='<a href=# onclick=saverow(this)>Save</a>';
+                            var c='<a href=# onclick=cancelrow(this)>Cancel</a>';
+                            return s+' '+c;
+                        }
+                        else{
+                            var e='<a href=# onclick=editrow(this)>Edit</a>';
+                            var d='<a href=# onclick=deleterow(this)>Delete</a>';
+                            return e+' '+d;
+                            } 
+                        }
+                ">Action</th>
+            </tr>
+        </thead>
+    </table>
+ 
+    <div id="tb" style="height:auto">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Accept</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">GetChanges</a>
+    </div>
+    
+    <script type="text/javascript">
+        var editIndex = undefined;
+        function endEditing(){
+            if (editIndex == undefined){return true}
+            if ($('#dg').datagrid('validateRow', editIndex)){
+                $('#dg').datagrid('endEdit', editIndex);
+                editIndex = undefined;
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function append(){
+            if (endEditing()){
+                $('#dg').datagrid('appendRow',{status:'P'});
+                editIndex = $('#dg').datagrid('getRows').length-1;
+                $('#dg').datagrid('selectRow', editIndex)
+                        .datagrid('beginEdit', editIndex);
+            }
+        }
+        function removeit(){
+            if (editIndex == undefined){return}
+            $('#dg').datagrid('cancelEdit', editIndex)
+                    .datagrid('deleteRow', editIndex);
+            editIndex = undefined;
+        }
+        function acceptit(){
+            if (endEditing()){
+                $('#dg').datagrid('acceptChanges');
+            }
+        }
+        function reject(){
+            $('#dg').datagrid('rejectChanges');
+            editIndex = undefined;
+        }
+        function getChanges(){
+            var rows = $('#dg').datagrid('getChanges');
+            alert(rows.length+' rows are changed!');
+        }
+    </script>
+</body>
+</html>

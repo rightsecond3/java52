@@ -1,0 +1,35 @@
+package com.network1;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+public class TalkServer extends JFrame implements Runnable {
+	//동시에 여러 접속자에 대한 소켓 정보를 안정적으로 수집하기 위해 필요.
+	ServerSocket server = null;
+	//서버소켓에 접속해온 소켓 정보를 일반 소켓이 받음.
+	Socket client = null;
+	//사용자가 접속을 해오면 접속해 온 사용자를 스레드로 관리함.
+	TalkServerThread tst = null;
+	List<TalkServerThread> chatList = null;
+	
+	///*** 생성자 ***///
+	public TalkServer() {}
+	//** 화면 처리 부 **//
+	public void initDisplay() {
+		
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

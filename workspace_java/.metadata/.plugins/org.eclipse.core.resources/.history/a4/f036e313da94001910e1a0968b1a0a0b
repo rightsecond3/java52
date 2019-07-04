@@ -1,0 +1,12 @@
+package com.project;
+
+public class RentRetrieveLogic {
+	RentDao rDao = new RentDao();
+	public List<Map<String, Object>> getRentMap(RentVO paVO) {
+		System.out.println("RentRetrieveLogic의 getRentMap");
+		List<Map<String, Object>> list = null;
+		list = rDao.getRentsMap(paVO);
+		return list;
+	}
+
+}

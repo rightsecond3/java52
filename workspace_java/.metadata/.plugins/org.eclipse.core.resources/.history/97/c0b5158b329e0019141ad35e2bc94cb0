@@ -1,0 +1,13 @@
+package com.helpme2;
+
+import javax.swing.JPanel;
+
+public class FriendGroupLayout {
+	JPanel jp_first = new JPanel();
+	JPanel jp_second = new JPanel();
+	JPanel jp_third = new JPanel();
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실시간 보드 판매량</title>
+<style>
+    body{
+        font-family: 'Courier New', Courier, monospace;
+        font-size : small;
+        text-align: center;
+    }
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        border : thin solid black;
+        font-size: small;
+    }
+    th,td {
+        border : thin dotted gray;
+        padding: 5px;
+        text-align: center;
+    }
+    th {
+        background-color: #ffaaaa;
+    }
+</style>
+<script type="text/javascript" src="../js/jsutil.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script>
+//비동기 통신객체를 활용하여 부분페이지 갱신처리를 해본다.
+//ex. 네이버의 자동완성 검색기능
+//XMLHttpRequest
+//비동기 통신객체 생성함수
+    //전번선언 - 비동기통신객체변수
+    //사용자와 웹서버[톰캣서버,JEUS,Websprer]사이에 통신을 지원하는 객체
+    var xhrObject = null;
+    function createRequest() {
+        try {
+            xhrObject = new XMLHttpRequest();
+        } catch (trymicrosoft) {
+            xhrObject = null;
+        }
+        if(xhrObject==null) {
+            alert("비동기 통신객체 생성 실패")
+        }
+    }
+    function getBoardSold() {
+        createRequest();
+        var url = "./boardSellAction.jsp?"+new Date().getTime();
+        //첫번째 : 전송 방식 - get|post
+        //두번째 : 이 요청을 처리할 페이지 이름
+        //세번째 : true : 비동기 false : 동기 처리
+        xhrObject.open("GET",url,true);
+        //서버와의 통신에 따라 상태(요청,요청준비중,다운로드중,다운로드완료)가 바뀌게 되고
+        //이벤트 핸들러 속성 추가 - 콜백함수이름 지정
+        xhrObject.onreadystatechange = account_process;
+        xhrObject.send(null);//get방식인 경우 null, post일 땐 값
+    }
+/*
+readyState:onreadystatechange에서 사용할 수 있는 HTTP요청 상태의 코드 값임.
+2-HTTP요청을 보내어 처리하는 중
+3-데이터를 받고 있는 중
+4-데이터를 완전히 받은 상태
+*/
+    //콜백함수 구현하기
+    function account_process() {
+        alert(xhrObject.readyState);
+        if(xhrObject.readyState==4) {//자바스크립트에서는 eqauls 대신 ==를 씀
+            if(xhrObject.status==200) {
+            var newTotal = xhrObject.responseText;
+            //alert(newTotal);
+            var boardSoldEl = $("#boardSold");
+            //replaceText(boardSoldEl,newTotal);
+            $("#boardSold").text(newTotal);
+            }
+        }
+    }
+</script>
+</head>
+<body>
+
+    <table id="dg_board" title="실시간 보드 판매량" style="width:400px;height:250px">
+        <tr>
+            <td colspan="2">보드 판매집계</td>
+        </tr>
+        <tr>
+            <th width="120px">보드판매량</th>
+            <!-- 텍스트노드는 태그이름은 없고 태그값만 있다. -->
+            <td width="180px"><span id="boardSold">10</span></td>
+        </tr>
+        <tr>
+            <th width="120px">구매가</th>
+            <td width="180px"><span id="cost">700000</span></td>
+        </tr>
+        <tr>
+            <th width="120px">소비자가</th>
+            <td width="180px"><span id="price">850000</span></td>
+        </tr>
+    </table>
+    <h2>마진금액: <span id="cash">150000</span></h2>
+    <button onclick="getBoardSold()">마진금액은 ?</button>
+</body>
+</html>

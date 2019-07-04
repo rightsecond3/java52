@@ -1,0 +1,25 @@
+package com.network2;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.util.DBConnectionMgr;
+
+import oracle.jdbc.OracleCallableStatement;
+
+public class ChatDao {
+	DBConnectionMgr         dbMgr = null;
+	Connection              con   = null;
+	CallableStatement       cstmt = null;//query
+	PreparedStatement       pstmt = null;//procedure
+	OracleCallableStatement ostmt = null;//refcursor
+	ResultSet               rs    = null;
+	
+	public String login(String id, String pw) {
+		
+		return null;
+	}
+	
+}

@@ -1,0 +1,46 @@
+package com.network1;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+
+public class ImoticonMessage extends JDialog implements ActionListener{
+	TalkClient tc = null;
+	JPanel jp_imo = new JPanel();
+	JButton jbtn_imo0 = new JButton();
+	JButton jbtn_imo1 = new JButton();
+	JButton jbtn_imo2 = new JButton();
+	JButton jbtn_imo3 = new JButton();
+	JButton jbtn_imo4 = new JButton();
+	String imgFiles[] = {
+							"lion11.png","lion22.png"
+							,"lion33.png","lion44.png","lion55.png"
+						};
+	//이미지 정보를 담을 변수
+	String imgPath = "C:\\workspace_java\\dev_java\\src\\images\\";
+	
+	//이미지 정보 담을 변수
+	String imgChoice = "defalut";
+	///*** 생성자 ***///
+	public ImoticonMessage(TalkClient tc) {
+		this.tc = tc;
+	}
+	//** 화면 처리부 **//
+	public void initDisplay() {
+		
+	}
+	// 메인 메소드 //
+	public static void main(String[] args) {
+
+	}
+	// 이벤트 처리부 //
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,32 @@
+package com.thread;
+//편의상 같은 클래스에 선엄함.
+class ATM implements Runnable {
+	private long depositMoney = 10000;
+	//지연, 경합, 순서처리
+	@Override
+	public void run() {
+		for(int i=0; i<10; i++) {//지연처리
+			
+		}
+	}
+	//파라미터로 인출할 금액을 받는다.
+	//전체 잔고에서 그 금액만큼 차감
+	//잔액을 출력
+	//스레드 출력
+	public void withDraw(long howMuch) {
+		
+	}
+	//** 잔고를 가져오는 메소드 선언 **//
+	public long getDepositMoney() {
+		return depositMoney;
+	}
+}
+public class SynchronizedEx {
+
+	public static void main(String[] args) {
+		ATM atm = new ATM();
+		//insert here - 엄마와 아들 스레드 추가하기
+		
+	}
+
+}

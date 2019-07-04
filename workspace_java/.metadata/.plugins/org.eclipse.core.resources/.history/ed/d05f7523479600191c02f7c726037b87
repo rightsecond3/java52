@@ -1,0 +1,25 @@
+package com.thread;
+class ATM extends Thread {
+	private long depositMoney = 10000;
+	//지연, 경합, 순서처리
+	public void run() {
+		for(int i=0; i<10; i++) {//지연처리
+			
+		}
+	}
+	//파라미터로 인출할 금액을 받는다.
+	//전체 잔고에서 그 금액만큼 차감
+	//잔액을 출력
+	//스레드 출력
+	public void withDraw(long howMuch) {
+		
+	}
+}
+public class SynchronizedEx {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

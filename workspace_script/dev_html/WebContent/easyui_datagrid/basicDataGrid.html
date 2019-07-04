@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../demo/demo.css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+</head>
+<body>
+<!-- 
+학습목표
+나는 easyui API를 활용하여 화면을 구성할 수 있다.
+나는 easyui에서 지원하는 태그 속성들을 자바스크립트 언어를 활용하여 조작할 수있다.
+나는 웹페이지 처리에 필요한 html,css,javascript위치와 역할에 대해 설명할 수 있다.
+ -->
+    <table class="easyui-datagrid" title="DVD관리시스템" style="width:700px;height:250px"
+    data-options="singleSelect:true,collapsible:true,url:'./chatList.json',method:'get'">
+<thead>
+    <tr>
+        <th data-options="field:'nickName',width:130">닉네임</th>
+        <th data-options="field:'age',width:100">나이</th>
+    </tr>
+</thead>
+</table>
+</body>
+</html>

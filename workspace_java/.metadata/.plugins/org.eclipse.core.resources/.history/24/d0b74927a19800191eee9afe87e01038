@@ -1,0 +1,12 @@
+package com.network1;
+
+import javax.swing.JDialog;
+
+public class ImoticonMessage extends JDialog {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

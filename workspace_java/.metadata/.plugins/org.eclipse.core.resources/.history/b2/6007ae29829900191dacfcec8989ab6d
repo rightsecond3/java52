@@ -1,0 +1,13 @@
+package com.network2;
+
+import javax.swing.JFrame;
+
+public class Login extends JFrame {
+	String imgPath="C:\\workspace_java\\dev_java\\src\\images\\";
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

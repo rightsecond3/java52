@@ -1,9 +1,0 @@
-package com.ch8;
-
-public class Son extends Father{
-	int leg = 0;
-	public Son() {}
-	public Son(int leg) {
-		this.leg=leg;
-	}
-}

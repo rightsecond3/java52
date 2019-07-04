@@ -1,8 +1,0 @@
-package com.myDVD;
-
-public class RegisterLogic {
-	DVDDao dDao = new DVDDao();
-	public DVDVO rentInsert(DVDVO paVO) {
-		
-	}
-}

@@ -76,6 +76,13 @@ public class DVD extends JFrame implements ActionListener{
 			this.add("Center", jp_dvdM);
 			//기존에 구성된 화면을 갱신(새로고침처리)
 			cont.revalidate();
+		} else if(obj==jbtn_member){
+			Container cont = this.getContentPane();
+			if(jp_center!=null) {
+				cont.remove(jp_center);
+			}
+			this.add("Center",jp_center);
+			cont.revalidate();
 		}
 	}
 }

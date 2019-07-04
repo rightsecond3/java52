@@ -1,0 +1,8 @@
+package com.network2;
+
+public class Room {
+	String title   = null;//단톡방의 이름
+	String state   = null;//대기 | 참여중...
+	int    max     = 0;//정원 수
+	int    current = 0;//현재원
+}

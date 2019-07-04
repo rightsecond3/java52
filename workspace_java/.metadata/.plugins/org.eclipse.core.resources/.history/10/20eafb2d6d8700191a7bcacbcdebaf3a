@@ -1,8 +1,0 @@
-package com.baseball;
-
-public class B {
-	int b;
-	public void methodB() {
-		System.out.println("methodB() 호출성공");
-	}
-}

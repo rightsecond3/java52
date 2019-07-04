@@ -1,0 +1,32 @@
+package com.network1;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JDialog;
+
+public class ImoticonMessage extends JDialog implements ActionListener{
+	TalkClient tc = null;
+	
+	//이미지 정보 담을 변수
+	String imgChoice = "defalut";
+	///*** 생성자 ***///
+	public ImoticonMessage(TalkClient tc) {
+		this.tc = tc;
+	}
+	//** 화면 처리부 **//
+	public void initDisplay() {
+		
+	}
+	// 메인 메소드 //
+	public static void main(String[] args) {
+
+	}
+	// 이벤트 처리부 //
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
