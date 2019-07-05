@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.google.gson.Gson" %>
+<%
+	/*
+	* pictureMain.html 문서에서 ajax 처리 메소드에서 호출하는
+	* url 뒤에 query string 문자열 값을 읽어오는 메소드.
+	*/
+	String p_no = request.getParameter("p_no");
+    List<Map<String,Object>> picList = new ArrayList<>();
+	Map<String,Object> picInfo = new HashMap<>();
+	picInfo.put("p_no",1);
+	picInfo.put("p_img","picture1.jpg");
+	picInfo.put("p_info","자동차");
+	picList.add(picInfo);
+	
+	picInfo = new HashMap<>();
+	picInfo.put("p_no",2);
+	picInfo.put("p_img","picture2.jpg");
+	picInfo.put("p_info","고양이");
+	picList.add(picInfo);
+	
+	picInfo = new HashMap<>();
+	picInfo.put("p_no",3);
+	picInfo.put("p_img","picture3.jpg");
+	picInfo.put("p_info","몽몽이");
+	picList.add(picInfo);
+	
+	picInfo = new HashMap<>();
+	picInfo.put("p_no",4);
+	picInfo.put("p_img","picture4.jpg");
+	picInfo.put("p_info","판다너구리");
+	picList.add(picInfo);
+	//구글에서 제공하는 오픈 API를 사용하여 JSON포맷으로 꺼내기
+	Gson g = new Gson();
+	String result = g.toJson(picList);
+	//picList가 아닌 Json포맷으로 변형된 result를 넘겨야 된다.
+	out.print(result);
+%>

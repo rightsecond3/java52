@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String news1[] = {"올해 잘해야 2.5% 성장”…일자리 증가는 20만명"};
+	String news2[] = {"소년에서 영웅으로…’스파이더맨’ 주역 내한"};
+	String news3[] = {"커피전문점 ‘고카페인 커피’ 카페인함량 표시 의무화"};
+	String news4[] = {"[해외축구] 이강인 “이적설 할 말 없어…지금 각오는 ‘열심히 놀기’”"};
+	String news5[] = {"[7/3 날씨] 어제보다 더워, 대구 33도…내륙 곳곳 폭염특보"};
+	String datas = "";
+	switch(x){
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	}
+%>

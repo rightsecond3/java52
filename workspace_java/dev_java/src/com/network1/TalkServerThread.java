@@ -66,6 +66,7 @@ public class TalkServerThread extends Thread {
 	public void run() {
 		boolean isStop = false;
 		try {
+			//라벨문
 			run_start://break run_start - 라벨이 붙어있는 구역 전체를 빠져나감
 			while(!isStop) {
 				String msg = (String) ois.readObject();
@@ -81,14 +82,13 @@ public class TalkServerThread extends Thread {
 				case Protocol.MESSAGE: {
 					String nickName = st.nextToken();
 					String message = st.nextToken();
-					String imgChoice = "";
-					while(st.hasMoreTokens()) { //남아있는 것이 있냐?
-						imgChoice = st.nextToken();//받아온 이모티콘이있을 때 짤라줌
-					}
+					String imgChoice = st.nextToken();//받아온 이모티콘이있을 때 짤라줌
+					String fontColor = st.nextToken();
 					this.broadCasting(Protocol.MESSAGE
 							+Protocol.seperator+nickName
 							+Protocol.seperator+message
 							+Protocol.seperator+imgChoice
+							+Protocol.seperator+fontColor
 							);
 					
 				}break;
@@ -128,7 +128,7 @@ public class TalkServerThread extends Thread {
 					this.broadCasting(Protocol.ROOM_OUT
 							+Protocol.seperator+nickName
 							+Protocol.seperator+index);
-				}break;
+				}break run_start;//방을 나갈 경우 스레드 종료
 				}
 			}
 		} catch (Exception e) {

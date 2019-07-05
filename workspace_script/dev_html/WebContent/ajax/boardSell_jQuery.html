@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>실시간 보드 판매량</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: small;
+            text-align: center;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border: thin solid black;
+            font-size: small;
+        }
+
+        th,
+        td {
+            border: thin dotted gray;
+            padding: 5px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ffaaaa;
+        }
+    </style>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jsutill.js"></script>
+    <script>
+        function getBoardSold() {
+            $.ajax({
+                method: "get"
+                , url: "./boardSellAction.jsp?" + new Date().getTime()
+                , success: function (result) {
+                    //alert("result: " + result);
+                    var boardSoldEl = $("#boardSold");
+                    //replaceText(boardSoldEl,newTotal);
+                    $("#boardSold").text(result);
+                    //** 구매가 가져오기
+                    var costEl = document.getElementById("cost");
+                    var cost = getText(costEl);
+                    //alert("cost : "+cost);
+                    //** 소비자가 가져오기
+                    var priceEl = document.getElementById("price");
+                    var price = getText(priceEl);
+                    //alert("price : "+price);
+                    //** 보드 한개당 마진 계산
+                    var cashPerBoard = price - cost;
+                    //alert("cashPerBoard : "+cashPerBoard);
+                    //** 총 마진 구하기
+                    var cash = cashPerBoard * result;
+                    //alert("총마진: "+cash);
+                    $("#cash").text(cash);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <table id="dg_board" title="실시간 보드 판매량" style="width:400px;height:250px">
+        <tr>
+            <td colspan="2">보드 판매집계</td>
+        </tr>
+        <tr>
+            <th width="120px">보드판매량</th>
+            <!-- 텍스트노드는 태그이름은 없고 태그값만 있다. -->
+            <td width="180px"><span id="boardSold">10</span></td>
+        </tr>
+        <tr>
+            <th width="120px">구매가</th>
+            <td width="180px"><span id="cost">700000</span></td>
+        </tr>
+        <tr>
+            <th width="120px">소비자가</th>
+            <td width="180px"><span id="price">850000</span></td>
+        </tr>
+    </table>
+    <h2>마진금액: <span id="cash">150000</span></h2>
+    <button onclick="getBoardSold()">마진금액은 ?</button>
+</body>
+
+</html>

@@ -1,12 +1,11 @@
 package com.helpme2;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,7 +44,8 @@ public class SuperView extends JFrame {
 	JLabel jl_test5 = new JLabel("테스트5");
 	JPanel jp_center_6 = new JPanel();
 	JLabel jl_test6 = new JLabel("테스트6");
-
+	
+	
 	// 생성자
 	public SuperView() {
 	}
@@ -65,13 +65,19 @@ public class SuperView extends JFrame {
 		jp_center_5.setBackground(Color.orange);
 		jp_center_6.setBackground(Color.pink);
 ///////////////////////////////////////////////////////
-		GridLayout gl = new GridLayout();
-		gl.setRows(10);
+		GridLayout gl = new GridLayout(5,1);
 		jp_center.setLayout(gl);
 		
-		for (int i = 0; i < 10; i++) {
+		Dao dao = new Dao();
+		List<testVO> tList = new Vector<>();
+		tList = dao.test();
+		testVO tVO = new testVO();
+		for(int i = 0; i < tList.size(); i++) {
+			tVO = tList.get(i);
 			FriendGroupLayout frl = new FriendGroupLayout();
-			frl.jl1.setText(i+"상범");
+			frl.jl1.setText(tVO.getMem_id());
+			frl.jl2.setText(tVO.getMem_name());
+			frl.jl3.setText(tVO.getMem_email());
 			jp_center.add(frl);
 		}
 		this.add("Center", jsp);

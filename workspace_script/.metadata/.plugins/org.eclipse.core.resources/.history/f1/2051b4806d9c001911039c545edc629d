@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pictureMain</title>
+</head>
+<body>
+<div id="popupContent">
+popupContent
+</div>
+</body>
+</html>

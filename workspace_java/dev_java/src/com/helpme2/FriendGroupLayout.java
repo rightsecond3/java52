@@ -46,9 +46,9 @@ public class FriendGroupLayout extends JPanel {
 		// 수평
 		gl.setVerticalGroup(gl.createSequentialGroup()
 				.addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(jp1)
-						.addComponent(jp2)
-						.addComponent(jp3)));
+						.addComponent(jp1,50,50,GroupLayout.PREFERRED_SIZE)
+						.addComponent(jp2,50,50,GroupLayout.PREFERRED_SIZE)
+						.addComponent(jp3,50,50,GroupLayout.PREFERRED_SIZE)));
 
 	}
 

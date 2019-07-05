@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>자동갱신 페이지 구현</title>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript">
+        function autoReload() {
+            $.ajax({
+                type : "get"
+                ,url : "newsData1.jsp"
+                ,success : function(result){//result는 응답페이지의 출력문자열이 담겨있다
+                	//innerHTML -> html():jQuery, innerText -> text():jQuery
+                    $("#d_news").html(result);
+                }
+                ,fail : function(xhrObject,textStatus){
+                    alert("Request failed: "+textStatus);
+                    alert(xhrObject.responseText);
+                }
+            });
+        }
+    </script>
+</head>
+<!-- onload 이벤트는 해당 페이지의 돔 구성이 완료되었을 때 발생 -->
+<body>
+    <script>
+        $(document).ready(function(){
+            var watch;
+            function start() {
+                /*
+                첫번째 파라미터는 메소드 호출하기
+                두번째 파라미터는 지연 시간 추가(밀리세컨 단위)
+                아래 경우 3초마다 한 번씩 메소드가 호출됨.
+                */
+                watch = setInterval(autoReload, 3000)
+            }
+            start();
+        });
+    </script>
+    <h3>헤드라인 뉴스</h3>
+    <!-- 뉴스 전광판 추가 -->
+    <div id="d_news">뉴스 준비중....</div>
+    <button onclick="start()">시작</button>
+</body>
+
+</html>

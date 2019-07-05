@@ -1,0 +1,5 @@
+@charset "UTF-8";
+div#popupContent {
+    /* 좌표값으로 위치 조정을 하기 위한 속성 */
+    position: absolute; 
+}

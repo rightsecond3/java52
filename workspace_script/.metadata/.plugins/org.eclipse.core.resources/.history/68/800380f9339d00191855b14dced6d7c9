@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>팝업 창에 해당항목의 내용표시</title>
+    <link rel="stylesheet" type="text/css" href="pictureMain.css"/>
+        <script>
+        //ajax코드 추가하기 - javascript - 주의사항 : 돔구성이 완료되었을 때 처리할 내용
+        var xhrObject = null;
+        function createRequest() {
+            try {
+                xhrObject = new XMLHttpRequest();//비동기통신객체 생성
+            } catch (trymicrosoft) {
+                xhrObject = null;
+            }
+            if(xhrObject==null) {
+                alert("비동기 통신객체 생성 실패")
+            }
+        }
+        //서버로 요청에 대한 처리를 전송 - 비동기 처리
+        function startMethod(td) {
+            //그림 제목에 마우스를 오버 했을 때 td태그에 정의한 아이디 값을 가져오는 코드
+            //alert("td.id: 1|2|3|4 => "+td.id);
+            //document.getElementById("popupContent").innerHTML = "startMethod";
+            createRequest();//비동기통신 객체 생성 메소드 호출 - 전역변수로 초기화됨.
+            //콜백메소드 이름 선언 : 비동기통신객체(Object:XMLHttpRequest).XXX
+            xhrObject.onreadystatechange = popup_process;
+            //옵션 추가
+            //1)전송방식 - GET[query string,링크,제약,노출] | POST[GET방식의 반대]
+            //2)전송(요청)에 대한 목적지[ex. XXX.jsp-오라클통신,자바코드활용,데이터]
+            //3)옵션 - true:비동기처리, flase:동기처리
+            var url="./pictureInfo.jsp?p_no="+td.id;
+            xhrObject.open("GET",url,true);
+            //전송
+            xhrObject.send(null);
+        }
+        //파라미터로 서버페이지에서 처리된 결과를 Json 포맷형으로 받아옴
+        function makeInfo(result) {
+            //alert(result);
+            var jsonDoc = JSON.parse(result);//리턴타입이 배열로 변환
+            var picHTML = "";
+            if(jsonDoc.length>0) {
+                for (var i=0;i<jsonDoc.length;i++) {
+                    //picHTML = jsonDoc[i].p_img+", "+jsonDoc[i].p_info;
+                    picHTML += "<table border='1'>";
+                    //자바 스크립트에서는 싱글, 더블쿼테이션이 없으면 변수 취급
+                    picHTML += "<tr><td><img width='700' height='500' src='"+jsonDoc[i].p_img+"'/></td>" ;//이미지
+                    picHTML += "<td>"+jsonDoc[i].p_info+"</td></tr>"; //설명
+                    picHTML += "</table>";
+                }
+            }else {
+                picHTML = "조회결과가 없습니다.";
+            }
+            return picHTML;
+        }
+        function result_process() {
+            //pictureInfo.jsp에서 출력된 결과를 담기
+            var temp = xhrObject.responseText;
+            //파라미터로 넘긴 json포멧에서 원하는 정보 가져오기
+            var picHTML = makeInfo(temp);
+            document.getElementById("popupContent").innerHTML=picHTML;
+        }
+        function popup_process() {
+            if(xhrObject.readyState==4) {//상태값이 4일 때
+                if(xhrObject.status==200) {//서버의 응답이 200 ok
+                    result_process();
+                }
+                else if(xhrObject.status==204) {//서버의 응답이 204 fail
+
+                }
+            }
+        }
+        function clearMethod() {
+            //document.getElementById("popupContent").innerHTML = "clearMethod";
+
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th colspan="2">그림 목록</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="center"><img src="picture1.jpg" width="50" height="50"/></td>
+                <!-- this는 td를 의미함 -->
+                <td id="1"onmouseover="startMethod(this)" onmouseout="clearMethod()">다람쥐</td>
+            </tr>
+            <tr>
+                <td align="center"><img src="picture2.jpg" width="50" height="50"/></td>
+                <td id="2" onmouseover="startMethod(this)" onmouseout="clearMethod()">고양이</td>
+            </tr>
+            <tr>
+                <td align="center"><img src="picture3.jpg" width="50" height="50"/></td>
+                <td id="3" onmouseover="startMethod(this)" onmouseout="clearMethod()">몽몽이</td>
+            </tr>
+            <tr>
+                <td align="center"><img src="picture4.jpg" width="50" height="50"/></td>
+                <td id="4" onmouseover="startMethod(this)" onmouseout="clearMethod()">판다너구리</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="popupContent">popupContent</div>
+</body>
+
+</html>

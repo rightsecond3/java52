@@ -1,0 +1,13 @@
+package com.helpme2;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.util.DBConnectionMgr_helpme;
+
+public class Dao {
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	DBConnectionMgr_helpme = null;
+}

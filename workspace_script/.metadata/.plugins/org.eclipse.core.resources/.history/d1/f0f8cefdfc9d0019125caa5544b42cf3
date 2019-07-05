@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Break Neck Pizza Delivery</title>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript">
+        function getCustomerInfo() {
+            //alert(user_tel);
+            //태그의 아이디인 mem_tel을 사용하여 val()메소드를 호출하면 사용자가 입력한 값을 읽어올 수 있다.
+            var user_tel = $("#mem_tel").val();
+            $("#mem_tel").text("입력한 값");
+            $.ajax({
+                method : "get"
+                , url : "./customerInfo.jsp?mem_tel="+user_tel
+                ,success : function(result) {
+					document.getElementById("mem_address").text(result);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <p><img src="breakneck-logo.gif" alt="Break Neck Pizza" /></p>
+    <p>Enter your phone number:
+        <input type="text" size="14" id="mem_tel" name="mem_tel" onChange="getCustomerInfo();" />
+    </p>
+    <p>Type your order in here:</p>
+    <p><textarea name="order" id="order" rows="6" cols="50"></textarea></p>
+    <p>Your order will be delivered to:</p>
+    <!-- 
+        JSON포맷의 이름과 태그의 name속성과 id속성을 같은 값으로 통일함.
+        name속성 : jsp에서 사용자가 입력한 값을 읽을 때 사용
+        id 속성 : javascript에서 사용자가 입력한 값을 읽을 때 사용
+        name과 id속성은 같은 값을 사용함.
+        오라클 서버에 테이블 컬럼명과 VO패턴의 멤버변수 이름, Map의 key는 모두 통일해서 사용
+    -->
+    <p><textarea name="address" id="address" rows="4" cols="50"></textarea></p>
+    <p><input type="button" id="btn_order" value="Order Pizza" /></p>
+    <div id="d_msg"></div>
+</body>
+
+</html>

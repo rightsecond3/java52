@@ -1,0 +1,33 @@
+package com.helpme2;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+import com.util.DBConnectionMgr_helpme;
+
+public class Dao {
+	DBConnectionMgr_helpme dbMgr  = null;
+	Connection con                = null;
+	PreparedStatement pstmt       = null;
+	ResultSet rs                  = null;
+	
+	public List<testVO> test() {
+		dbMgr = DBConnectionMgr_helpme.getInstance();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT * FROM chat_member ");
+		try {
+			con = dbMgr.getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			Vo vO = null;
+			while(rs.next()) {
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팝업 창에 해당항목의 내용표시</title>
+<link rel="stylesheet" type="text/css" href="pictureMain.css/">
+</head>
+<body>
+<!-- colspan="2" : 옆 셀과 병합하기
+여기서는 두칸이 병합됨. 3이면 세칸 4일경우는 네칸이 병합
+위 아래로 병합할 때는 rowspan="2" 위쪽과 아래 쪽 셀이 병합
+-->
+<table>
+    <thead>
+        <th colspan="2">그림 목록</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center"><img src="picture1.jpg" width="50" height="50"/></td>
+            <td id="1">거리</td>
+        </tr>
+        <tr>
+            <td align="center"><img src="picture2.jpg" width="50" height="50"/></td>
+            <td id="2">고양이</td>
+        </tr>
+        <tr>
+            <td align="center"><img src="picture3.jpg" width="50" height="50"/></td>
+            <td id="3">몽몽이</td>
+        </tr>
+        <tr>
+            <td align="center"><img src="picture4.jpg" width="50" height="50"/></td>
+            <td id="4">판다너구리</td>
+        </tr>
+    </tbody>
+</table>
+<div id="popupContent">
+popupContent
+</div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax_수업</title>
+    <!-- 
+        CSS와 JS를 외부에서 import하는 경우 수정했음에도 반영이 안되는 경우 발생함.
+        이러한 경우 페이지 이름 뒤에 ?를 붙이고 임의의 문자를 추가해서 GET방식의 헛점을 피해 테스트함
+        같은 요청 건이면 브라우저가 인터셉트함. - 서버까지 전달이 안됨.
+        버퍼캐시에 저장된 정보가 그대로 출력되므로 수정된 내용이 반영 되지 않음.
+     -->
+    <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../demo/demo.css">
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+
+    <script type="text/javascript">
+        function login() {
+            //insert here
+            //alert("login 함수 호출");
+            var u_id = $("#i_id").val();
+            var u_pw = $("#i_pw").val();
+            //alert(u_id);
+            $.ajax({
+                method : "GET"
+                ,url : "loginInfo.jsp"
+                ,success : function(result) {
+                    //alert(result);
+                    var jsonDoc = JSON.parse(result);
+                    if(jsonDoc.length>0) {
+                        for(var i=0;i<jsonDoc.length;i++) {
+                            if(u_id==jsonDoc[i].mem_id && u_pw==jsonDoc[i].mem_pw) {
+                                $("#d_login").hide();
+                                $("#d_logout").show();
+                                $("#s_logout").text(jsonDoc[i].mem_name+"님 환영합니다.");
+                                $("#i_id").textbox('clear');
+                                $("#i_pw").passwordbox('clear');
+                                return;
+                            }
+                            //마지막 방까지 왔는데도 아이디 비번이 맞지 않냐?
+                            else if(i==jsonDoc.length-1) {
+                                alert("아이디와 비밀번호를 확인하세요");
+                                $("#i_pw").passwordbox('clear');
+                                return;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        function logout() {
+            //insert here
+            //alert("logout 함수 호출");
+            $("#d_login").show();
+            $("#d_logout").hide();
+        }
+        //해당하는 페이지의 DOM구성이 완료되었을 때
+        $(document).ready(function() {
+            $("#d_login").show();
+            $("#d_logout").hide();
+        });
+    </script>
+</head>
+
+<body>
+    <center>
+        <table width="900px" height="650px">
+            <!--=========== top.html 시작 ===========-->
+            <tr>
+                <td width="900px" height="50px">
+                    <table width="100%" height="100%" border="1" borderColor="orange">
+                        <tr>
+                            <td align="center">Ajax 수업</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!--=========== top.html 끝 ===========-->
+
+            <!--=========== body.html 시작 ===========-->
+            <tr>
+                <td width="900px" height="570px">
+                    <table>
+                        <tr>
+                            <!--=========== menu.html 시작 ===========-->
+                            <td width="250px" height="570px">
+                                <table width="100%" height="100%" border="1" borderColor="blue">
+                                    <tr>
+                                        <td align="left" valign="top">
+                                            <table border="1">
+                                                <tr>
+                                                    <td height="20px">
+                                                        <!--=========== 로그인 화면 시작 ===========-->
+                                                        <div id="d_login">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input class="easyui-textbox" id="i_id" prompt="id"
+                                                                            data-options="iconCls:'icon-man'"
+                                                                            style="width:170px">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input class="easyui-passwordbox" id="i_pw"
+                                                                            prompt="Password" iconWidth="28"
+                                                                            style="width:170px">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="checkbox" id="i_btn"
+                                                                        value="자동로그인">자동로그인
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a id="btn" href="javascript:login()" class="easyui-linkbutton"
+                                                                            data-options="width:170">로그인</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <!--=========== 로그인 화면 끝 ===========-->
+                                                        <!--=========== 로그인아웃 화면 시작 ===========-->
+                                                        <div id="d_logout">
+                                                            <table>
+                                                                <tr>
+                                                                    <td height="100px" align="center">
+                                                                        <span id="s_logout" >XXX님 환영합니다.</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a id="btn" href="javascript:logout()" class="easyui-linkbutton"
+                                                                            data-options="width:170">로그아웃</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <!--=========== 로그인아웃 화면 끝 ===========-->
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="20px">메뉴1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="20px">메뉴2</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!--=========== menu.html 끝 ===========-->
+                            <!--=========== body.html 시작 ===========-->
+                            <td width="650px" height="570px">
+                                <table width="100%" height="100%" border="1" borderColor="red">
+                                    <tr>
+                                        <td>콘텐츠</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!--=========== body.html 끝 ===========-->
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!--=========== body.html 끝 ===========-->
+
+            <!--=========== bottom.html 시작 ===========-->
+            <tr>
+                <td width="900px" height="30px">
+                    <table width="100%" height="100%" border="1" borderColor="brown">
+                        <tr>
+                            <td align="center">한국 소프트웨어 인재 개발원</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!--=========== bottom.html 끝 ===========-->
+        </table>
+    </center>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,com.google.gson.Gson" %>
+<%
+String mem_tel = request.getParameter("mem_tel");
+List<Map<String,Object>> memList = new ArrayList<>();
+Map<String,Object> memInfo = new HashMap<>();
+memInfo.put("mem_name","이순신");
+memInfo.put("mem_addr","서울시 마포구 공덕동");
+memInfo.put("mem_tel","025559999");
+memList.add(memInfo);
+
+memInfo = new HashMap<>();
+memInfo.put("mem_name","김유신");
+memInfo.put("mem_addr","서울시 영등포구 당산동");
+memInfo.put("mem_tel","026669999");
+memList.add(memInfo);
+
+memInfo = new HashMap<>();
+memInfo.put("mem_name",3);
+memInfo.put("mem_addr","picture3.jpg");
+memInfo.put("mem_tel","몽몽이");
+memList.add(memInfo);
+
+memInfo = new HashMap<>();
+memInfo.put("mem_name","강감찬");
+memInfo.put("mem_addr","서울시 구로구 개봉동");
+memInfo.put("mem_tel","027779999");
+memList.add(memInfo);
+//선택하는 그림의 아이디에 대응하는 값만 가져오기
+//json 포맷으로 넘겨야 하고 그 후 스크립트로 다시 파싱해야 하므로 동일한 구조로 만들어야함
+//그러면 파싱하는 부분의 코드는 수정을 안해도 되니깐
+/*
+위에서는 모든 건을 다 조회하였다
+그러나 그림 제목에 오버했을 때 td태그의 id속성의 값을 읽어서 그 값을 쿼리 스트링으로 넘겼다.
+pictureInfo.jsp?p_no=? -> ?뒤에 문장 : 쿼리 스트링
+*/
+List<Map<String,Object>> picDetail = new ArrayList<>();
+Map<String,Object> picDetailMap = null;
+for(int i=0;i<memList.size();i++) { //4번 반복
+	Map<String,Object> rmap = memList.get(i); //한건 식 꺼냄
+	if(mem_tel.equals(rmap.get("mem_tel").toString())) { //비교 - p_no로
+		//한건 씩 꺼낸 맵의 주소번지를 새로운 주소번지 대입하고
+		picDetailMap = rmap; //4건을 가진 map 중에서 p_no가 같은 한개 맵만 주소번지를 저장
+		picDetail.add(picDetailMap); //리스트에 담아줌
+	}
+}
+//구글에서 제공하는 오픈 API를 사용하여 JSON포맷으로 꺼내기
+Gson g = new Gson();
+String result = g.toJson(picDetail);
+//picList가 아닌 Json포맷으로 변형된 result를 넘겨야 된다.
+out.print(result);
+%>

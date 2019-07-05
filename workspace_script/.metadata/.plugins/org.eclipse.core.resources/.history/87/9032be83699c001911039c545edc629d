@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%
+    List<Map<String,Object>> picList = new ArrayList<>();
+	Map<String,Object> picInfo = new HashMap<>();
+	picInfo.put("p_no",1);
+	picInfo.put("p_img","picture1.jpg");
+	picInfo.put("p_info","오토바이");
+	picList.add(0, picInfo);
+	picInfo = new HashMap<>();
+	picInfo.put("p_no",2);
+	picInfo.put("p_img","picture2.jpg");
+	picInfo.put("p_info","고양이");
+	picList.add(0, picInfo);
+	picInfo = new HashMap<>();
+	picInfo.put("p_no",1);
+	picInfo.put("p_img","picture1.jpg");
+	picInfo.put("p_info","오토바이");
+	picList.add(0, picInfo);
+	picInfo = new HashMap<>();
+	
+%>

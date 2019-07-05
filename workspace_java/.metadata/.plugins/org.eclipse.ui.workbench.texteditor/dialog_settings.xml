@@ -6,18 +6,19 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="tc"/>
+		<item key="selection" value="gl"/>
 		<list key="findhistory">
+			<item value="chat_rightLayout"/>
+			<item value="g_title"/>
+			<item value="nickName"/>
 			<item value="tc"/>
 			<item value="index"/>
 			<item value="refreshdata"/>
 			<item value="detail"/>
 			<item value="setVisible"/>
-			<item value="SubView_DVD"/>
-			<item value="DVDMem"/>
-			<item value="DVDVO"/>
 		</list>
 		<list key="replacehistory">
+			<item value="gl"/>
 			<item value="tc2"/>
 			<item value="SubList"/>
 			<item value="dvd"/>
@@ -25,7 +26,6 @@
 			<item value="H"/>
 			<item value="myQuiz20"/>
 			<item value="&quot;"/>
-			<item value="Question3_2"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

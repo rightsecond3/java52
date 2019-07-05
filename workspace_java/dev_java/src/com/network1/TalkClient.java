@@ -1,27 +1,32 @@
 package com.network1;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.colorchooser.ColorSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledDocument;
-//클라이언트 측에서는 Runnable하지 않았다. - 단일스레드이다.
-//why? - 경합,선택에 따른 지속적인 서비스
 
 
 public class TalkClient extends JFrame implements ActionListener{
@@ -53,9 +58,14 @@ public class TalkClient extends JFrame implements ActionListener{
 	JButton jbtn_change = new JButton("대화명 변경");
 	JButton jbtn_exit = new JButton("종료");
 	JButton jbtn_icon = new JButton("이모티콘");
+	JButton jbtn_font = new JButton("글꼴");
+	JButton jbtn_color = new JButton("글자색");
+	
+	JDialog jdl_color = null;
+	String fontColor = "-16777216";
 	
 	String nickName = null;
-	String ip = "192.168.0.242";
+	String ip = "192.168.0.211";
 	int port = 3333;
 	//소켓 선언 - (서버 접속 시도 - 객체를 손에 쥐면 oos와 ois생성)
 	Socket mySocket = null;
@@ -88,6 +98,18 @@ public class TalkClient extends JFrame implements ActionListener{
 	//** 화면 구성부 **//
 	public void initDisplay() {
 		//이벤트 처리부
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				try {
+					exit_process();
+					System.exit(0);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		jbtn_font.addActionListener(this);
+		jbtn_color.addActionListener(this);
 		jbtn_change.addActionListener(this);
 		jbtn_exit.addActionListener(this);
 		jbtn_icon.addActionListener(this);
@@ -96,9 +118,11 @@ public class TalkClient extends JFrame implements ActionListener{
 		//레이아웃 설정
 		jp_first.setLayout(new BorderLayout());
 		jp_second.setLayout(new BorderLayout());
-		jp_second_south.setLayout(new GridLayout(2,2));
+		jp_second_south.setLayout(new GridLayout(3,2));
 		this.setLayout(new GridLayout(1,2));
 		//컴포넌트 붙혀주기
+		jp_second_south.add(jbtn_font);
+		jp_second_south.add(jbtn_color);
 		jp_second_south.add(jbtn_icon);
 		jp_second_south.add(jbtn_whisper);
 		jp_second_south.add(jbtn_change);
@@ -127,7 +151,8 @@ public class TalkClient extends JFrame implements ActionListener{
 				oos.writeObject(Protocol.MESSAGE
 						+Protocol.seperator+nickName
 						+Protocol.seperator+msg
-						+Protocol.seperator+imgChoice);//선택한 이모티콘 정보 넘김
+						+Protocol.seperator+imgChoice
+						+Protocol.seperator+fontColor);//선택한 이모티콘 정보 넘김
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -138,7 +163,9 @@ public class TalkClient extends JFrame implements ActionListener{
 				oos.writeObject(Protocol.MESSAGE
 						+Protocol.seperator+nickName
 						+Protocol.seperator+msg
-						+Protocol.seperator+"default");
+						+Protocol.seperator+"default"
+						+Protocol.seperator+fontColor
+						);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -192,7 +219,7 @@ public class TalkClient extends JFrame implements ActionListener{
 	public void exit_process() {
 		try {
 			oos.writeObject(Protocol.ROOM_OUT
-					+Protocol.seperator+nickName);
+					+Protocol.seperator+this.nickName);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -208,6 +235,26 @@ public class TalkClient extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		String msg = jtf_msg.getText();
+		if (obj==jbtn_color) {
+			jdl_color = new JDialog();
+			jdl_color.setSize(600,500);
+			//색상 파레트를 지원하는 클래스 생성하기
+			final JColorChooser jcc_color = new JColorChooser();
+			ColorSelectionModel model = jcc_color.getSelectionModel();
+			//색상 정보 선택 시 이벤트 발생 그리고 처리하기
+			ChangeListener listener = new ChangeListener() {
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					Color nfColor = jcc_color.getColor();
+					fontColor = String.valueOf(nfColor.getRGB());
+					
+				}
+			};
+			model.addChangeListener(listener);
+			jdl_color.add(jcc_color);
+			jdl_color.setVisible(true);
+			
+		}
 		//메세지 버튼
 		if(obj==jtf_msg) {
 			message_process(msg, null);

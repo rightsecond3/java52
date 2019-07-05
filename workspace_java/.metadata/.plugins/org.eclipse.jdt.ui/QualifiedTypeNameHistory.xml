@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.network1.TalkClient"/>
-<fullyQualifiedTypeName name="com.project.RenDetail"/>
-<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
-<fullyQualifiedTypeName name="com.project.RentDetailVO"/>
-<fullyQualifiedTypeName name="com.project.RenDetailCtrl"/>
 <fullyQualifiedTypeName name="com.project.RenDetailDao"/>
 <fullyQualifiedTypeName name="com.project.SubRenDetial"/>
 <fullyQualifiedTypeName name="com.project.RenDetailVO"/>
 <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
 <fullyQualifiedTypeName name="javax.swing.border.Border"/>
 <fullyQualifiedTypeName name="javax.swing.JTabbedPane"/>
-<fullyQualifiedTypeName name="java.awt.FlowLayout"/>
 <fullyQualifiedTypeName name="com.network1.TalkClientThread"/>
 <fullyQualifiedTypeName name="com.network1.TalkServer"/>
 <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
@@ -42,22 +36,28 @@
 <fullyQualifiedTypeName name="com.network2.WaitRoom"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="java.awt.Rectangle"/>
-<fullyQualifiedTypeName name="javax.swing.JButton"/>
-<fullyQualifiedTypeName name="java.awt.GridLayout"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.network2.Room"/>
 <fullyQualifiedTypeName name="java.awt.event.AdjustmentListener"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollBar"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="com.network2.Protocol"/>
-<fullyQualifiedTypeName name="java.util.Vector"/>
-<fullyQualifiedTypeName name="javax.swing.JPanel"/>
-<fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 <fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
 <fullyQualifiedTypeName name="javax.swing.JList"/>
-<fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.GroupLayout.Alignment"/>
+<fullyQualifiedTypeName name="com.network2.TalkServerThread"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="com.helpme2.FriendGroupLayout"/>
+<fullyQualifiedTypeName name="javax.swing.SpringLayout"/>
+<fullyQualifiedTypeName name="java.awt.FlowLayout"/>
 <fullyQualifiedTypeName name="javax.swing.GroupLayout"/>
+<fullyQualifiedTypeName name="java.awt.GridLayout"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+<fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
 </qualifiedTypeNameHistroy>
