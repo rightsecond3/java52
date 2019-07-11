@@ -1,0 +1,14 @@
+package com.helpme3;
+
+public class VOChatList {
+	private String clist_code    = null; //채팅리스트 코드
+	private String clist_yourid  = null; //상대방 코드들
+	private String clist_count   = null; //채팅방 인원수
+	private String clist_name    = null; //채팅방 이름
+	private String clist_fcolor  = null; //채팅방 폰트색
+	private String clist_bcolor  = null; //채팅방 배경색
+	private String clist_img     = null; //채팅방 프로필 사진
+	private String mem_id        = null; //회원 아이디(방 만든사람)_FK:[MEM]
+	
+	
+}

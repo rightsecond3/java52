@@ -27,7 +27,6 @@ public class MemCtrl {
 		}
 		else if(_UPD.equals(command)) {//수정버튼을 누른거야?
 			MemModifyLogic memModLogic = new MemModifyLogic();
-			System.out.println("Ctrl의 status값 ");
 			mraVO = memModLogic.memUpdate(mpaVO);
 		}
 		else if(_DEL.equals(command)) {//삭제하니?

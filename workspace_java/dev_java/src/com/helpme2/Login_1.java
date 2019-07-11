@@ -22,12 +22,13 @@ public class Login_1 extends JFrame implements ActionListener{
 	//폰트 추가하기
 	Font font = new Font("휴먼매직체",Font.PLAIN,25);
 	//아이디와 패스워드 라벨 추가하기
-	JTextField jtf_id = new JTextField("test");
-	JPasswordField jpf_pw = new JPasswordField("123");
+	JTextField jtf_id = new JTextField("kyeong");
+	JPasswordField jpf_pw = new JPasswordField("4567");
 	JButton jbtn_login = new JButton(new ImageIcon(imgPath+"login.png"));
 	JButton jbtn_join = new JButton(new ImageIcon(imgPath+"confirm.png"));
 	String nickName = null;//전역변수만이 다른 클래스에서 재사용됨.
 	TalkClientVer2_1 tc2 = null;
+	SuperView sv = null;
 	
 	
 	///*** 생성자 ***///
@@ -94,8 +95,9 @@ public class Login_1 extends JFrame implements ActionListener{
 			this.setVisible(false);//메모리상에는 상주하고 있음.
 			jtf_id.setText("");
 			jpf_pw.setText("");
+			sv = new SuperView();
 			//TalkClientVer2
-			tc2 = new TalkClientVer2_1(this);
+			//tc2 = new TalkClientVer2_1(this);
 		}
 	}
 	//// **** 이벤트 처리부 ****////

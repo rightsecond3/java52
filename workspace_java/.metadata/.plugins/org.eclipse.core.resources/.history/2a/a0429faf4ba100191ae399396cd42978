@@ -1,0 +1,14 @@
+package com.ch15;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class RandomGame {
+	
+	public static void main(String[] args) {
+		//BufferdReader : 보조 스트림
+		//InputStreamReader : 기반 스트림
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	}
+
+}

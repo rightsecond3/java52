@@ -1,0 +1,10 @@
+package com.helpme3;
+
+public class MyTalk_LogVO {
+	private int    mt_rno       = 0;    //순번_PK
+	private String mt_date      = null; //작성날짜
+	private String mt_time      = null; //작성시간
+	private String mt_contents  = null; //작성내용
+	private String mt_writer    = null; //작성자
+	private String mt_code      = null; //채팅방코드_FK(MyTalk)
+}

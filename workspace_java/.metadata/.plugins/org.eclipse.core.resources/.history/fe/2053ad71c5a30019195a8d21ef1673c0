@@ -1,0 +1,14 @@
+package com.helpme3;
+
+public class VOChatList {
+	private String clist_code    = null; //
+	private String clist_yourid  = null; //
+	private String clist_count   = null; //
+	private String clist_name    = null; //
+	private String clist_fcolor  = null; //
+	private String clist_bcolor  = null; //
+	private String clist_img     = null; //
+	private String mem_id        = null; //
+	
+	
+}

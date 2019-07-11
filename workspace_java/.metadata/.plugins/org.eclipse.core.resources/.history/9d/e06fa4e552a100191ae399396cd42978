@@ -1,0 +1,12 @@
+package com.ch15;
+
+public class ViewURL {
+	ViewURL(String url) {
+		
+	}
+	
+	public static void main(String[] args) {
+		new ViewURL("http://localhost:8000/google/multiMarkergoogleMap.html");
+	}
+
+}

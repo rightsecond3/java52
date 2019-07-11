@@ -18,7 +18,7 @@ public class Dao {
 		List<testVO> tList = new Vector<testVO>();
 		dbMgr = DBConnectionMgr_helpme.getInstance();
 		StringBuilder sql = new StringBuilder();
-		sql.append(" SELECT mem_id, mem_name, mem_email   ");
+		sql.append(" SELECT *   ");
 		sql.append("   FROM chat_member                   ");
 		sql.append("   ORDER BY mem_name ASC              ");
 		try {

@@ -1,0 +1,22 @@
+package json;
+
+import java.io.ObjectInputStream.GetField;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+public class JsonTest1 {
+
+	public static void main(String[] args) {
+		String key = "{\"key\":\"abcd1234\"}";
+		System.out.println(key);
+		//위 문자열은 json 포맷이 아니다.
+		//why - 대괄호가 없기 때문
+		//그러므로 Gson으로 파싱이 되지 않음.
+		JsonParser jsonPar = new JsonParser();
+		//key를 Json 포멧으로 바꿔줌
+		JsonObject jsonObj = jsonPar.parse(key).getAsJsonObject();
+		String value = jsonObj.get("key").toString();
+	}
+
+}

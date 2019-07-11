@@ -1,0 +1,10 @@
+package com.helpme3;
+
+public class MyTalkVO {
+	private String mt_code     = null; //개인채팅방코드_PK
+	private String mt_yourid   = null; //상대방 아이디
+	private String mt_fcolor   = null; //내 폰트 색
+	private String mt_bcolor   = null; //내 배경 색
+	private String mem_id      = null; //내 아이디_FK
+	
+}

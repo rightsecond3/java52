@@ -1,0 +1,11 @@
+package com.helpme3;
+
+public class VOGroupLog {
+	private int    glog_rno      = 0;    // 그룹로그순번_PK : 복합키
+	private String gcode_code    = null; // 그룹코드_FK[GroupCode]_PK :복합키
+	private String glog_time     = null; // 작성시간
+	private String glog_date     = null; // 작성날짜
+	private String glog_contents = null; // 작성내용
+	private String glog_writer   = null; // 작성자
+	
+}

@@ -1,0 +1,24 @@
+package com.ch15;
+
+import java.io.FileReader;
+import java.util.Scanner;
+
+public class ScannerReadable {
+/*
+ * oos.writeObject(); - Object 단위
+ * dos.wirteDouble(); - Double 단위
+ * is.write(); - byte 단위
+ */
+	public static void main(String[] args) {
+		Scanner scan = null;
+		//2Byte 단위
+		FileReader fr = null;
+		try {
+			fr = new FileReader(".\\src\\com\\ch15\\scan.txt");
+			System.out.println(fr.toString());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+}

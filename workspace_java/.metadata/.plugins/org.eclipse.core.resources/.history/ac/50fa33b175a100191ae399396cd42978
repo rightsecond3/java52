@@ -1,0 +1,9 @@
+package com.helpme3;
+
+public class GroupList {
+	private String glist_code   = null; //단톡코드_FK(GroupCode)_PK :복합키
+	private String mem_id       = null; //회원아이디_FK(MEM)_PK : 복합키
+	private String glist_fcolor = null; //단톡글자색
+	private String glist_bcolor = null; //단톡배갱색
+	private String glist_gimg   = null; //단톡이미지
+}

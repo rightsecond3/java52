@@ -1,0 +1,16 @@
+package com.ch11;
+
+import com.ch2.Sonata;
+import com.ch9.Car;
+
+public class ClassTest {
+
+	public static void main(String[] args) {
+		Car myCar = new Sonata();
+		Class c = myCar.getClass();
+		if(myCar instanceof Sonata) {
+			
+		}
+	}
+	
+}

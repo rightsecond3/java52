@@ -1,0 +1,9 @@
+package com.ch15;
+
+public class ScannerReadable {
+
+	public static void main(String[] args) {
+
+	}
+
+}

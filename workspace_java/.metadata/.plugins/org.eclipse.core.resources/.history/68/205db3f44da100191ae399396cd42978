@@ -1,0 +1,13 @@
+package com.ch15;
+
+public class ScannerReadable {
+/*
+ * oos.writeObject(); - Object 단위
+ * dos.wirteDouble(); - Double 단위
+ * is.write(); - byte 단위
+ */
+	public static void main(String[] args) {
+
+	}
+
+}

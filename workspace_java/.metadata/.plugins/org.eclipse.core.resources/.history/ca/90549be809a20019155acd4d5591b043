@@ -1,0 +1,11 @@
+package com.helpme3;
+
+import javax.swing.JTextField;
+
+public class ChatView {
+	JTextField jtf_search = new JTextField("채팅방 이름, 참여자 검색");
+	public ChatView() {
+		
+	}
+	
+}

@@ -1,0 +1,22 @@
+package com.ch15;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class ViewURL {
+	ViewURL(String url) {
+		URL myURL = null;
+		URLConnection myCon = null;
+		InputStream is = null;//추상클래스
+		BufferedReader br = null;//필터 스트림 클래스
+		String data = null;
+		String headerType = null;
+	}
+	
+	public static void main(String[] args) {
+		new ViewURL("http://192.168.0.211:8000/google/multiMarkergoogleMap.html");
+	}
+
+}

@@ -1,0 +1,38 @@
+package com.ch15;
+
+import java.io.FileReader;
+import java.util.Scanner;
+
+public class ScannerReadable {
+/*
+ * oos.writeObject(); - Object 단위
+ * dos.wirteDouble(); - Double 단위
+ * is.write(); - byte 단위
+ */
+	public static void main(String[] args) {
+		Scanner scan = null;
+		//2Byte 단위
+		FileReader fr = null;
+		try {
+			fr = new FileReader(".\\src\\com\\ch15\\scan.txt");
+			scan = new Scanner(fr);
+			while (scan.hasNextDouble()) { //Double 타입만 읽어옴
+				System.out.println("hasNextDouble : "+scan.nextDouble());
+			}
+			while (scan.hasNext()) {
+				System.out.println("hasNext : "+scan.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(fr!=null) {
+				try {
+					fr.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+	}
+
+}

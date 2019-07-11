@@ -1,0 +1,10 @@
+package com.helpme3;
+
+public class ChatDao {
+
+	public String login(String mem_id, String mem_pw) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
