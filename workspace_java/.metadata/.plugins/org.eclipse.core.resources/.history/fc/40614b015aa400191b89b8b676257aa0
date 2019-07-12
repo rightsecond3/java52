@@ -1,0 +1,82 @@
+package com.helpme3;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+
+public class ChatListView extends JPanel {
+	///선언부
+	//* 검색
+	JPanel jp_search = new JPanel();
+	JButton jbtn_search = new JButton("검색");
+	//텍스트필드의 외부 보더 검정색 제거
+	JTextField jtf_search = new JTextField(35) {
+		public void setBorder(Border border) {}
+	};
+	//* 채팅목록
+	JPanel jp_chat = new JPanel();
+	JScrollPane jsp = new JScrollPane(jp_chat) {
+		public void setBorder(Border border) {}
+	};
+	ChatGroup cg = null;
+	/////////
+	JPanel jp_search_first = new JPanel();
+	JPanel jp_search_second = new JPanel();
+	//테스트 완료
+	List<Map<String, Object>> list = null;
+	Map<String, Object> map = null;
+	///** 생성자
+	public ChatListView() {
+		//검색창 그룹 레이 아웃
+		GroupLayout gl = new GroupLayout(jp_search);
+		jp_search.setLayout(gl);
+		
+		
+		jp_search.setBackground(Color.GRAY);
+		jp_search_first.add(jtf_search);
+		jp_search_second.add(jbtn_search);
+//		jp_search.add(jtf_search);
+//		jp_search.add(jbtn_search);
+		
+		gl.setHorizontalGroup(
+				gl.createSequentialGroup()
+					.addComponent(jp_search_first,150,150,GroupLayout.DEFAULT_SIZE)
+					.addComponent(jp_search_second,30,30,30)
+				);
+		gl.setVerticalGroup(
+				gl.createSequentialGroup()
+					.addGroup(gl.createParallelGroup()
+							.addComponent(jp_search_first)
+							.addComponent(jp_search_second)
+							)
+				);
+		
+		//* GroupLayout 넣기
+		this.setLayout(new BorderLayout());
+		GridLayout gr = new GridLayout();
+		ChatDao cDao = new ChatDao();
+		list = cDao.getChatMap();
+		gr.setRows(10);
+		jp_chat.setLayout(gr);
+		//GroupLayout쪽에 해당하는 이벤트와 라벨을 붙히기 위해 list를 보내줌
+		for (int i=0;i<list.size();i++) {
+			cg = new ChatGroup();
+			cg.initDisplay(list.get(i));
+			jp_chat.add(cg);
+		}
+
+		this.add("North", jp_search);
+		this.add("Center", jsp);
+	}
+
+}

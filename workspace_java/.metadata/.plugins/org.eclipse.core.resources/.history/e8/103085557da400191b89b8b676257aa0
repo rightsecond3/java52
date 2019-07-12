@@ -1,0 +1,98 @@
+package com.helpme3;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FontDialog;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+ 
+public class FontDialogExample {
+	private Font font;
+	private Color color;
+ 
+	public void run() {
+		Display display = new Display();
+		Shell shell = new Shell(display);
+ 
+		shell.setText("폰트 다이얼로그 예제");
+		createContents(shell);
+		shell.pack();
+		shell.open();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+ 
+		if (font != null) {
+			font.dispose();
+		}
+		if (color != null) {
+			color.dispose();
+		}
+ 
+		display.dispose();
+	}
+ 
+	private void createContents(final Shell shell) {
+		shell.setLayout(new GridLayout(2, false));
+ 
+		final Label lblFont = new Label(shell, SWT.NONE);
+		lblFont.setText("폰트를 선택하세요!!!!");
+ 
+		Button btnFont = new Button(shell, SWT.PUSH);
+		btnFont.setText("Font선택");
+		btnFont.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent event) {
+				// 폰트다이얼로그
+				FontDialog fontDialog = new FontDialog(shell);
+ 
+				// 폰트가 NULL이 아닐 경우 라벨 폰트 데이터를 폰트다이얼로그에 설정한다.
+				if (font != null) {
+					fontDialog.setFontList(lblFont.getFont().getFontData());
+				}
+ 
+				// 컬러가 NULL이 아닐 경우 폰트컬러를 폰트아이얼로그에 설정한다.
+				if (color != null) {
+					fontDialog.setRGB(color.getRGB());
+				}
+ 
+				// 폰트다이얼로그 오픈
+				if (fontDialog.open() != null) {
+					// 폰트다이얼로그에서 선택된 내용이 있을경우
+					// 기존 적용된 폰트 내용을 제거한다.
+					if (font != null) {
+						font.dispose();
+					}
+ 
+					// 기존 적용된 컬러 내용을 제거한다.
+					if (color != null) {
+						color.dispose();
+					}
+ 
+					// 선택된 폰트 내용을 라벨에 설정함.
+					font = new Font(shell.getDisplay(), fontDialog
+							.getFontList());
+					lblFont.setFont(font);
+ 
+					// 선택된 컬러내용을 라벨에 설정함.
+					color = new Color(shell.getDisplay(), fontDialog.getRGB());
+					lblFont.setForeground(color);
+ 
+					// 화면에 반영
+					shell.pack();
+				}
+			}
+		});
+	}
+ 
+	public static void main(String[] args) {
+		new FontDialogExample().run();
+	}
+}

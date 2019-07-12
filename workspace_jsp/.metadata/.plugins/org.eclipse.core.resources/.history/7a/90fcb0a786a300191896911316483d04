@@ -1,0 +1,39 @@
+package com.basic;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+public class RequestTest extends HttpServlet {
+	Logger logger = Logger.getLogger(RequestTest.class);
+	/*
+	 * 아래 메소드는 HttpServlet에서 정의된 메소드를 재정의 하였음.
+	 * 이 때 파라미터는 반드시 request, response 사용
+	 * 그래야 그 객체를 주입 받으므로 NullPointerException 피할 수 있다.
+	 * 서블릿은 톰캣 서버에서 싱글톤으로 객체를 관리하므로 
+	 * 한개의 서블릿 클래스를 메모리에 올린 후 여러 사용자가 사용할 땐 스레드를 통하여
+	 * 순서 혹은 경합의 경우 공평하게 서비스를 제공 받게 됨.
+	 * 싱글톤으로 만들어진 RequestTest객체를 톰캣에서 관리 하므로 내가 직접 예외처리하는데 한계가 있다.
+	 */
+	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
+	throws ServletException, IOException {
+		logger.debug("debug");//너무 많은 정보를 다 출력하여 서버에 부담을 줌.
+		logger.info("info");
+		logger.warn("warn");
+		logger.error("error");
+		logger.fatal("fatal");
+		//int i = req.getParameter("name"); : 불가
+		List<String> nameList = new ArrayList<>();
+		//req 객체에 필요한 정보를 담을 수 있다.
+		req.setAttribute("nameList", nameList);
+		res.setContentType("text/html; charset=utf-8");
+	}
+}

@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
 
+
     <script type="text/javascript">
         function login() {
             //insert here
@@ -24,23 +25,23 @@
             var u_pw = $("#i_pw").val();
             //alert(u_id);
             $.ajax({
-                method : "GET"
-                ,url : "loginInfo.jsp"
-                ,success : function(result) {
+                method: "GET"
+                , url: "loginInfo.jsp"
+                , success: function (result) {
                     //alert(result);
                     var jsonDoc = JSON.parse(result);
-                    if(jsonDoc.length>0) {
-                        for(var i=0;i<jsonDoc.length;i++) {
-                            if(u_id==jsonDoc[i].mem_id && u_pw==jsonDoc[i].mem_pw) {
+                    if (jsonDoc.length > 0) {
+                        for (var i = 0; i < jsonDoc.length; i++) {
+                            if (u_id == jsonDoc[i].mem_id && u_pw == jsonDoc[i].mem_pw) {
                                 $("#d_login").hide();
                                 $("#d_logout").show();
-                                $("#s_logout").text(jsonDoc[i].mem_name+"님 환영합니다.");
+                                $("#s_logout").text(jsonDoc[i].mem_name + "님 환영합니다.");
                                 $("#i_id").textbox('clear');
                                 $("#i_pw").passwordbox('clear');
                                 return;
                             }
-                            //마지막 방까지 왔는데도 아이디 비번이 맞지 않냐?
-                            else if(i==jsonDoc.length-1) {
+                            //마지막 방까지 왔는데도 아이디 비번이 맞는것이 없냐?
+                            else if (i == jsonDoc.length - 1) {
                                 alert("아이디와 비밀번호를 확인하세요");
                                 $("#i_pw").passwordbox('clear');
                                 return;
@@ -57,7 +58,7 @@
             $("#d_logout").hide();
         }
         //해당하는 페이지의 DOM구성이 완료되었을 때
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#d_login").show();
             $("#d_logout").hide();
         });
@@ -97,7 +98,8 @@
                                                             <table>
                                                                 <tr>
                                                                     <td>
-                                                                        <input class="easyui-textbox" id="i_id" prompt="id"
+                                                                        <input class="easyui-textbox" id="i_id"
+                                                                            prompt="id"
                                                                             data-options="iconCls:'icon-man'"
                                                                             style="width:170px">
                                                                     </td>
@@ -112,13 +114,15 @@
                                                                 <tr>
                                                                     <td>
                                                                         <input type="checkbox" id="i_btn"
-                                                                        value="자동로그인">자동로그인
+                                                                            value="자동로그인">자동로그인
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <a id="btn" href="javascript:login()" class="easyui-linkbutton"
+                                                                        <a id="btn" href="javascript:login()"
+                                                                            class="easyui-linkbutton"
                                                                             data-options="width:170">로그인</a>
+
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -129,12 +133,13 @@
                                                             <table>
                                                                 <tr>
                                                                     <td height="100px" align="center">
-                                                                        <span id="s_logout" >XXX님 환영합니다.</span>
+                                                                        <span id="s_logout">XXX님 환영합니다.</span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <a id="btn" href="javascript:logout()" class="easyui-linkbutton"
+                                                                        <a id="btn" href="javascript:logout()"
+                                                                            class="easyui-linkbutton"
                                                                             data-options="width:170">로그아웃</a>
                                                                     </td>
                                                                 </tr>

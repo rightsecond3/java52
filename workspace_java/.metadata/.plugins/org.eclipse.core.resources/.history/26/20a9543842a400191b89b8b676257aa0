@@ -1,0 +1,69 @@
+package UI.swing;
+
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JRootPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+//* 내부 클래스
+class InnerFrame extends JInternalFrame {
+	String data[][] = {
+			{"1_1","1_2","1_3"}
+			,{"2_1","2_2","2_3"}
+			,{"3_1","3_2","3_3"}
+	};
+	String cols[] = {"1번","2번","3번"};
+	JTable jt = new JTable(data, cols);
+	JScrollPane jsp = new JScrollPane(jt);
+	
+	//** 생성자
+	InnerFrame(String title, boolean a, boolean b, boolean c, boolean d) {
+		this.setTitle(title);
+		this.setSize(300, 200);
+		this.setVisible(true);
+	}
+}
+public class JInternalFrameTest extends JFrame implements ActionListener {
+	///// 선언부
+	JRootPane jrp = this.getRootPane(); //JMenuBar
+	Container cont = this.getContentPane(); //swing component붙힘
+	JDesktopPane jdp = new JDesktopPane();
+	JButton jbtn_new = new JButton("새 창");
+	
+	
+	//** 화면 처리부
+	public void initDisplay() {
+		jbtn_new.addActionListener(this);
+		cont.add("South", jbtn_new);
+		//센터에 들어올 내부 프레임 InnerFrame
+		cont.add("Center", jdp);
+		this.setSize(700, 400);
+		this.setVisible(true);
+	}
+	
+	//*** 이벤트 처리부
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj == jbtn_new) {
+			InnerFrame inn = new InnerFrame("새 창", true, true, true, true);
+			cont.add(inn);
+		}
+		
+	}
+	
+	/// 메인 메소드
+	public static void main(String[] args) {
+		JInternalFrameTest jif = new JInternalFrameTest();
+		jif.initDisplay();
+	}
+
+
+
+}

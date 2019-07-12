@@ -13,11 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-
 public class MainView extends JFrame implements ActionListener {
 	//// 선언부
-	//검색창 north, 그룹레이아웃한 그리드 레이아웃 센터에 붙히시면 됩니다.
-	JPanel jp_view = null;//갈아 끼울 것
+	// 검색창 north, 그룹레이아웃한 그리드 레이아웃 센터에 붙히시면 됩니다.
+	JPanel jp_view = null;// 갈아 끼울 것
 	JLabel jl_friend = new JLabel("    친구 : ");
 	JPanel jp_first = new JPanel();
 	JPanel jp_first_south = new JPanel();
@@ -28,20 +27,20 @@ public class MainView extends JFrame implements ActionListener {
 	String img[] = { "friend.jpg", "talk.jpg", "setting.jpg" };
 	JButton imgFiles[] = { jbtn_friend, jbtn_talk, jbtn_set };
 
-	JScrollPane jsp_friend = new JScrollPane(jp_view,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
-			,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	
-	//*** 생성자 ***//
+	JScrollPane jsp_friend = new JScrollPane(jp_view, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+			JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+	// *** 생성자 ***//
 	public MainView() {
 	}
 
 	// 화면구현
 	public void initDisplay() {
-		//이벤트 처리
+		// 이벤트 처리
 		jbtn_friend.addActionListener(this);
 		jbtn_talk.addActionListener(this);
 		jbtn_set.addActionListener(this);
-		//화면 붙히기
+		// 화면 붙히기
 		for (int i = 0; i < img.length; i++) {
 			imgFiles[i].setIcon(new ImageIcon(imgPath + img[i]));
 			imgFiles[i].setBorderPainted(false);
@@ -53,7 +52,7 @@ public class MainView extends JFrame implements ActionListener {
 		jbtn_set.setBackground(Color.white);
 		jp_first_south.setBackground(Color.white);
 		jp_first.setBackground(new Color(229, 153, 90));
-		
+
 		jp_first.setLayout(new GridLayout(2, 1));
 		jp_first.add(jl_friend);
 		jp_first.add(jp_first_south);
@@ -61,18 +60,19 @@ public class MainView extends JFrame implements ActionListener {
 		jp_first_south.add(jbtn_friend);
 		jp_first_south.add(jbtn_talk);
 		jp_first_south.add(jbtn_set);
-		//창이 닫힐 때 자원반납하기
+		// 창이 닫힐 때 자원반납하기
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//최초 실행시에는 친구목록 뷰를 보여준다.
+		// 최초 실행시에는 친구목록 뷰를 보여준다.
 		friend();
 		this.add("North", jp_first);
 		this.setSize(500, 600);
 		this.setVisible(true);
 	}
-	//** 친구목록 뷰
+
+	// ** 친구목록 뷰
 	public void friend() {
 		Container cont = this.getContentPane();
-		if(jp_view!=null) {
+		if (jp_view != null) {
 			cont.remove(jp_view);
 			jp_view = null;
 		}
@@ -81,13 +81,14 @@ public class MainView extends JFrame implements ActionListener {
 		cont.revalidate();
 		cont.repaint();
 	}
-	//** 이벤트 처리부
+
+	// ** 이벤트 처리부
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if(jbtn_talk == obj) {
+		if (jbtn_talk == obj) {
 			Container cont = this.getContentPane();
-			if(jp_view!=null) {
+			if (jp_view != null) {
 				cont.remove(jp_view);
 				jp_view = null;
 			}
@@ -99,7 +100,7 @@ public class MainView extends JFrame implements ActionListener {
 			friend();
 		} else if (obj == jbtn_set) {
 			Container cont = this.getContentPane();
-			if(jp_view!=null) {
+			if (jp_view != null) {
 				cont.remove(jp_view);
 				jp_view = null;
 			}
@@ -109,6 +110,7 @@ public class MainView extends JFrame implements ActionListener {
 			cont.repaint();
 		}
 	}
+
 	public static void main(String[] args) {
 		MainView mv = new MainView();
 		mv.initDisplay();

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>구글맵 서비스 API 활용 - marker[multiMarkergoogleMao.html]</title>
+</head>
+
+<body>
+    <div id="map" style="width:900px; height: 500px;"></div>
+    <script type="text/javascript">
+        var locs = [
+            ['덕수궁', 37.565838, 126.975186]
+            , ['충무로', 37.561547, 126.993918]
+            , ['남산', 37.553821, 126.980945]
+
+        ];
+        //locs[0] = ['둘둘치킨', 37.480879, 126.882433];
+        function initMap() {
+            //둘둘치킨 가산디지털역의 위도와 경도 값을 배열로 선언
+            var curLatLng = {
+                lat: 37.480879
+                , lng: 126.882433
+            };
+            /*
+            구글에서 제공하는 Map객체를 생성하기
+            지도 출력시 중앙의 위치를 설정하고 내가 보고 싶은 위치는 별도로 추가가능
+            map속성에는 생성한 Map객체를 치환
+            zoom속성에 따라 상세도가 결정됨.
+            */
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: new google.maps.LatLng(37.560272, 126.980749)
+                , position: curLatLng
+                , map: map
+                , zoom: 10
+            });
+            //윈도우
+            var InfoWindow = new google.maps.InfoWindow();
+            //마커 객체를 여러개 선언해야 하므로 for문 사용
+            var marker, i;
+            for(i=0;i<locs.length;i++) {//로우의 수
+                marker = new google.maps.Marker({
+                    id:i
+                    ,position: new google.maps.LatLng(locs[i][1],locs[i][2])//위도와 경도
+                    ,map:map
+                });///end of marker
+            }/////////end of for
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDigOrPSjgbT5dH_bDWdUCCbHcj3EIASyc&callback=initMap"></script>
+</body>
+
+</html>

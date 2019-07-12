@@ -1,0 +1,17 @@
+package UI.swing;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+
+class InnerFrame extends JInternalFrame {
+	InnerFrame() {
+		this.setSize(300, 200);
+		this.setVisible(true);
+	}
+}
+public class JInternalFrameTest extends JFrame {
+	public static void main(String[] args) {
+
+	}
+
+}

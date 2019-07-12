@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;dev_jsp&apos;" deleteContents="true" description="Delete resource &apos;dev_jsp&apos;" element1="/dev_jsp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1562731394515"/>&#x0A;<refactoring comment="Delete resource &apos;Servers/Tomcat v9.0 JSP-config&apos;" deleteContents="false" description="Delete resource &apos;Servers/Tomcat v9.0 JSP-config&apos;" element1="/Servers/Tomcat v9.0 JSP-config" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1562731603206"/>
+</session>

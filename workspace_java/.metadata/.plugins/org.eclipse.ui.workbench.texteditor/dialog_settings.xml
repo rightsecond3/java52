@@ -6,18 +6,19 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="package com.helpme3;"/>
+		<item key="selection" value="cont"/>
 		<list key="findhistory">
+			<item value="dce"/>
+			<item value="cp"/>
+			<item value="package UI.swing;"/>
+			<item value="JPanel jp_"/>
 			<item value="package com.helpme3;"/>
 			<item value="eidt"/>
 			<item value="has"/>
 			<item value="makeAttribute"/>
-			<item value="chat_rightLayout"/>
-			<item value="g_title"/>
-			<item value="nickName"/>
-			<item value="tc"/>
 		</list>
 		<list key="replacehistory">
+			<item value="cont"/>
 			<item value="edit"/>
 			<item value="gl"/>
 			<item value="tc2"/>
@@ -25,7 +26,6 @@
 			<item value="dvd"/>
 			<item value="HP"/>
 			<item value="H"/>
-			<item value="myQuiz20"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

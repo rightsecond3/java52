@@ -1,0 +1,14 @@
+package UI.swing;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+
+class InnerFrame extends JInternalFrame {
+	
+}
+public class JInternalFrameTest extends JFrame {
+	public static void main(String[] args) {
+
+	}
+
+}

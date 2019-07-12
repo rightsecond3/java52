@@ -1,0 +1,13 @@
+package UI.swing;
+
+import javax.swing.JInternalFrame;
+
+public class ExcelFrame extends JInternalFrame {
+	public ExcelFrame(String title, boolean a, boolean b, boolean c, boolean d) {
+		super(title, true, true, true, true);
+	}
+	public void initDisplay() {
+		
+	}
+
+}

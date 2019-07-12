@@ -1,0 +1,25 @@
+package UI.swing;
+
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JInternalFrame;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+
+public class ExcelFrame extends JInternalFrame {
+	///// 선언부
+	DefaultTableModel dtm = new DefaultTableModel(100,27);
+	DefaultTableColumnModel dtcm = new DefaultTableColumnModel();
+	DefaultListSelectionModel dlsm = new DefaultListSelectionModel();
+	
+	public ExcelFrame(String title, boolean a, boolean b, boolean c, boolean d) {
+		super(title, true, true, true, true);
+		this.initDisplay();
+		this.setTitle(title);
+		this.setSize(300, 200);
+		this.setVisible(true);
+	}
+	public void initDisplay() {
+		
+	}
+
+}

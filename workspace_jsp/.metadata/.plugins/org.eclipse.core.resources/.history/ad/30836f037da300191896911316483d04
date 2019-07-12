@@ -1,0 +1,16 @@
+package com.basic;
+
+public class ParameterTest {
+	/*
+	 * 리턴타입이 void이다. - 내가 설계한 메소드가 아닐 때
+	 * public void doGet(req, res); //override
+	 */
+	public void methodA() {
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

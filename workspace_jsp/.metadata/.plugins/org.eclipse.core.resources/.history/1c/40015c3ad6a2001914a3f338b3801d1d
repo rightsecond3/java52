@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!-- 
+JSP는 서블릿이다.
+JAVA>Servelt>JSP
+지금 만든 파일명 index.jsp -> index_jsp.java(서블릿) -> index_jsp.class
+질문 1 : 자바와 서블릿은 어떻게 구분하는가 ?
+답변 1 : 상속받는 부모가 다르다 - Java : Object[로컬], Servlet : HttpServlet[원격호출]
+질문 2 : JSP도 서블릿이므로 인스턴스화 할 수 있는가 ?
+답변 2 : 인스턴스화 불가 - JSP안에 메소드 선언은 좋지 않다. - 재사용 불가하기 때문
+질문 3 : index.jsp를 자바 코드로 누가 만들어 주는가 ? 
+답변 3 : WAS(Tomcat - 1.JSP엔진, 2.서블릿엔진, 3.자바엔진)이 만들어 줌
+질문 4 : 확장자가 달라지는 경우 인데 이름은 어떻게 결정되는가?
+답변 4 : 웹서버마다 명명 규칙이 다를 수 있다. - 클래스 이름을 모른다. -> 인스턴스화 불가
+
+JSP에는 가급적 자바코드를 줄임.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>처음 보는 JSP</title>
+</head>
+<body>
+<h3>처음 보는 JSP</h3>
+</body>
+</html>

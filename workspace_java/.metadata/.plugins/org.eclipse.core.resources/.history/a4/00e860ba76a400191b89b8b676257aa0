@@ -1,0 +1,31 @@
+package com.helpme3;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class FirendDialog extends JDialog {
+	JPanel jp_center = new JPanel();
+	JPanel jp_img = new JPanel();
+	JLabel jl_img = new JLabel("프사");
+	JPanel jp_nick = new JPanel();
+	JLabel jl_nick = new JLabel("박 상범");
+	
+	public void initDisplay() {
+		this.setLayout(null);
+		jp_img.add(jl_img);
+		jp_img.setBounds(100, 400, 100, 100);
+		jp_nick.add(jl_nick);
+		jp_nick.setBounds(100, 400, 100, 100);
+		this.add(jp_nick);
+		this.setSize(300, 580);
+		this.setResizable(false);
+		this.setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		FirendDialog fd = new FirendDialog();
+		fd.initDisplay();
+	}
+
+}

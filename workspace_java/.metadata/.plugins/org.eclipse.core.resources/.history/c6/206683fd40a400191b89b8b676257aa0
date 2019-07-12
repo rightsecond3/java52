@@ -1,0 +1,33 @@
+package UI.swing;
+
+import java.awt.Container;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JRootPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+class InnerFrame extends JInternalFrame {
+	String data[][] = {
+			{"1_1","1_2","1_3"}
+			,{"2_1","2_2","2_3"}
+			,{"3_1","3_2","3_3"}
+	};
+	String cols[] = {"1번","2번","3번"};
+	JTable jt = new JTable();
+	JScrollPane jsp = new JScrollPane(jt);
+	InnerFrame(String title, boolean a, boolean b, boolean c, boolean d) {
+		this.setTitle(title);
+		this.setSize(300, 200);
+		this.setVisible(true);
+	}
+}
+public class JInternalFrameTest extends JFrame {
+	JRootPane jrp = this.getRootPane(); //JMenuBar
+	Container cont = this.getContentPane(); //swing component 붙힘
+	public static void main(String[] args) {
+
+	}
+
+}

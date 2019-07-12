@@ -1,0 +1,15 @@
+package UI.swing;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+
+public class JInternalFrameTest extends JFrame {
+class InnerFrame extends JInternalFrame {
+	
+}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

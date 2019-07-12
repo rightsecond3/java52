@@ -1,0 +1,20 @@
+package com.helpme3;
+
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+
+public class FirendDialog extends JDialog {
+	JPanel jp_center = new JPanel();
+	
+	public void initDisplay() {
+		this.setSize(300, 580);
+		this.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		FirendDialog fd = new FirendDialog();
+		fd.initDisplay();
+
+	}
+
+}
