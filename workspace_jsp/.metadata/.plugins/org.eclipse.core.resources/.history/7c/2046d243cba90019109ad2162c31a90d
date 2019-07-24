@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.MemberMapper">
+	<select id="currentTime" parameterType="int" resultType="java.lang.String">
+		select TO_CHAR(sysdate, 'YYYY-MM-DD') FROM dual
+	</select>
+	<insert id="memberInsert" parameterType="map">
+		INSERT INTO member(mem_id,mem_pw,mem_name,mem_addr,mem_zipcode)
+		       VALUES (#{mem_id}, #{mem_pw}, #{mem_name}, #{mem_addr}, #{mem_zipcode})
+	</insert>
+	<select id="memberList" parameterType="int" resultType="map">
+		SELECT mem_id, mem_name, mem_addr, mem_zipcode, mem_pw FROM member
+	</select>
+</mapper>

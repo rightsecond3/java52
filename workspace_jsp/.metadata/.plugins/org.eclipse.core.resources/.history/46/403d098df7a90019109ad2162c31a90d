@@ -1,0 +1,12 @@
+package com.mvc1;
+
+public class MemberDaoSimulation {
+
+	public static void main(String[] args) {
+		MemberDao mDao = new MemberDao();
+		String time = mDao.currentTime();
+		ZipCodeDao zDao = new ZipCodeDao();
+		zDao.zipcodeList("가산");
+	}
+
+}

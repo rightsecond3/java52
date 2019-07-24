@@ -1,0 +1,37 @@
+package com.helpme3;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CtrlServer {
+	private static final String _LOGIN = "login";
+	private static final String _ROOMCREATE = "roomcreate";
+	private static final String _GETCLIST = "getclist";
+	
+	public VOMem send(VOMem pVO) {
+		VOMem rVO = null;
+		String command = pVO.getCommand();
+		if(_LOGIN.equals(command)) {
+			LogicLogin loginLogic = new LogicLogin();
+			rVO = loginLogic.login(pVO);
+		}
+		return rVO;
+	}
+	public VOChatList send(VOChatList pVO) {
+		VOChatList rVO = null;
+		String command = pVO.getCommand();
+		if(_ROOMCREATE.equals(command)) {
+			LogicRoomCreate rcLogic = new LogicRoomCreate();
+			rVO = rcLogic.getRoomCreate(pVO);
+		}
+		return rVO;
+	}
+	public List<VOChatList> send(String command) {
+		List<VOChatList> rList = null;
+		if(_GETCLIST.equals(command)) {
+			List<VOChatList> rVO = new ArrayList<VOChatList>();
+			
+		}
+		return rVO;
+	}
+}

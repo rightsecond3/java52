@@ -1,0 +1,13 @@
+package com.mvc1;
+
+import java.util.List;
+import java.util.Map;
+
+public class TestLogic {
+
+	public List<Map<String, Object>> subjectList(List<Map<String, Object>> subMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

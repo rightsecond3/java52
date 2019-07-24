@@ -1,0 +1,42 @@
+package com.helpme3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class CtrlServer {
+	private static final String _MESSAGE = "message";
+	
+	LogicServer sLogic = new LogicServer();
+	
+	public VOMem send(VOMem pVO) {
+		VOMem rVO = null;
+		rVO = sLogic.login(pVO);
+		return rVO;
+	}
+	public VOChatList send(VOChatList pVO) {
+		VOChatList rVO = null;
+		rVO = sLogic.getRoomCreate(pVO);
+		return rVO;
+	}
+	//서버열때 해당 server.chatlist
+	public List<VOChatList> send(String command) {
+		List<VOChatList> rList = null;
+		rList = sLogic.getcList();
+		return rList;
+	}
+	//* 메시지를 보낼때 DB에 인서트하고 룸캐스팅으로 보내주는 거
+	public Map<String, Object> send(Map<String, Object> pMap) {
+		Map<String, Object> rMap = null;
+		String command = (String) pMap.get("command");
+		if("message".equals(command)) {
+			rMap = sLogic.insMsgLogic(pMap); 
+		}
+		return rMap;
+	}
+	//* 아이디 중복 검사
+	public String overLap(String mem_id) {
+		String temp = sLogic.overLap(mem_id);
+		return temp;
+	}
+}

@@ -1,0 +1,11 @@
+package com.helpme3;
+
+public class LogicRoomCreate {
+	DaoServer sDao = new DaoServer();
+	public VOChatList getRoomCreate(VOChatList pVO) {
+		VOChatList rVO = new VOChatList();
+		rVO = sDao.getRoomCreate(pVO);
+		return null;
+	}
+
+}

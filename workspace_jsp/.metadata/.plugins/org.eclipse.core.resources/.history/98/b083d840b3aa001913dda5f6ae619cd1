@@ -1,0 +1,8 @@
+package com.util;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class MemberVOBinder {
+	HttpServletRequest req = null;
+	public Membe
+}

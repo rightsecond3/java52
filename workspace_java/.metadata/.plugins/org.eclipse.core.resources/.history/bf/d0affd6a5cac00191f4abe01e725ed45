@@ -1,0 +1,10 @@
+package com.helpme3;
+
+public class JsonSimulation {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

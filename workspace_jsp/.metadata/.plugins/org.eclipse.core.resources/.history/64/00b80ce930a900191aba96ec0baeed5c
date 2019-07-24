@@ -1,0 +1,56 @@
+package com.mvc1;
+
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
+
+import com.util.MyBatisCommonFactory;
+
+public class MemberDao {
+	Logger logger = Logger.getLogger(MemberDao.class);
+	SqlSessionFactory sqlSessionFactory = null;
+	
+	//*** 생성자
+	public MemberDao() {
+		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
+	}
+	public String currentTime() {
+		//DML 호출 뿐 아니라 커밋과 롤백도 처리 가능하다
+		/*
+		 * SELECT 할 때
+		 * sqlSession.selectList("아이디", 파라미터) => List로 반환
+		 * sqlSession.selectOne() ==> 여기서 One은 Object
+		 * sqlSession.select<ap() ==> Map으로 반환
+		 * insert 할 때 => 리턴 타입 : Object
+		 * sqlSession.inisert("아이디", 파라미터);
+		 * update 할 때 => 리턴 타입 : int
+		 * sqlSession.update("아이디", 파라미터);
+		 * delete 할 때 => 리턴타입 : int
+		 * sqlSession.delete("아이디", 파라미터);
+		 * 
+		 * 과제
+		 * MemberDao를 단위 테스트 할 수 있는 클래스를 선언하고
+		 * currentTime 메소드를 호출하여 현재 시간 정보(오라클 서버가 제공하는)를
+		 * 출력하는 문장을 작성해보자
+		 */
+		String time = null;
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			time = sqlSession.selectOne("currentTime");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return time;
+	}
+	public int memberInsert(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.update("memberInsert",pMap);
+			sqlSession.commit();
+		}
+		return 0;
+	}
+}

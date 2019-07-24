@@ -1,0 +1,28 @@
+package com.util;
+
+import java.io.Reader;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+public class MyBatisCommonFactory {
+	private static SqlSessionFactory sqlSessionFactory = null;
+
+	public static void init() {
+		try {
+			String resource = "com/mybatis/MapperConfig.xml";
+			Reader reader = Resources.getResourceAsReader(resource);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public static SqlSessionFactory getSqlSessionFactory() {
+		// SqlSessionFactory 객체를 생성해야 SqlSession객체를 생성 할 수 있다.
+		// SqlSessionFactory 객체를 생성하기 위해서는 DB커넥션 정보를 읽어야 한다.
+		// 따라서 초기화에 필요한 메소드를 추가할 것.
+		init();
+		return sqlSessionFactory;
+	}
+
+}

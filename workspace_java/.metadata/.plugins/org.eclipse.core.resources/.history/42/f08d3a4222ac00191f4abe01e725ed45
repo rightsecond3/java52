@@ -1,0 +1,12 @@
+package com.basic;
+
+public class Sonata {
+	Wheel w = null
+	public void execute(Wheel wheel) {
+		w.setWheel(10);
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

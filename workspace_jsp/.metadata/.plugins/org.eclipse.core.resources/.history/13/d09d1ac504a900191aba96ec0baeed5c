@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE configuration     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 밑으 코드로 config.properties 파일을 읽어옴 -->
+	<properties resource="com/mybatis/config.properties" />
+	<environments default="development">
+		<!-- 서버가 여러개일 경우 해당 아이디를 바꿔주면 된다. -->
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- UNPOOLED -->
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="org/mybatis/example/BlogMapper.xml" />
+	</mappers>
+</configuration>

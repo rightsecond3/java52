@@ -13,8 +13,8 @@
 		</list>
 	</section>
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item key="DIALOG_X_ORIGIN" value="414"/>
-		<item key="DIALOG_Y_ORIGIN" value="195"/>
+		<item key="DIALOG_X_ORIGIN" value="231"/>
+		<item key="DIALOG_Y_ORIGIN" value="98"/>
 	</section>
 	<section name="ImportExportAction">
 	</section>
@@ -22,5 +22,12 @@
 		<item key="actionSetFilter" value="true"/>
 		<item key="internalFilter" value="true"/>
 		<item key="uncategorizedFilter" value="true"/>
+	</section>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.wst.xml.ui.internal.wizards.NewXMLWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.wst.XMLCategory"/>
+		</list>
 	</section>
 </section>

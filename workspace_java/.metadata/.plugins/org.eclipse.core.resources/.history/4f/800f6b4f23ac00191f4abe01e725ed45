@@ -1,0 +1,16 @@
+package com.basic;
+
+public class Car {
+	Wheel wheel = new Wheel();
+	int x =0
+	public void run() {
+		Sonata s = new Sonata();
+		s.execute(wheel);
+		System.out.println(wheel.getWheel());
+	}
+	public static void main(String[] args) {
+		Car c = new Car();
+		c.run();
+	}
+
+}

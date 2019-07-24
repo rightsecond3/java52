@@ -1,0 +1,17 @@
+[
+  {
+    "mem_pw": "123",
+    "mem_name": "김유신",
+    "mem_id": "test"
+  },
+  {
+    "mem_pw": "123",
+    "mem_name": "이성계",
+    "mem_id": "apple"
+  },
+  {
+    "mem_pw": "123",
+    "mem_name": "김춘추",
+    "mem_id": "haha"
+  }
+]

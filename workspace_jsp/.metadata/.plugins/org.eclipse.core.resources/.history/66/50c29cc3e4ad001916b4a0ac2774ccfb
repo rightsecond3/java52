@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String daps[] = new String[3];
+	//쿠키에 담긴 답안지 출력
+	Cookie cookies[] = request.getCookies();
+	if(cookies!=null && cookies.length>0) {
+		for(int i=0;i<cookies.length;i++) {
+			if(cookies[i].getName().equals("dap1")) {
+				daps[0] = cookies[i].getValue();
+				//out.print("daps[0]"+daps[0]+"<br>");
+			} else if(cookies[i].getName().equals("dap2")) {
+				daps[1] = cookies[i].getValue();
+				//out.print("daps[1]"+daps[1]+"<br>");
+			} else if(cookies[i].getName().equals("dap3")) {
+				daps[2] = cookies[i].getValue();
+				//out.print("daps[2]"+daps[2]+"<br>");
+			}
+		}
+	}
+	//쿠키에 담긴 답안지 정보 출력하기
+	int x = 0;
+	for(String temp : daps) {
+		out.print(++x+","+temp);
+		out.print("<br>");
+	}
+	String jungdaps[] = {"2","1","4"};
+	int rightNum = 0;
+	int wrongNum = 0;
+	for(int i=0;i<jungdaps.length; i++) {
+		if(jungdaps[i].equals(daps[i])) {
+			rightNum++;
+		} else {
+			wrongNum++;
+		}
+	}
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>채점 결과</title>
+</head>
+<body>
+	<div>
+	정답 수 : <%=rightNum %>
+	<br>
+	오답 수 : <%=wrongNum %>
+	</div>
+</body>
+</html>

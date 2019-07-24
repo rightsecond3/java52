@@ -1,0 +1,13 @@
+package com.mvc1;
+
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+public class MemberLogic {
+	Logger logger = Logger.getLogger(MemberLogic.class)
+	public int memberInsert(Map<String, Object> pMap) {
+		return 0;
+	}
+
+}

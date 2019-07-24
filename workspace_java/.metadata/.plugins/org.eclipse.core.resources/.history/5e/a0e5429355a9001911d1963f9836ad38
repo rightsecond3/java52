@@ -1,0 +1,32 @@
+package com.helpme3;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class MemberJoin extends JDialog {
+	private JLabel mem_id      =   new JLabel();
+	private JLabel mem_name    =   new JLabel();
+	private JLabel mem_pw      =   new JLabel();
+	private JLabel mem_nick    =   new JLabel();
+	private JLabel mem_hp      =   new JLabel();
+	private JLabel mem_status  =   new JLabel();
+	private JLabel mem_img     =   new JLabel();
+	private JLabel mem_birth   =   new JLabel();
+	private JTextField mem_id      =   new JTextField(); 
+	private JTextField mem_name    =   new JTextField(); 
+	private JTextField mem_pw      =   new JTextField(); 
+	private JTextField mem_nick    =   new JTextField(); 
+	private JTextField mem_hp      =   new JTextField(); 
+	private JTextField mem_status  =   new JTextField(); 
+	private JTextField mem_img     =   new JTextField(); 
+	private JTextField mem_birth   =   new JTextField(); 
+	
+	public void initDisplay() {
+		
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

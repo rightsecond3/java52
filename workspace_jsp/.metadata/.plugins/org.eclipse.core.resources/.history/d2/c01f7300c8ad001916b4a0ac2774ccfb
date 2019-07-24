@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String dap1 = request.getParameter("dap1");
+	String dap2 = request.getParameter("dap2");
+	//out.print(dap1+", "+dap2);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문제3</title>
+<%@include file="../common/JEasyUICommon.jsp" %>
+	<script type="text/javascript">
+		function answerSend() {
+			alert("제출");
+			location.href="result.jsp";
+		}
+	</script>
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#p_test3").panel({
+				fit:true
+				,border:false
+				,footer:'#footer'
+			});
+		});
+	</script>
+	<!-- 패널이 오는 구역 -->
+	<div class="easyui-panel" id="p_test3" title="문제3" style="width:600px;height:100px">
+		<form>
+			<div>
+				문제3 : 다음 중 서버로 데이터를 전송할 수 있는 방법이 아닌 것을 고르시오.
+			</div>
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="1">
+			1.form
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="2">
+			2.ajax
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="3">
+			3.location.href
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="4">
+			4.div
+		</form>
+	</div>
+	<!-- 패널의 푸터가 오는 구역 -->
+    <div id="footer" style="padding:5px;" align="right">
+	    <a href="./test2.jsp" class="easyui-linkbutton" data-options="iconCls:'icon-undo'">이전</a>
+	    <a href="javascript:answerSend()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">제출</a>
+    </div>
+</body>
+</html>

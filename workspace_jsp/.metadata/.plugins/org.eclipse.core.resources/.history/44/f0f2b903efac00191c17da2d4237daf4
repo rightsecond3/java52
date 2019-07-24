@@ -1,0 +1,16 @@
+package com.mvc1;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class TestController implements Action {
+
+	@Override
+	public ActionForward excuete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		return forward;
+	}
+
+}

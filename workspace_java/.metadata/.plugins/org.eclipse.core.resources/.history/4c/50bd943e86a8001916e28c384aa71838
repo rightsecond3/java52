@@ -1,0 +1,11 @@
+package com.helpme3;
+
+public class LogicLogin {
+	DaoServer sDao = new DaoServer();
+	public VOMem login(VOChatList pVO) {
+		VOChatList rVO = new VOChatList();
+		rVO = sDao.login(pVO);
+		return rVO;
+	}
+
+}

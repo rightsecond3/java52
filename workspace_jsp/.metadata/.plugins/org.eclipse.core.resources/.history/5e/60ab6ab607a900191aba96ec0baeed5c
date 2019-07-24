@@ -1,0 +1,15 @@
+package com.mvc1;
+
+public class Simulation {
+	MemberDao mDao = new MemberDao();
+	
+	public void simulation() {
+		mDao.currentTime();
+	}
+	
+	public static void main(String[] args) {
+		Simulation s = new Simulation();
+		s.simulation();
+	}
+
+}

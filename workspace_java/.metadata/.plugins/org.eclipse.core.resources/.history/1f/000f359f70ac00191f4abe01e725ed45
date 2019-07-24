@@ -1,0 +1,14 @@
+package com.helpme3;
+
+import java.util.List;
+
+public class LogicGetcList {
+	DaoServer sDao = new DaoServer();
+	
+	public List<VOChatList> getcList() {
+		List<VOChatList> rList = null;
+		rList = sDao.getcList();
+		return rList;
+	}
+
+}

@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script>
+    function loginModal(){
+      $("#myModal").modal();
+    }
+    function loginAction(){
+
+    }   
+    function logoutAction(){
+
+    }   
+  </script>
+</head>
+<body>
+		<!-- =========================== 메인 이미지 다음 사이트 소개=====================-->
+		<div class="row">
+			<div class="col-sm-4">
+				<h4>코딩놀이의 특징</h4>
+				<p>코딩놀이는 프로그래밍 언어를 사용하여 자신이 상상하는 것들을 소프트웨어로 만들어 보는 놀이들로 구성되었습니다.</p>
+				<p>
+					<a class="btn btn-default" data-target="#modal" data-toggle="modal">자세히
+						알아보기</a>
+				</p>
+			</div>
+			<div class="col-sm-4">
+				<h4>코딩놀이의 특징</h4>
+				<p>코딩놀이는 프로그래밍 언어를 사용하여 자신이 상상하는 것들을 소프트웨어로 만들어 보는 놀이들로 구성되었습니다.</p>
+				<p>
+					<a class="btn btn-default" href="instructor.html">자세히 알아보기</a>
+				</p>
+			</div>
+			<div class="col-sm-4">
+				<h4>코딩놀이의 특징</h4>
+				<p>코딩놀이는 프로그래밍 언어를 사용하여 자신이 상상하는 것들을 소프트웨어로 만들어 보는 놀이들로 구성되었습니다.</p>
+				<p>
+					<a class="btn btn-default" href="lecture.html">자세히 알아보기</a>
+				</p>
+			</div>
+		</div>
+		<hr>
+		<!-- =========================== 메인 이미지 다음 사이트 소개=====================-->
+
+</body>
+</html>

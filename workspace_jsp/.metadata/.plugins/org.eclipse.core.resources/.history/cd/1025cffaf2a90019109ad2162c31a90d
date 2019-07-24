@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.ZipcodeMapper">
+<!-- 
+parameterType과 resultType을 VO 패턴으로 변경하여 처리해보가
+-->
+	<select id="zipcodeList" parameterType="com.vo.ZipCodeVO" resultType="com.vo.ZipCodeVO">
+		SELECT zipcode,address FROM zipcode_t 
+		WHERE 1=1
+		<if test='dong!=null'>
+			AND dong LIKE '%'||#{dong}||'%'
+		</if>
+		ORDER BY dong ASC
+	</select>
+</mapper>

@@ -1,0 +1,17 @@
+package com.basic;
+
+public class Car {
+	int wheel = 0;
+	
+	public void run(int wheel) {
+		wheel+=1;
+		Sonata s = new Sonata();
+		s.execute(wheel);
+		System.out.println(wheel);
+	}
+	public static void main(String[] args) {
+		Car c = new Car();
+		c.run(0);
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.helpme3;
+
+import javax.swing.JDialog;
+
+public class MemberJoin extends JDialog {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

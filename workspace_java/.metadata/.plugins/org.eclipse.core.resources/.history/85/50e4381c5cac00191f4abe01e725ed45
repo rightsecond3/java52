@@ -1,0 +1,12 @@
+package com.helpme3;
+
+import com.google.gson.Gson;
+
+public class Json {
+	public String toJson(List<Map<String Object>> list) {
+		Gson gson = new Gson();
+		String temp = null;
+		temp = gson.toJson();
+		return temp;
+	}
+}

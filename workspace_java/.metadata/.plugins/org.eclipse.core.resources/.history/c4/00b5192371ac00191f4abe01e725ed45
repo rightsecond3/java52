@@ -1,0 +1,34 @@
+package com.helpme3;
+
+import java.util.List;
+import java.util.Map;
+
+public class LogicServer {
+	DaoServer sDao = new DaoServer();
+	//로그인
+	public VOMem login(VOMem pVO) {
+		VOMem rVO = new VOMem();
+		rVO = sDao.login(pVO);
+		return rVO;
+	}
+	//더블클릭시 방생성(개인톡방만 잇을 경우)
+	public VOChatList getRoomCreate(VOChatList pVO) {
+		System.out.println("Logic getRoomCreate");
+		VOChatList rVO = new VOChatList();
+		rVO = sDao.getRoomCreate(pVO);
+		return rVO;
+	}
+	//VOclist
+	public List<VOChatList> getcList() {
+		List<VOChatList> rList = null;
+		rList = sDao.getcList();
+		return rList;
+	}
+	//메세지를 보낼 경우 
+	public Map<String, Object> insMsgLogic(Map<String, Object> pMap) {
+		Map<String, Object> rMap = null;
+		
+		return rMap;
+	}
+
+}

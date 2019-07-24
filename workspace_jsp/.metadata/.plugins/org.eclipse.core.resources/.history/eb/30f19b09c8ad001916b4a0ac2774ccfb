@@ -1,0 +1,78 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String dap1 = request.getParameter("dap1");
+	String dap2 = request.getParameter("dap2");
+	//out.print(dap1+", "+dap2);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문제3</title>
+<%@include file="../common/JEasyUICommon.jsp" %>
+	<script type="text/javascript">
+	//체크박스 선택된것 해제시켜주기 - 선택 유무 - 멀티 초이스 막기
+	function answer(p_dap) {
+		for(var i=0;i<document.getElementById("f_test2").cb.length;i++) {
+			if(p_dap==i) { //0이 아닐 경우 다 true
+				document.getElementById("f_test2").cb[i].checked=1;
+			} else {
+				document.getElementById("f_test2").cb[i].checked=0;
+			}
+		}
+	}
+	//다음 문제 선택시 이전문제 답안지 기억하기 - hidden 속성
+	function next() {
+		var temp = 1;
+		for(var i=0;i<document.getElementById("f_test2").cb.length;i++) {
+			if(document.getElementById("f_test2").cb[i].checked==1) {
+				document.getElementById("f_test2").dap2.value = temp;
+			} else {
+				temp = temp + 1;
+			}
+		}
+		document.getElementById("f_test2").submit();
+	}
+	//이전 문제로 돌아가는 함수
+	function prev() {
+		location.href = "test1.jsp?dap1=<%=dap1%>";
+	}
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#p_test3").panel({
+				fit:true
+				,border:false
+				,footer:'#footer'
+			});
+		});
+	</script>
+	<!-- 패널이 오는 구역 -->
+	<div class="easyui-panel" id="p_test3" title="문제3" style="width:600px;height:100px">
+		<form>
+			<div>
+				문제3 : 다음 중 서버로 데이터를 전송할 수 있는 방법이 아닌 것을 고르시오.
+			</div>
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="1">
+			1.form
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="2">
+			2.ajax
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="3">
+			3.location.href
+			<div style="margin-bottom:20px;"></div>
+			<input type="checkbox" name="cb" value="4">
+			4.div
+		</form>
+	</div>
+	<!-- 패널의 푸터가 오는 구역 -->
+    <div id="footer" style="padding:5px;" align="right">
+	    <a href="./test2.jsp" class="easyui-linkbutton" data-options="iconCls:'icon-undo'">이전</a>
+	    <a href="javascript:answerSend()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">제출</a>
+    </div>
+</body>
+</html>

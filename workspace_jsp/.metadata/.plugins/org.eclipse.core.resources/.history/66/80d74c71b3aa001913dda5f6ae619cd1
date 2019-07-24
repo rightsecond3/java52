@@ -1,0 +1,21 @@
+package com.util;
+
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.vo.MemberVO;
+
+public class MemberVOBinder {
+	HttpServletRequest req = null;
+	public MemberVOBinder(HttpServletRequest req) {
+		this.req = req;
+	}
+	public void bind(MemberVO mVO) {
+		Enumeration<String> er = req.getParameterNames();
+		while(er.hasMoreElements()) {
+			String name = (String) er.nextElement();
+			mVO.setMem_addr(mem_addr);
+		}
+	}
+}

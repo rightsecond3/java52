@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import oracle.jdbc.OracleCallableStatement;
 /*
  * 오라클은 동시 접속자들을 세션으로 관리하는데
  * 일정 개수의 세션을 넘어서면 서버 접속 불가 - 강제로 연결 끊음
@@ -111,6 +113,25 @@ public class DBConnectionMgr_helpme {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+	}
+	//** REF_CURSOR를 쓸때 **//
+	public void freeConnection(Connection con, CallableStatement cstmt, ResultSet rs, OracleCallableStatement ocstmt) {
+		try {
+			if (ocstmt!=null) {
+				ocstmt.close();
+			}
+			if (rs!=null) {
+				rs.close();
+			}
+			if (cstmt!=null) { // 자원반납은 객체 생성의 역순으로 해줘야 한다.
+				cstmt.close();
+			}
+			if (con!=null) {
+				con.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

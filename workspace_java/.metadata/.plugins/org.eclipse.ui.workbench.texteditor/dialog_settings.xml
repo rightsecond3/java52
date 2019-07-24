@@ -6,16 +6,16 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="cont"/>
+		<item key="selection" value="send"/>
 		<list key="findhistory">
-			<item value="dce"/>
-			<item value="cp"/>
-			<item value="package UI.swing;"/>
-			<item value="JPanel jp_"/>
-			<item value="package com.helpme3;"/>
-			<item value="eidt"/>
-			<item value="has"/>
-			<item value="makeAttribute"/>
+			<item value="send"/>
+			<item value="insMsgLogic"/>
+			<item value="sys"/>
+			<item value="clist_code"/>
+			<item value="roomList"/>
+			<item value="system"/>
+			<item value="chat_right"/>
+			<item value="jlb_rightimg"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cont"/>

@@ -1,0 +1,13 @@
+package com.basic;
+
+public class Car {
+	int wheel = 0;
+	
+	public void run(int wheel) {
+		wheel+=1;
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

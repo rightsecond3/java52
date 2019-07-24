@@ -1,0 +1,14 @@
+package com.helpme3;
+
+import java.util.List;
+
+public class LogicRoomCreate {
+	DaoServer sDao = new DaoServer();
+	public List<VOChatList> getRoomCreate(VOChatList pVO) {
+		System.out.println("Logic getRoomCreate");
+		List<VOChatList> rVO = new VOChatList();
+		rVO = sDao.getRoomCreate(pVO);
+		return rVO;
+	}
+
+}

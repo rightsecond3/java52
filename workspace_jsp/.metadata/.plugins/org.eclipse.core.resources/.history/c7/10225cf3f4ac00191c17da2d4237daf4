@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>시험응시</title>
+<%@ include file="../common/JEasyUICommon.jsp" %>
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function (){
+			$('#cb_subject').combobox({
+			    url:'#'
+			    ,valueField:'id'
+			    ,textField:'text'
+			    ,prompt : '수험번호를 선택하세요.'
+			   
+			});
+		});
+	</script>
+	
+	<div class="easyui-panel" title="Test Take" style="width"100%;max-width:400padding:30px 30px">
+		<div style="margin=botto:20px">
+			<select class="easyui-combobox" id="cb_subject" label="수험과목 :" label-position="left" style="width:100%;">
+				
+			</select>
+		</div>
+	</div>
+</body>
+</html>

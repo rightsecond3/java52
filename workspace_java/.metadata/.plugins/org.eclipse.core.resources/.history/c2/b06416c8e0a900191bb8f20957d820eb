@@ -1,0 +1,69 @@
+package com.helpme3;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class Server extends JFrame implements Runnable {
+	ServerSocket sSocket = null;
+	Socket cSocket = null;
+	ServerThread st = null;
+	// 전체 사용자 스레드
+	List<ServerThread> globalList = new Vector<ServerThread>();
+	// 전체 방 리스트 넣어주는거
+	List<VOChatList> chatList = new Vector<VOChatList>();
+	JTextArea jta_log = new JTextArea();
+	JScrollPane jsp_log = new JScrollPane(jta_log);
+
+	// *** 생성자
+	public Server() {
+	}
+
+	// ** 화면 처리부
+	public void initDisplay() {
+		// 창 닫힐 때 자원 반납
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.add(jsp_log);
+		this.setTitle("서버 측 로그 출력창");
+		this.setSize(500, 500);
+		this.setVisible(true);
+	}
+
+	@Override
+	public void run() {
+//		globalList = new Vector<ServerThread>();
+//		chatList = new Vector<VOChatList>();
+		CtrlServer sCtrl = new CtrlServer();
+		chatList = sCtrl.send("getclist");
+		chatList.add();
+		for(int i=0;i<chatList.size();i++) {
+			VOChatList vo = chatList.get(i);
+			//System.out.println(vo.getClist_name()+"\n");
+		}
+		boolean isStop = false;
+		try {
+			sSocket = new ServerSocket(5050);
+			while (!isStop) {
+				cSocket = sSocket.accept();
+				jta_log.append(cSocket.toString() + "\n");
+				st = new ServerThread(this);
+				st.start();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	//*메인 메소드
+	public static void main(String[] args) {
+		Server server = new Server();
+		server.initDisplay();
+		new Thread(server).start();//내 안의 run 메소드 호출
+	}
+}

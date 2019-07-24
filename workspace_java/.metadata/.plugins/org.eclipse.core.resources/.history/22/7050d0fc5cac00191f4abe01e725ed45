@@ -1,0 +1,9 @@
+package com.helpme3;
+
+public class JsonSimulation {
+
+	public static void main(String[] args) {
+
+	}
+
+}

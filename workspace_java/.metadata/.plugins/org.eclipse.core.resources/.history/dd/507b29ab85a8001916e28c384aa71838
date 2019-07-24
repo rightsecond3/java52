@@ -1,0 +1,22 @@
+package com.helpme3;
+
+public class CtrlServer {
+	private static final String _LOGIN = "login";
+	private static final String _ROOMCREATE = "roomcreate";
+	private static final String _GETCLIST = "getclist";
+	
+	public VOChatList send(VOChatList pVO) {
+		VOChatList rVO = null;
+		String command = pVO.getCommand();
+		if(_LOGIN.equals(command)) {
+			
+		}
+		else if(_ROOMCREATE.equals(command)) {
+			
+		}
+		else if(_GETCLIST.equals(command)) {
+			
+		}
+		return rVO;
+	}
+}

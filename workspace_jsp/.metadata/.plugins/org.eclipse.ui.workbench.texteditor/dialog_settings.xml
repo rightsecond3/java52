@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;"/>
+		<item key="selection" value="cb"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;"/>
+			<item value="cb_test1"/>
+			<item value="label"/>
+			<item value="Home"/>
+			<item value="mem_addr"/>
+			<item value="tb_ins"/>
+			<item value="tb_upd"/>
+			<item value="pencil"/>
+			<item value="icon-edit"/>
 		</list>
 		<list key="replacehistory">
+			<item value="cb"/>
 		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="729"/>
+		<item key="DIALOG_Y_ORIGIN" value="403"/>
 	</section>
 </section>

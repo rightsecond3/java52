@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String dap1 = request.getParameter("dap1");
+	String dap2 = request.getParameter("dap2");
+	String dap3 = request.getParameter("dap3");
+	String dap[] = {dap1,dap2,dap3};
+	String jungdap[] = {"2","1","4"};
+	int jumsu = 0;
+	for(int i=0;i<jungdap.length; i++) {
+		if(jungdap[i].equals(dap[i])) {
+			
+		}
+	}
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%=dap1 %>
+<%=dap2 %>
+<%=dap3 %>
+</body>
+</html>

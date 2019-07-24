@@ -1,0 +1,14 @@
+package com.helpme3;
+
+import java.util.List;
+import java.util.Vector;
+
+/*
+ * 채팅방 관리할 vo 같은 클래스
+ */
+public class Room {
+	List<ServerThread> userList = new Vector<>();
+	List<String> nameList = new Vector<String>();
+	String title = null;
+
+}

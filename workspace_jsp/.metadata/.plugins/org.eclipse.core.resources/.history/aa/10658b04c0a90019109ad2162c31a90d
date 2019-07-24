@@ -1,0 +1,23 @@
+package com.mvc1;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+public class MemberLogic {
+	Logger logger = Logger.getLogger(MemberLogic.class);
+	MemberDao mDao = new MemberDao();
+	
+	public int memberInsert(Map<String, Object> pMap) {
+		logger.info("memberInsert 호출 성공");
+		int result = 0;
+		result = mDao.memberInsert(pMap);
+		return result;
+	}
+
+	public List<Map<String, Object>> memberList() {
+		return null;
+	}
+
+}

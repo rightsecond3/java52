@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -42,6 +43,19 @@ public class HelloServlet extends HttpServlet {
 	 *****************************************************************/
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException,IOException {
+		/*
+		 * JSP에서는 내장 객체로 자동 지원되지만
+		 * 서블릿에서는 내장객체 지원이 없으므로 다음과 같이 생성한후 사용함
+		 */
+		HttpSession session = req.getSession();
+		//세션에 값을 담기
+		session.setAttribute("name", "이순신");
+		//세션에 있는 값 꺼내기
+		//List 같은 자료구조도 담을 수 있다.
+		//그러나 cache메모리 공간의 한계로 조회 결과를 담는데 사용하지 않음
+		//일반적으로 이런 경우에는 request를 사용
+		String s_name = (String) session.getAttribute("name");
+		
 		String mem_id = "test";
 		res.setContentType("text/html;charset=utf-8");
 		//hello.do?command=insert

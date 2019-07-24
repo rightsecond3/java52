@@ -1,0 +1,22 @@
+package com.basic;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JDialog;
+
+public class WindowTest extends JDialog{
+	public void init() {
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		System.out.println(dim.width);
+		System.out.println(dim.height);
+		this.setLocation(1770, 930);
+		this.setSize(150, 150);
+		this.setVisible(true);
+	}
+	public static void main(String[] args) {
+		WindowTest wt = new WindowTest();
+		wt.init();
+	}
+
+}

@@ -1,0 +1,15 @@
+package com.mvc1;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
+
+import com.util.MyBatisCommonFactory;
+
+public class ZipCodeDao {
+	Logger logger = Logger.getLogger(ZipCodeDao.class);
+	SqlSessionFactory ssf = null;
+	
+	public ZipCodeDao() {
+		ssf = MyBatisCommonFactory.getSqlSessionFactory();
+	}
+}

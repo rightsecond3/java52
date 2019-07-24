@@ -1,0 +1,39 @@
+package com.helpme3;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class MemberJoin extends JDialog {
+	private JLabel jl_id      =   new JLabel();
+	private JLabel jl_name    =   new JLabel();
+	private JLabel jl_pw      =   new JLabel();
+	private JLabel jl_nick    =   new JLabel();
+	private JLabel jl_hp      =   new JLabel();
+	private JLabel jl_status  =   new JLabel();
+	private JLabel jl_img     =   new JLabel();
+	private JLabel jl_birth   =   new JLabel();
+	private JTextField jtf_id      =   new JTextField(); 
+	private JTextField jtf_name    =   new JTextField(); 
+	private JTextField jtf_pw      =   new JTextField(); 
+	private JTextField jtf_nick    =   new JTextField(); 
+	private JTextField jtf_hp      =   new JTextField(); 
+	private JTextField jtf_status  =   new JTextField(); 
+	private JTextField jtf_img     =   new JTextField(); 
+	private JTextField jtf_birth   =   new JTextField(); 
+	
+	JPanel jp_center = new JPanel(); // 붙힐꺼
+	JPanel jp_south = new JPanel(); // 가입 | 취소
+	JButton jbtn_save = new JButton();
+	JButton jbtn_cancel = new JButton();
+	
+	public void initDisplay() {
+		
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

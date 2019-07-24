@@ -1,0 +1,24 @@
+package com.helpme3;
+
+import java.util.List;
+
+public class LogicServer {
+	public VOMem send(VOMem pVO) {
+		VOMem rVO = null;
+		LogicLogin loginLogic = new LogicLogin();
+		rVO = loginLogic.login(pVO);
+		return rVO;
+	}
+	public VOChatList send(VOChatList pVO) {
+		VOChatList rVO = null;
+		LogicRoomCreate rcLogic = new LogicRoomCreate();
+		rVO = rcLogic.getRoomCreate(pVO);
+		return rVO;
+	}
+	public List<VOChatList> send(String command) {
+		List<VOChatList> rList = null;
+		LogicGetcList glLogic = new LogicGetcList();
+		rList = glLogic.getcList();
+		return rList;
+	}
+}

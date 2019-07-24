@@ -1,0 +1,47 @@
+package com.helpme3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class CtrlServer {
+	private static final String _LOGIN = "login";
+	private static final String _ROOMCREATE = "roomcreate";
+	private static final String _GETCLIST = "getclist";
+	
+	LogicServer sLogic = new LogicServer();
+	
+	public VOMem send(VOMem pVO) {
+		VOMem rVO = null;
+		String command = pVO.getCommand();
+		if(_LOGIN.equals(command)) {
+			LogicLogin loginLogic = new LogicLogin();
+			rVO = loginLogic.login(pVO);
+		}
+		return rVO;
+	}
+	public VOChatList send(VOChatList pVO) {
+		System.out.println("CtrlServer");
+		VOChatList rVO = null;
+		String command = pVO.getCommand();
+		if(_ROOMCREATE.equals(command)) {
+			LogicRoomCreate rcLogic = new LogicRoomCreate();
+			rVO = rcLogic.getRoomCreate(pVO);
+		}
+		return rVO;
+	}
+	public List<VOChatList> send(String command) {
+		List<VOChatList> rList = null;
+		if(_GETCLIST.equals(command)) {
+			LogicGetcList glLogic = new LogicGetcList();
+			rList = glLogic.getcList();
+		}
+		return rList;
+	}
+	//* 메시지를 보낼때 DB에 인서트하고 룸캐스팅으로 보내주는 거
+	public Map<String, Object> send(Map<String, Object> rMap) {
+		Map<String, Object> rMap = null;
+		insMsgLogic 
+		return rMap;
+	}
+}

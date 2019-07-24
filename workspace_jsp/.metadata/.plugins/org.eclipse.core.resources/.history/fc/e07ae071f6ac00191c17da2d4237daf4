@@ -1,0 +1,37 @@
+package com.mvc1;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+public class TestController extends HttpServlet implements Action {
+	Logger logger = Logger.getLogger(TestController.class);
+	TestLogic testLogic = new TestLogic();
+	
+	@Override
+	public ActionForward excuete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		ActionForward forward = new ActionForward();
+		String viewName = null;
+		boolean isRedirect = false;
+		String crud = (String) req.getAttribute("crud");
+		if("onLineTest/subjectList".equals(crud)); {
+			logger.info("combobox url");
+			List<Map<String, Object>> subjectList = null;
+			subjectList = testLogic.subjectList();
+			req.setAttribute("subjectList", subjectList);
+			viewName = "jsonSubjetList.jsp";
+			isRedirect = false;
+			forward.setRedirect(isRedirect);
+			forward.setViewName(viewName);
+		}
+		return forward;
+	}
+
+}

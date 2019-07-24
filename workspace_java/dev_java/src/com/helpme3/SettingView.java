@@ -18,12 +18,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.BevelBorder;
 
+/*
+ * 설정 전체 뷰
+ */
 public class SettingView extends JPanel implements ActionListener {
+	Setting_changeprofile se = null;
+	Setting_info si = null;
+	Setting_notice sn = null;
+	VOMem VOmem = new VOMem();
 	// 전체 패널
 	JPanel jp_profile = new JPanel();
 	JPanel jp_setting = new JPanel();
@@ -32,10 +40,12 @@ public class SettingView extends JPanel implements ActionListener {
 	JPanel jp_pro_picture = new JPanel();
 	JPanel jp_pro_introduce = new JPanel();
 
-	JButton jbtn_picture = new JButton();// 프로필 사진
-	String imgpic = "lion55.png"; // 프로필 사진
-	JLabel jl_picture_nick = new JLabel("nickname", JLabel.LEFT);
-	JLabel jl_picture_id = new JLabel("id", JLabel.LEFT);
+	String imgPath = "C:\\workspace_java\\dev_java\\src\\images\\";
+	ImageIcon img_prof = new ImageIcon(imgPath + "lion11.png");
+	JLabel jl_prof = new JLabel();
+	String mem_img = null;
+	JLabel jl_picture_nick = new JLabel();
+	JLabel jl_picture_id = new JLabel();
 
 	//// jp_setting 에 붙는 버튼
 	JButton jbtn_nickname = new JButton();// 닉네임
@@ -54,7 +64,6 @@ public class SettingView extends JPanel implements ActionListener {
 	JPanel jp_notice = new JPanel();
 
 	// 버튼 패널에 붙는 이미지와 라벨
-	String imgPath = "C:\\workspace_java\\dev_java\\src\\images\\";
 	ImageIcon img_nick = new ImageIcon(imgPath + "nickname.png");
 	JLabel jl_nick = new JLabel("닉네임 변경", img_nick, JLabel.CENTER);
 	ImageIcon img_font = new ImageIcon(imgPath + "font.png");
@@ -68,41 +77,48 @@ public class SettingView extends JPanel implements ActionListener {
 	ImageIcon img_notice = new ImageIcon(imgPath + "notice.png");
 	JLabel jl_notice = new JLabel("공지사항", img_notice, JLabel.CENTER);
 
+	String mem_id = null;
+	String mem_nick = null;
+
 	public SettingView() {
+		// 이벤트 처리하기
+		jbtn_notice.addActionListener(this);
+		jbtn_nickname.addActionListener(this);
+		jbtn_pimage.addActionListener(this);
+		jbtn_info.addActionListener(this);
 		// 패널_프로필 구역 나누기
 		jp_profile.setLayout(new FlowLayout(FlowLayout.LEFT));
 		jp_profile.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		jp_profile.setBackground(Color.white);
 		jp_profile.add(jp_pro_picture);
-		// jp_pro_picture.setMinimumSize(new Dimension(100,700));
-
-		// 패널_프로필_사진에 프사 버튼 추가
+		// 패널_프로필_사진에 라벨 프사 이미지 붙이기
 		jp_pro_picture.setBackground(Color.white);
-		jp_pro_picture.add(jbtn_picture);
-		// jbtn_picture.setVerticalAlignment(JButton.LEFT);
-		jbtn_picture.setBackground(Color.white);
-		jbtn_picture.setIcon(new ImageIcon(imgPath + imgpic));
-		jbtn_picture.setBorderPainted(false);
-		jbtn_picture.setFocusPainted(false);
-		jbtn_picture.setContentAreaFilled(true);
+		jp_pro_picture.add(jl_prof);
+		VOmem.setMem_img("lion11.png");
+		mem_img = VOmem.getMem_img();
+		jl_prof.setIcon(new ImageIcon(imgPath + mem_img));// 프로필 이미지 붙이기
 
 		// 패널_프로필_소개 구역에 라벨 붙이기
 		jp_profile.add(jp_pro_introduce);
 		jp_pro_introduce.setLayout(new GridLayout(2, 1));
 		jp_pro_introduce.setBackground(Color.white);
+		mem_id = VOmem.getMem_id();
+		mem_nick = VOmem.getMem_nick();
 		jp_pro_introduce.add(jl_picture_id);
+		jl_picture_id.setText(mem_id);
 		jl_picture_id.setFont(new Font("명조", Font.CENTER_BASELINE, 20));
 		jp_pro_introduce.add(jl_picture_nick);
+		jl_picture_nick.setText(mem_nick);
 		jl_picture_nick.setFont(new Font("명조", Font.CENTER_BASELINE, 20));
 		jl_picture_id.setVerticalAlignment(JLabel.BOTTOM);
 		jl_picture_nick.setVerticalAlignment(JLabel.TOP);
 
 		// 세팅 구역에 버튼 붙이기
-		jp_setting.setLayout(new GridLayout(6, 1));
+		jp_setting.setLayout(new GridLayout(5, 1));
 		jp_setting.setBackground(Color.white);
 		jp_setting.add(jbtn_nickname);
 		jp_setting.add(jbtn_font);
-		jp_setting.add(jbtn_bg);
+		// jp_setting.add(jbtn_bg);
 		jp_setting.add(jbtn_pimage);
 		jp_setting.add(jbtn_info);
 		jp_setting.add(jbtn_notice);
@@ -121,13 +137,6 @@ public class SettingView extends JPanel implements ActionListener {
 		jp_font.setLayout(new FlowLayout(FlowLayout.LEFT));
 		jp_font.setBackground(Color.white);
 		jp_font.add(jl_font);
-		// 세팅 구역 버튼에 패널 붙이기. -배경
-		jbtn_bg.add(jp_bg);
-		jbtn_bg.setBackground(Color.white);
-		jbtn_bg.setContentAreaFilled(false);
-		jp_bg.setLayout(new FlowLayout(FlowLayout.LEFT));
-		jp_bg.setBackground(Color.white);
-		jp_bg.add(jl_bg);
 		// 세팅 구역 버튼에 패널 붙이기. -프로필 이미지 변경
 		jbtn_pimage.add(jp_pimage);
 		jbtn_pimage.setBackground(Color.white);
@@ -167,7 +176,23 @@ public class SettingView extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		Object obj = e.getSource();
+		if (obj == jbtn_nickname) {
+			String afterName = JOptionPane.showInputDialog("변경할 대화명을 입력하세요.");
+			VOmem.setMem_nick(afterName);
+			remove(jl_picture_nick);
+			jl_picture_nick.setText(VOmem.getMem_nick());
+
+		}
+		if (obj == jbtn_pimage) {
+			se = new Setting_changeprofile(this);
+		}
+		if (obj == jbtn_info) {
+			si = new Setting_info(this);
+		}
+		if (obj == jbtn_notice) {
+
+		}
 
 	}
 

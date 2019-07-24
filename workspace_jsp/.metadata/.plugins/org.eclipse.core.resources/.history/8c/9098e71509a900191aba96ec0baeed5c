@@ -1,0 +1,10 @@
+package com.mvc1;
+
+public class MemberDaoSimulation {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

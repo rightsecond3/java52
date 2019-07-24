@@ -1,0 +1,70 @@
+package com.helpme3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class CtrlServer {
+	private static final String _MESSAGE = "message";
+	private static final String _JOIN    = "join";
+	
+	LogicServer sLogic = new LogicServer();
+	
+	public VOMem send(VOMem pVO) {
+		VOMem rVO = null;
+		rVO = sLogic.login(pVO);
+		return rVO;
+	}
+	public VOChatList send(VOChatList pVO) {
+		VOChatList rVO = null;
+		rVO = sLogic.getRoomCreate(pVO);
+		return rVO;
+	}
+	//서버열때 해당 server.chatlist
+	public List<VOChatList> send(String command) {
+		List<VOChatList> rList = null;
+		rList = sLogic.getcList();
+		return rList;
+	}
+	//* 메시지를 보낼때 DB에 인서트하고 룸캐스팅으로 보내주는 거
+	public Map<String, Object> send(Map<String, Object> pMap) {
+		Map<String, Object> rMap = null;
+		rMap = sLogic.insMsgLogic(pMap); 
+		return rMap;
+	}
+	//* 아이디 중복 검사
+	public String overLap(String mem_id) {
+		String temp = sLogic.overLap(mem_id);
+		return temp;
+	}
+	//* 회원가입
+	public String join(Map<String, Object> pMap) {
+		String mem_id = null;
+		mem_id = sLogic.join(pMap);
+		return mem_id;
+	}
+	//* FriendList
+	public List<Map<String, Object>> friendList(String mem_id) {
+		List<Map<String, Object>> rList = null;
+		rList = sLogic.friendList(mem_id);
+		return rList;
+	}
+	// 친구추가
+	public String addFriend(VOFriend pVO) {
+		String result = sLogic.addFriend(pVO);
+		return result;
+	}
+	// 친구 닉네임 변경
+	public void changeFriNick(VOFriend pVO) {
+		sLogic.changeFriNick(pVO);
+	}
+	public void deleteFriend(VOFriend pVO) {
+		sLogic.deleteFriend(pVO);
+	}
+	// 친구목록 조건검색 
+	public List<Map<String, Object>> searchFriend(VOFriend pVO) {
+		List<Map<String, Object>> rList = null;
+		rList = sLogic.searchFriend(pVO);
+		return rList;
+	}
+}

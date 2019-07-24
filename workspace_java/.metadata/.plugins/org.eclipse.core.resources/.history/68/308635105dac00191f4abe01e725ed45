@@ -1,0 +1,20 @@
+package com.helpme3;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class JsonSimulation {
+	
+	public static void main(String[] args) {
+		JsonSimulation js = new JsonSimulation();
+		VOMem mVO = new VOMem();
+		List<VOMem> list = new ArrayList<>();
+		mVO.setMem_id("20130573");
+		mVO.setMem_name("박상범");
+		mVO.setMem_hp("01094181307");
+		list.add(mVO);
+		Json json = new Json();
+		json.VOtoJson(list);
+	}
+
+}

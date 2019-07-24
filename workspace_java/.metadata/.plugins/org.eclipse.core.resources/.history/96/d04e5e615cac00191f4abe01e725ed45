@@ -1,0 +1,13 @@
+package com.helpme3;
+
+import java.util.List;
+import java.util.Map;
+
+public class Json {
+	public String toJson(List<Map<String, Object>> JList) {
+		Gson gson = new Gson();
+		String temp = null;
+		temp = gson.toJson(jList);
+		return temp;
+	}
+}

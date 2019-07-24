@@ -1,0 +1,22 @@
+package com.mvc1;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+public class TestController implements Action {
+	Logger logger = Logger.getLogger(TestController.class);
+	TestLogic testLogic = new TestLogic();
+	
+	@Override
+	public ActionForward excuete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		ActionForward forward = new ActionForward();
+		
+		return forward;
+	}
+
+}

@@ -1,0 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%	
+	String dap3 = request.getParameter("dap3");
+	Cookie cookie = new Cookie("dap3", dap3);
+	cookie.setMaxAge(60*10);
+	cookie.setPath("/");
+	response.addCookie(cookie);
+	//cookie에서 꺼내는 것이기 때문에 sendRedirect를 해도 값이 유지된다.
+	response.sendRedirect("account.jsp");
+%>

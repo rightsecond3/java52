@@ -1,0 +1,34 @@
+package com.mvc1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
+
+import com.util.MyBatisCommonFactory;
+
+public class TestDao {
+	Logger logger = Logger.getLogger(TestDao.class);
+	SqlSessionFactory sqlSessionFactory = null;
+	
+	//*** 생성자
+	public TestDao() {
+		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
+	}
+	
+	//* DB의 콤보박스 값을 가져올
+	public List<Map<String, Object>> subjectList() {
+		List<Map<String, Object>> subjectList = new ArrayList<>();
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			subjectList = sqlSession.selectList("subjectList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return subjectList;
+	}
+
+}

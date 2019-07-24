@@ -1,0 +1,17 @@
+package com.helpme3;
+
+import java.util.List;
+
+public class LogicServer {
+	public VOMem login(VOMem pVO) {
+		VOMem rVO = new VOMem();
+		rVO = sDao.login(pVO);
+		return rVO;
+	}
+	public List<VOChatList> getcList() {
+		List<VOChatList> rList = null;
+		rList = sDao.getcList();
+		return rList;
+	}
+
+}
