@@ -1,0 +1,36 @@
+package com.mvc1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.util.MyBatisCommonFactory;
+
+public class MyProcSimulation {
+	// 스태틱 영역은 메인메소드보다 먼저 시작됨.
+	static SqlSessionFactory sqlSessionFactory = null;
+	static {
+		sqlSessionFactory =
+				MyBatisCommonFactory.getSqlSessionFactory();
+	}
+	public MyProcSimulation() {
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			Map<String, Object> pMap = new HashMap<>();
+			sqlSession.selectOne("my_proc", pMap);
+			if(pMap instanceof HashMap) { //해당하는 변수가 HashMap이냐
+				Object keys[] = pMap.keySet().toArray();
+				
+			}
+			System.out.println(pMap.getClass()); //실제 타입을 확인
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args) {
+		new MyProcSimulation();
+	}
+
+}

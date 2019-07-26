@@ -95,19 +95,21 @@ public class MemberCont extends HttpServlet implements Action {
 		//온라인 시험 처리 서비스에서 로그인 할 경우
 		else if("member/login".equals(crud)) { 
 			logger.info("온라인 서험처리 서비스 로그인");
-			MemberVO mVO = new MemberVO();
-			mVO.setMem_id(req.getParameter("mem_id"));
-			mVO.setMem_pw(req.getParameter("mem_pw"));
-			String mem_name = memLogic.login(mVO);
+			MemberVO pmVO = new MemberVO();
+			MemberVO rmVO = null;
+			pmVO.setMem_id(req.getParameter("mem_id"));
+			pmVO.setMem_pw(req.getParameter("mem_pw"));
+			rmVO = memLogic.proc_login(pmVO);
 			// 일정 시간만 로그인 되게 하기 위해 session에 담기
-			HttpSession session = req.getSession(); 
-			session.setAttribute("mem_name", mem_name);
+			HttpSession session = req.getSession();
+			session.setAttribute("rmVO", rmVO);
 			//로그인 성공시 보여줄 화면
 			viewName = "/onLineTest/loginAccount.jsp";
 			isRedirect = true;
 			forward.setRedirect(isRedirect);
 			forward.setViewName(viewName);
 		}
+
 		return forward;
 	}
 

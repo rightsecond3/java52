@@ -133,4 +133,50 @@ public class MemberDao {
 		}
 		return mem_name;
 	}
+	/*
+	 * 저장 프로시저의 특이사항은 파라미터로 넘긴 주소번지의 OUT속성의 값이 담긴다는 사실이
+	 */
+	public MemberVO proc_login(MemberVO pmVO) {
+		logger.info("Dao proc_login");
+		//* 프로시저를 사용할 경우 OUT 속성 또한 파라미터로 넘긴 주소번지에 담긴다.
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			sqlSession.selectOne("proc_login", pmVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pmVO;
+	}
+	/*******************************************************
+	 * 리턴타입과 파라미터 타입이 서로 같은 객체이다.
+	 * 커서 사용시 조인이 있을 때는 VO 타입은 배제함.
+	 * 왜냐하면 테이블 2개 이상이므로 파라미터에 두 개를 처리 할 수 없다.
+	 * @param pmVO
+	 * @return
+	 *******************************************************/
+	//public Map(String, Object) my_proc(Map<String, Object> pMap) {
+	public MemberVO my_proc(MemberVO pmVO) {
+		logger.info("Dao my_proc");
+		//* 프로시저를 사용할 경우 OUT 속성 또한 파라미터로 넘긴 주소번지에 담긴다.
+		try {
+			/*
+			 * sqlSessionFactory.oppenSession()에서의 NullPointerExeption
+			 * 원시적인 방법에서는 문제해결이 비교적 쉽다.
+			 * 1) 커넥션 설정 부분
+			 * 2) xml문서의 경로
+			 * 3) 같은 아이디가 존재할 때
+			 * 4) 아이디 대소문자를 구분하지 않았을 때
+			 * 5) parameter #1, #2, #3 : 물음표자리에 값이 안들어오는 경우 -> 부적합한 열 유형
+			 */
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			sqlSession.selectOne("my_proc", pmVO);
+			logger.info(pmVO);
+			logger.info(pmVO.getMem_id());
+			logger.info(pmVO.getMem_name());
+			logger.info(pmVO.getMem_pw());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pmVO;
+	}
 }

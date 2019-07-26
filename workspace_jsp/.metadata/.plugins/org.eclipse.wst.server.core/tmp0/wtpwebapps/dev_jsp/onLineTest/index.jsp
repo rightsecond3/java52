@@ -24,7 +24,6 @@
 			method:"GET"
 			,url:"/member/login.kos?work=member&mem_id="+u_id+"&mem_pw="+u_pw
 			,success:function(data) {
-				alert(data);
 				$("#loginForm").html(data);
 			}
 			,error:function(e) {
@@ -149,7 +148,7 @@
 			</div>
 		</div>
 	</div>
-
+	<!-- 디렉티브 -->
 	<%@ include file="bottom.jsp" %>
 </body>
 </html>

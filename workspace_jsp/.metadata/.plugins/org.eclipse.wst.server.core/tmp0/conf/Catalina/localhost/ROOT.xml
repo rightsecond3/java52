@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="C:\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\dev_jsp" path="" reloadable="true" source="org.eclipse.jst.jee.server:dev_jsp"/>
+<Context docBase="C:\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\dev_jsp" path="" reloadable="true" source="org.eclipse.jst.jee.server:dev_jsp">
+		<ResourceLink global="jdbc/dbPool" name="jdbc/dbPool" type="javax.sql.DataSource"/>
+      </Context>

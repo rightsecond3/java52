@@ -10,15 +10,15 @@ public class VOChatList {
 	List<ServerThread> userList = new Vector<>();
 	//그 사람들의 pk 이름 값들
 	List<String> nameList = new Vector<String>();
-	private String clist_code    = null; //채팅리스트 코드
-	private String clist_yourid  = null; //상대방 코드들
-	private String clist_count   = null; //채팅방 인원수
-	private String clist_name    = null; //채팅방 이름
-	private String clist_gubun   = null;  //채팅방 갠톡 단톡 구분
-	private String clist_bcolor  = null; //채팅방 배경색
-	private String clist_img     = null; //채팅방 프로필 사진
-	private String mem_id        = null; //회원 아이디(방 만든사람)_FK:[MEM]
+	private String clist_code    = null;
+	private String clist_yourid  = null;
+	private String mem_id        = null;
+	private String clist_count   = null;
+	private String clist_img     = null;
+	private String clist_name    = null;
+	private String clist_gubun   = null;
 	private String command       = null; //컨트롤계층에서 분기할 커맨드
+	private String result        = null; // 새창 아니면 clist_code
 	
 	
 	public String getClist_code() {
@@ -51,12 +51,6 @@ public class VOChatList {
 	public void setClist_gubun(String clist_gubun) {
 		this.clist_gubun = clist_gubun;
 	}
-	public String getClist_bcolor() {
-		return clist_bcolor;
-	}
-	public void setClist_bcolor(String clist_bcolor) {
-		this.clist_bcolor = clist_bcolor;
-	}
 	public String getClist_img() {
 		return clist_img;
 	}
@@ -74,6 +68,12 @@ public class VOChatList {
 	}
 	public void setCommand(String command) {
 		this.command = command;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
 	}
 	
 	

@@ -28,11 +28,9 @@
 <fullyQualifiedTypeName name="java.io.Reader"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.io.Resources"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactoryBuilder"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.mvc1.MemberLogic"/>
 <fullyQualifiedTypeName name="com.mvc1.MemberDao"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="com.util.HashMapBinder"/>
 <fullyQualifiedTypeName name="com.mvc1.ZipcCodeDao"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.vo.ZipCodeVO"/>
@@ -43,17 +41,19 @@
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.mvc1.TestLogic"/>
-<fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
 <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
 <fullyQualifiedTypeName name="com.util.MyBatisCommonFactory"/>
 <fullyQualifiedTypeName name="com.mvc1.ActionForward"/>
 <fullyQualifiedTypeName name="com.mvc1.Action"/>
 <fullyQualifiedTypeName name="com.onlinetest.TestController"/>
-<fullyQualifiedTypeName name="com.vo.MemberVO"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
 <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
+<fullyQualifiedTypeName name="com.vo.MemberVO"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.util.HashMapBinder"/>
+<fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
 </qualifiedTypeNameHistroy>

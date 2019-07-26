@@ -53,25 +53,27 @@ public class DaoServer {
 
 	// 개인톡 더블클릭 시
 	public VOChatList getRoomCreate(VOChatList pVO) {
-		System.out.println("Dao getRoomCreate");
 		String mem_id = pVO.getMem_id();
 		String your_id = pVO.getClist_yourid();
-		VOChatList rVO = null;
+		String gubun = pVO.getClist_gubun();
+		VOChatList rVO = new VOChatList();
 		try {
 			con = dbMgr.getConnection();
-			cstmt = con.prepareCall("{call proc_newroom(?,?,?)}");
+			cstmt = con.prepareCall("{call proc_newroom2(?, ?, ?, ?, ?)}");
 			cstmt.setString(1, mem_id);
 			cstmt.setString(2, your_id);
-			cstmt.registerOutParameter(3, OracleTypes.CURSOR);
+			cstmt.setString(3, gubun);
+			cstmt.registerOutParameter(4, OracleTypes.VARCHAR);
+			cstmt.registerOutParameter(5, OracleTypes.CURSOR);
 			cstmt.execute();
+			rVO.setResult(cstmt.getString(4));
 			ocstmt = (OracleCallableStatement) cstmt;
-			rs = ocstmt.getCursor(3);
+			rs = ocstmt.getCursor(5);
 			while (rs.next()) {
-				rVO = new VOChatList();
 				rVO.setClist_code(rs.getString("clist_code"));
 				rVO.setClist_yourid(rs.getString("clist_yourid"));
-				rVO.setClist_count(rs.getString("clist_code"));
-				rVO.setClist_name(rs.getString("clist_name"));
+				rVO.setClist_count(rs.getString("clist_count"));
+				rVO.setClist_name(rs.getString("chat_nick"));
 				rVO.setClist_gubun(rs.getString("clist_gubun"));
 				rVO.setClist_img(rs.getString("clist_img"));
 				rVO.setMem_id(rs.getString("mem_id"));
@@ -119,11 +121,9 @@ public class DaoServer {
 	// * 서버가 닫힐 때 리스트와 로그 싹 다 날리기
 	public void serverClosing() {
 		try {
-			System.out.println("serverClosing");
 			con = dbMgr.getConnection();
 			cstmt = con.prepareCall("{call proc_serverexit()}");
 			int result = cstmt.executeUpdate();
-			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -243,7 +243,6 @@ public class DaoServer {
 			cstmt.registerOutParameter(++i, OracleTypes.VARCHAR);
 			cstmt.execute();
 			result = cstmt.getString(3);
-			System.out.println("Dao" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -260,7 +259,6 @@ public class DaoServer {
 			cstmt.setString(++i, pVO.getFri_fid());
 			cstmt.setString(++i, pVO.getFri_fnick());
 			int result = cstmt.executeUpdate();
-			System.out.println("changeFriNick 결과 : " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -275,7 +273,6 @@ public class DaoServer {
 			cstmt.setString(++i, pVO.getMem_id());
 			cstmt.setString(++i, pVO.getFri_fid());
 			int result = cstmt.executeUpdate();
-			System.out.println("deleteFreind의 결과 : " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -306,5 +303,51 @@ public class DaoServer {
 			e.printStackTrace();
 		}
 		return rList;
+	}
+
+	public VOChatList createGroup(VOChatList pVO) {
+		try {
+			con = dbMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_newroom2(?,?,?,?,?)}");
+			int i = 0;
+			cstmt.setString(++i, pVO.getMem_id());
+			cstmt.setString(++i, pVO.getClist_yourid());
+			cstmt.setString(++i, pVO.getClist_gubun());
+			cstmt.registerOutParameter(++i, OracleTypes.VARCHAR);
+			cstmt.registerOutParameter(++i, OracleTypes.CURSOR);
+			cstmt.execute();
+			String result = cstmt.getString(4);
+			ocstmt = (OracleCallableStatement) cstmt;
+			rs = ocstmt.getCursor(5);
+			while(rs.next()) {
+				pVO.setClist_code(rs.getString("clist_code"));
+				pVO.setClist_yourid(rs.getString("clist_yourid"));
+				pVO.setClist_count(rs.getString("clist_count"));
+				pVO.setClist_name(rs.getString("clist_name"));
+				pVO.setClist_gubun(rs.getString("clist_gubun"));
+				pVO.setClist_img(rs.getString("clist_img"));
+				pVO.setMem_id(rs.getString("mem_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pVO;
+	}
+
+	public void addChatNick(VOChatList pVO) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" INSERT INTO chatnick(chat_nick,clist_code,chat_id) ");
+		sql.append("        VALUES (?,?,?) ");
+		try {
+			con = dbMgr.getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, pVO.getClist_name());
+			pstmt.setString(2, pVO.getClist_code());
+			pstmt.setString(3, pVO.getClist_yourid());
+			int result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

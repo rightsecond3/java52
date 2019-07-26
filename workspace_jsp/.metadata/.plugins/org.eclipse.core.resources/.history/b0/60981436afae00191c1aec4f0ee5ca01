@@ -1,0 +1,18 @@
+<%@page import="com.vo.MemberVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//MemberController에서 세션에 담오논 값 읽어오기
+	//세션 값은 서버의 cache 메모리에 기억되어 있어서 페이지 이동과 상관없이
+	//그 시간 동안은 무조건 유지 된다.
+	MemberVO rmVO = (MemberVO) session.getAttribute("rmVO");
+	String mem_name = rmVO.getMem_name();
+%>
+<div id="loginForm" class="nav navbar-nav navbar-right">
+	<form class="navbar-form navbar-right" action="#">
+		<label for="msg">
+			<font color="white"><%=mem_name %></font>
+		</label>
+		<button type="button" class="btn btn-dark" id="btn_login" onclick="logoutAction()">Logout</button>
+	</form>
+</div>

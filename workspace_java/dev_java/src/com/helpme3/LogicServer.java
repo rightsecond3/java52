@@ -3,6 +3,8 @@ package com.helpme3;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 public class LogicServer {
 	DaoServer sDao = new DaoServer();
 	
@@ -14,7 +16,6 @@ public class LogicServer {
 	}
 	//더블클릭시 방생성(개인톡방만 잇을 경우) : ROOMCREATE
 	public VOChatList getRoomCreate(VOChatList pVO) {
-		System.out.println("Logic getRoomCreate");
 		VOChatList rVO = new VOChatList();
 		rVO = sDao.getRoomCreate(pVO);
 		return rVO;
@@ -28,7 +29,12 @@ public class LogicServer {
 	//메세지를 보낼 경우 DB에도 넣고 룸캐스팅  : MESSAGE
 	public Map<String, Object> insMsgLogic(Map<String, Object> pMap) {
 		Map<String, Object> rMap = null;
-		rMap = sDao.insMsg(pMap);
+		List<String> fList = (List<String>) pMap.get("fList");
+		System.out.println("fList의 사이즈 : "+fList);
+		for(int i=0;i<fList.size();i++) {
+			String your_id =  fList.get(i);
+		}
+		//rMap = sDao.insMsg(pMap);
 		return rMap;
 	}
 	public String overLap(String mem_id) {
@@ -63,6 +69,13 @@ public class LogicServer {
 		List<Map<String, Object>> rList = null;
 		rList = sDao.searchFriend(pVO);
 		return rList;
+	}
+	public VOChatList createGroup(VOChatList pVO) {
+		pVO = sDao.createGroup(pVO);
+		return pVO;
+	}
+	public void addChatNick(VOChatList pVO) {
+		sDao.addChatNick(pVO);
 	}
 
 }

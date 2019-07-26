@@ -28,4 +28,22 @@
 		SELECT NVL((SELECT mem_name||'님 환영합니다.' FROM member WHERE mem_id=#{mem_id} AND mem_pw = #{mem_pw})
  		  ,'비밀번호가 틀립니다.') FROM dual
 	</select>
+	<resultMap type="com.vo.TakeExaminationVO" id="teVO" />
+	<select id="proc_login" parameterType="com.vo.MemberVO" statementType="CALLABLE">
+		{call proc_login2
+		(#{mem_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+		,#{mem_pw, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+		,#{mem_name, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		,#{r_status, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		,#{key, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=teVO }
+		)}	
+	</select>
+	<!-- resultMap 선언하기 -->
+	<resultMap type="com.vo.MemberVO" id="mVO" />
+	<!-- refcursor simulation -->
+	<select id="my_proc" parameterType="map" statementType="CALLABLE">
+		{call my_proc(
+			#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=mVO}
+		)}
+	</select>
 </mapper>

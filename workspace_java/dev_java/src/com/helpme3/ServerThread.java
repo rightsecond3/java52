@@ -2,10 +2,14 @@ package com.helpme3;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.Vector;
+
+import org.w3c.dom.NameList;
 
 import com.google.gson.Gson;
 
@@ -37,11 +41,12 @@ public class ServerThread extends Thread {
 			VOChatList clVO = server.chatList.get(i);// 서버의 모든 방 리스트
 			// 우리가 가지고있는 gclVO에서도 다 빼서 clist코드 비교
 			// 내가 들어간 코드랑 같은지 비교하고
+			//System.out.println("clist_code : "+clist_code);
 			if (clist_code.equals(clVO.getClist_code())) { // 해당 톡방이 선정
 				for (int j = 0; j < clVO.userList.size(); j++) {
 					try {
 						ServerThread st = clVO.userList.get(j);
-						System.out.println("룸캐스팅 메세지 : " + msg);
+						//System.out.println("룸캐스팅 메세지 : "+j+", "+ msg);
 						st.send(msg);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -75,7 +80,6 @@ public class ServerThread extends Thread {
 				if (msg != null) {
 					stz = new StringTokenizer(msg, "|");
 					protocol = Integer.parseInt(stz.nextToken());
-					System.out.println("protocol :" + protocol);
 				}
 				switch (protocol) {
 				case Protocol.JOIN: {
@@ -87,7 +91,6 @@ public class ServerThread extends Thread {
 					// json으로 온 포맷을 map으로 바꿔준다.
 					pMap = (Map<String, Object>) g.fromJson(json, pMap.getClass());
 					String mem_id = sCtrl.join(pMap);
-					System.out.println("JOIN mem_id : " + mem_id);
 					this.send(Protocol.JOIN + Protocol.seperator + mem_id);
 				}
 					break;
@@ -143,15 +146,72 @@ public class ServerThread extends Thread {
 					break;
 				case Protocol.SEARCHFRIEND : {
 					String mem_id = stz.nextToken();
-					String keyword = stz.nextToken();
 					VOFriend pVO = new VOFriend();
 					pVO.setMem_id(mem_id);
-					pVO.setKeyword(keyword);
 					List<Map<String, Object>> rList = null;
 					rList = sCtrl.searchFriend(pVO);
 					Gson g = new Gson();
-					String fList = g.toJson(rList);
+					String fList =  g.toJson(rList);
 					this.send(Protocol.SEARCHFRIEND+Protocol.seperator+fList);
+				}
+					break;
+				case Protocol.GROUPLIST : { //단톡방 생성시 뿌려줄 친구 목록
+					String mem_id = stz.nextToken();
+					sCtrl = new CtrlServer();
+					List<Map<String, Object>> rList = null;
+					rList = sCtrl.friendList(mem_id);
+					Gson gson = new Gson();
+					String fList = gson.toJson(rList);
+					this.send(Protocol.GROUPLIST + Protocol.seperator + fList);
+				}
+					break;
+				case Protocol.ADDGROUP : {
+					String mem_id = stz.nextToken();
+					String clist_yourid = stz.nextToken();
+					String gubun = stz.nextToken();
+					VOChatList pVO = new VOChatList();
+					pVO.setMem_id(mem_id);
+					pVO.setClist_yourid(clist_yourid);
+					pVO.setClist_gubun(gubun);
+					pVO = sCtrl.createGroup(pVO);
+					List fList = new Vector<>(); // , ,로 오는 친구 목록 따로따로 넣어주기
+					if(clist_yourid!=null) {
+						StringTokenizer stz2 = new StringTokenizer(clist_yourid, ",");
+						while(stz2.hasMoreTokens()) {
+							String friend_id = stz2.nextToken();
+							fList.add(friend_id);
+							pVO.setClist_yourid(friend_id);
+							//닉네임 테이블에 넣어주기
+							sCtrl.addChatNick(pVO);
+						}
+					}
+					Gson gson = new Gson();
+					clist_yourid = gson.toJson(fList);
+					this.send(Protocol.ADDGROUP
+							+Protocol.seperator+pVO.getClist_code()
+							+Protocol.seperator+pVO.getClist_name()
+							+Protocol.seperator+clist_yourid);
+					// **** 서버의 chatList에 넣어주기 위해 단톡방의 사람들의 이름(pk)과 해당 스레드를 넣어준 VOchatList를 만듬
+					// 서버의 글로벌 리스트의 사이즈만큼 돌리고
+					for (int i = 0; i < server.globalList.size(); i++) {
+						// 서버의 글로벌리스트의 i번째 스레드의 전역변수 mem_id와 비교
+						String id = server.globalList.get(i).mem_id;
+						if(mem_id.equals(id)) {
+							pVO.nameList.add(id);
+							pVO.userList.add(server.globalList.get(i));
+						}
+						// 상대방 이름이랑 같은 VO가 있을경우
+						for(int j=0;j<fList.size();j++) {
+							if (fList.get(j).equals(id)) {
+								// ChatVO의 nameList에 add해주고
+								pVO.nameList.add(id);
+								// ChatVO의 스레드List에도 add해줌
+								pVO.userList.add(server.globalList.get(i));
+							}
+						}
+					}
+					// **** 만들어 놓은 VOchatList를 서버의 chatList<VOChatList>에 넣어줌.
+					server.chatList.add(pVO);
 				}
 					break;
 				case Protocol.LOGIN: {
@@ -168,11 +228,16 @@ public class ServerThread extends Thread {
 					String str = Protocol.LOGIN + Protocol.seperator + mem_id;
 					server.globalList.add(this);
 					this.send(str);
-					// 재접속했을 경우 원래 있던 방의 스레드 리스트에 add해줌
+					// 재접속했을 경우 원래 있던 방의 스레드 리스트에 내 스레드를 add해줌
 					for (int i = 0; i < server.chatList.size(); i++) {
 						VOChatList clVO = server.chatList.get(i);
+						System.out.println("로그인 : "+i+" 번째 방코드 : "+clVO.getClist_code());
+						System.out.println("내 아이디  : "+mem_id);
 						for (int j = 0; j < clVO.nameList.size(); j++) {
+							System.out.println(j+"번지의 pk : "+clVO.nameList.get(j));
 							if (mem_id.equals(clVO.nameList.get(j))) {
+								System.out.println("내가 있는 스레드의 주소번지 : "+clVO.userList);
+								System.out.println("내 이름이 있는 곳의 nameList : "+clVO.nameList.get(j));
 								clVO.userList.add(this);
 							}
 						}
@@ -184,44 +249,65 @@ public class ServerThread extends Thread {
 					String mem_id = stz.nextToken();
 					// 상대방아이디
 					String your_id = stz.nextToken();
+					// 구분
+					String gubun = stz.nextToken();
 					sCtrl = new CtrlServer();
 					VOChatList pVO = new VOChatList();
 					VOChatList rVO = new VOChatList();
 					pVO.setMem_id(mem_id);
 					pVO.setClist_yourid(your_id);
+					pVO.setClist_gubun(gubun);
 					rVO = sCtrl.send(pVO);
-					// 방코드로 입장하기 위해서
+					// 전역변수 초기화 해주기
 					clist_code = rVO.getClist_code();
-					// 서버의 글로벌 리스트의 사이즈만큼 돌리고
-					for (int i = 0; i < server.globalList.size(); i++) {
-						// 서버의 글로벌리스트의 i번째 스레드의 전역변수 mem_id와 비교
-						String id = server.globalList.get(i).mem_id;
-						// 상대방 이름이랑 같은 VO가 있을경우
-						if (your_id.equals(id)) {
-							// ChatVO의 nameList에 add해주고
-							rVO.nameList.add(id);
-							// ChatVO의 스레드List에도 add해줌
-							rVO.userList.add(server.globalList.get(i));
-						} else if (mem_id.equals(id)) {
-							rVO.nameList.add(id);
-							rVO.userList.add(server.globalList.get(i));
+					// 클라에 보낼 clist_yourid
+					your_id = rVO.getClist_yourid();
+					String clist_name = rVO.getClist_name();
+					String result = rVO.getResult();
+					System.out.println("새창 아니면 회식 : "+result);
+					if("새창".equals(result)) {
+						// 서버의 글로벌 리스트의 사이즈만큼 돌리고
+						for (int i = 0; i < server.globalList.size(); i++) {
+							// 서버의 글로벌리스트의 i번째 스레드의 전역변수 mem_id와 비교
+							String id = server.globalList.get(i).mem_id;
+							// 상대방 이름이랑 같은 VO가 있을경우
+							if (your_id.equals(id)) {
+								// ChatVO의 nameList에 add해주고
+								rVO.nameList.add(id);
+								// ChatVO의 스레드List에도 add해줌
+								rVO.userList.add(server.globalList.get(i));
+							} else if (mem_id.equals(id)) {
+								rVO.nameList.add(id);
+								rVO.userList.add(server.globalList.get(i));
+							}
 						}
+						server.chatList.add(rVO);
 					}
-					server.chatList.add(rVO);
 					// 방을 팔때는 방을 판 사람에게만 보냄
-					this.send(Protocol.ROOM_CREATE + Protocol.seperator + mem_id + Protocol.seperator + clist_code);
+					this.send(Protocol.ROOM_CREATE + Protocol.seperator + mem_id 
+							+ Protocol.seperator + clist_code
+							+ Protocol.seperator + clist_name
+							+ Protocol.seperator + your_id);
 				}
 					break;
 				case Protocol.MESSAGE: {
 					// 클라이언트에서 보내준 코드
 					String clist_code = stz.nextToken();
 					String writer = stz.nextToken();
+					String your_id = stz.nextToken();
 					String date = stz.nextToken();
 					String time = stz.nextToken();
 					String content = stz.nextToken();
 					String imogi = stz.nextToken();
 					sCtrl = new CtrlServer();
 					Map<String, Object> pMap = new HashMap<>();
+					//json 포멧으로 온 your_id를 리스트로 변환
+					Gson g = new Gson();
+					List<String> fList = new ArrayList<>();
+					fList = (List<String>) g.fromJson(your_id, fList.getClass());
+					for(int i=0;i<fList.size();i++) {
+						System.out.println("제이슨 리스트에 는거 : "+fList.get(i));
+					}
 					// clog 테이블에 인서트 해주기 위한 Map
 					pMap.put("clist_code", clist_code);
 					pMap.put("writer", writer);
@@ -229,9 +315,11 @@ public class ServerThread extends Thread {
 					pMap.put("time", time);
 					pMap.put("content", content);
 					pMap.put("imogi", imogi);
+					pMap.put("fList", fList);
 					// rMap 클라이언트에서 필요한 정보를 json 포멧으로 바꿔줌
 					Map<String, Object> rMap = null;
 					rMap = sCtrl.send(pMap);
+					// 공통코드를 만들었었구나...
 					JsonFormatter jf = new JsonFormatter();
 					String json = jf.toJson(rMap);
 					this.roomCasting(Protocol.MESSAGE + Protocol.seperator + json);

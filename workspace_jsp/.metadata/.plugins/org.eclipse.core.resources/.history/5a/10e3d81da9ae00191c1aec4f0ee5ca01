@@ -1,0 +1,41 @@
+<%@page import="com.vo.MemberVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	MemberVO mVO = (MemberVO) session.getAttribute("rmVO");
+	String s_memid = mVO.getMem_id();
+	String s_memname = mVO.getMem_name();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<%@ include file="../common/JEasyUICommon.jsp" %>
+</head>
+<body>
+	<script type="text/javascript">
+		// 데이터 포멧가져오기
+		$.fn.datebox.defaults.formatter = function(date){
+			var y = date.getFullYear();
+			//달은 0~11을 리턴해주기 때문에 1을 더해준 것
+			var m = date.getMonth()+1;
+			var d = date.getDate();
+			// 삼항 연산자 (조건 ? 참 : 거짓)
+			return y+'-'+(m<10 ? ('0'+m) : m)+'-'+(d<10?('0'+d) : d);
+		}
+		// 선택한 날짜 가져오기
+		$.fn.datebox.defaults.parser = function(s){
+			var t = Date.parse(s);
+			if (!isNaN(t)){
+				return new Date(t);
+			} else {
+				return new Date();
+			}
+		}
+		$(document).ready(function() {
+			
+		});
+	</script>
+</body>
+</html>

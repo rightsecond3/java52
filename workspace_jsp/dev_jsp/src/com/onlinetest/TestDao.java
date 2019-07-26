@@ -47,5 +47,31 @@ public class TestDao {
 		}
 		return subjectList;
 	}
+	// 수험번호 채번 -- 시퀀스
+	public String getExamNo() {
+		logger.info("TestDao getExamNO");
+		String exam_no = null;
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			exam_no = sqlSession.selectOne("getExamNo");
+			logger.info("수험번호 채번 ==> "+exam_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exam_no;
+	}
+	// 시험 응시 정보 등록
+	public int examReceipt(Map<String, Object> pMap) {
+		logger.info("TestDao examReceipt");
+		int result = 0;
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.update("examReceipt", pMap);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }

@@ -1,0 +1,70 @@
+package com.onlinetest;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
+
+import com.util.MyBatisCommonFactory;
+/*
+ * MyBatis를 활용하여 오라클 서버에 접속(MyBatis에서 대신 해줌.)하고
+ * 쿼리문을 요청하기 위해 myBatis에서 제공하는 클래스를 객체 주입 받아야 함.
+ * 생성자에서 초기화 해야한다.
+ * 생성자가 하는 역할이 멤버변수의 초기화이므로 생성자 안에서 
+ * SqlSessionFactory 객체를 주입받는다.
+ * myBatis Layer에서 오라클 서버와 커넥션을 맺는 것과 쿼리문을 요청하고
+ * 그 응답을 받는일까지 모두 담당하므로 이것과 관련된 하나의 이상이라도 존재하면
+ * NullPointerException이 발생하므로 디버깅시 주의 해야함.
+ */
+public class TestDao {
+	Logger logger = Logger.getLogger(TestDao.class);
+	/*
+	 * SqlSessionFactory
+	 * 물리적으로 떨어져있는 오라클 서버와 연결통로만 맺게 해주는 객체
+	 * 두번째는 오라클 서버에 쿼리문을 요청하는데 필요한 SqlSession 객체 생성시 의존관계에 있는 클래스
+	 * crud이름 = 메소드이름 = 쿼리문 아이디는 통일 시키자!!
+	 */
+	SqlSessionFactory sqlSessionFactory = null;
+	
+	//*** 생성자
+	public TestDao() {
+		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
+	}
+	
+	//* DB의 콤보박스 값을 가져올
+	public List<Map<String, Object>> subjectList() {
+		List<Map<String, Object>> subjectList = new ArrayList<>();
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			//Map으로 나온 결과값을 List에 알아서 add해준다.
+			subjectList = sqlSession.selectList("subjectList");
+		} catch (Exception e) {
+			//Stack영역에 저장되는 에러머세지 히스토리를 출력
+			e.printStackTrace();
+		}
+		return subjectList;
+	}
+	// 수험번호 채번 -- 시퀀스
+	public String getExamNo() {
+		logger.info("TestDao getExamNO");
+		logger.info("수험번호 채번 ==> ");
+		String exam_no = null;
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			exam_no = sqlSession.selectOne("getExamNo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	// 시험 응시 정보 등록
+	public int examReceipt(Map<String, Object> pMap) {
+		logger.info("TestDao examReceipt");
+		int result = 0;
+		return 0;
+	}
+
+}

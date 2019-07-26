@@ -1,0 +1,16 @@
+package com.vo;
+
+public class TakeExaminationVO {
+	private String exam_no    = null;
+	private String mem_id     = null;
+	private int    sub_cd     = 0;
+	private int    exam_chasi = 0;
+	private String exam_date  = null;
+	private int    get_point  = 0;
+	private String is_pass    = null;
+	private String s_time     = null;
+	private String e_time     = null;
+	private String fee_date   = null;
+	private String is_payment = null;
+	private String reg_date   = null;
+}

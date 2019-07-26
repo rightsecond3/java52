@@ -1,0 +1,293 @@
+package com.helpme3;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+import com.google.gson.Gson;
+
+public class ServerThread extends Thread {
+	Server server = null;
+	ObjectOutputStream oos = null;
+	ObjectInputStream ois = null;
+	String mem_nick = null;
+	String mem_id = null;
+	String mem_pw = null;
+	String clist_code = null;// 클라에서 넘겨주는 톡방 코드
+	CtrlServer sCtrl = null;
+
+	public ServerThread(Server server) {
+		this.server = server;
+		try {
+			oos = new ObjectOutputStream(server.cSocket.getOutputStream());
+			ois = new ObjectInputStream(server.cSocket.getInputStream());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// * 해당 채팅방으로 보냄
+	public void roomCasting(String msg) {
+		// 전체방개수
+		for (int i = 0; i < server.chatList.size(); i++) {
+			// 여기에 서버가 관리하는 모든 리스트가 담기고 ex) 4개
+			VOChatList clVO = server.chatList.get(i);// 서버의 모든 방 리스트
+			// 우리가 가지고있는 gclVO에서도 다 빼서 clist코드 비교
+			// 내가 들어간 코드랑 같은지 비교하고
+			if (clist_code.equals(clVO.getClist_code())) { // 해당 톡방이 선정
+				for (int j = 0; j < clVO.userList.size(); j++) {
+					try {
+						ServerThread st = clVO.userList.get(j);
+						System.out.println("룸캐스팅 메세지 : " + msg);
+						st.send(msg);
+					} catch (Exception e) {
+						e.printStackTrace();
+						clVO.userList.remove(j--);
+					}
+				} ////////////// end of inner for
+				break;
+			}
+		}
+	}
+
+	// * 나와의 채팅
+	public void send(String msg) {
+		try {
+			oos.writeObject(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void run() {
+		boolean isStop = false;
+		try {
+			run_start: while (!isStop) {
+				String msg = (String) ois.readObject();
+				server.jta_log.append(msg + "\n");
+				server.jta_log.setCaretPosition(server.jta_log.getDocument().getLength());
+				int protocol = 0;
+				StringTokenizer stz = null;
+				if (msg != null) {
+					stz = new StringTokenizer(msg, "|");
+					protocol = Integer.parseInt(stz.nextToken());
+					System.out.println("protocol :" + protocol);
+				}
+				switch (protocol) {
+				case Protocol.JOIN: {
+					sCtrl = new CtrlServer();
+					VOChatList pVO = new VOChatList();
+					String json = stz.nextToken();
+					Gson g = new Gson();
+					Map<String, Object> pMap = new HashMap<String, Object>();
+					// json으로 온 포맷을 map으로 바꿔준다.
+					pMap = (Map<String, Object>) g.fromJson(json, pMap.getClass());
+					String mem_id = sCtrl.join(pMap);
+					System.out.println("JOIN mem_id : " + mem_id);
+					this.send(Protocol.JOIN + Protocol.seperator + mem_id);
+				}
+					break;
+				case Protocol.OVERLAP: { // 아이디 중복검사
+					String mem_id = stz.nextToken();
+					sCtrl = new CtrlServer();
+					String temp = sCtrl.overLap(mem_id);
+					this.send(Protocol.OVERLAP + Protocol.seperator + temp);
+				}
+					break;
+				case Protocol.ADDFRIEND: { // 친구 추가
+					String mem_id = stz.nextToken();
+					String friend_id = stz.nextToken();
+					sCtrl = new CtrlServer();
+					VOFriend pVO = new VOFriend();
+					pVO.setMem_id(mem_id);
+					pVO.setFri_fid(friend_id);
+					String result = sCtrl.addFriend(pVO);
+					this.send(Protocol.ADDFRIEND + Protocol.seperator + result);
+				}
+					break;
+				case Protocol.FRIENDLIST: { // 친구 리스트
+					String mem_id = stz.nextToken();
+					sCtrl = new CtrlServer();
+					List<Map<String, Object>> rList = null;
+					rList = sCtrl.friendList(mem_id);
+					Gson gson = new Gson();
+					String fList = gson.toJson(rList);
+					this.send(Protocol.FRIENDLIST + Protocol.seperator + fList);
+				}
+					break;
+				case Protocol.CHANGEFRINICK : { //친구닉네임 바꾸기
+					String mem_id = stz.nextToken();
+					String friend_id = stz.nextToken();
+					String change_nick = stz.nextToken();
+					VOFriend pVO = new VOFriend();
+					pVO.setMem_id(mem_id);
+					pVO.setFri_fid(friend_id);
+					pVO.setFri_fnick(change_nick);
+					sCtrl = new CtrlServer();
+					sCtrl.changeFriNick(pVO);
+				}
+					break;
+				case Protocol.DELETEFRIEND : { //친구삭제
+					String mem_id = stz.nextToken();
+					String friend_id = stz.nextToken();
+					VOFriend pVO = new VOFriend();
+					pVO.setMem_id(mem_id);
+					pVO.setFri_fid(friend_id);
+					sCtrl = new CtrlServer();
+					sCtrl.deleteFriend(pVO);
+				}
+					break;
+				case Protocol.SEARCHFRIEND : {
+					String mem_id = stz.nextToken();
+					VOFriend pVO = new VOFriend();
+					pVO.setMem_id(mem_id);
+					List<Map<String, Object>> rList = null;
+					rList = sCtrl.searchFriend(pVO);
+					Gson g = new Gson();
+					String fList =  g.toJson(rList);
+					this.send(Protocol.SEARCHFRIEND+Protocol.seperator+fList);
+				}
+					break;
+				case Protocol.GROUPLIST : { //단톡방 생성시 뿌려줄 친구 목록
+					String mem_id = stz.nextToken();
+					sCtrl = new CtrlServer();
+					List<Map<String, Object>> rList = null;
+					rList = sCtrl.friendList(mem_id);
+					Gson gson = new Gson();
+					String fList = gson.toJson(rList);
+					this.send(Protocol.GROUPLIST + Protocol.seperator + fList);
+				}
+					break;
+				case Protocol.ADDGROUP : {
+					String mem_id = stz.nextToken();
+					String clist_yourid = stz.nextToken();
+					String gubun = stz.nextToken();
+					VOChatList pVO = new VOChatList();
+					pVO.setMem_id(mem_id);
+					pVO.setClist_yourid(clist_yourid);
+					pVO.setClist_gubun(gubun);
+					pVO = sCtrl.createGroup(pVO);
+					List fList = null; // , ,로 오는 친구 목록 따로따로 넣어주기
+					if(clist_yourid!=null) {
+						StringTokenizer stz2 = new StringTokenizer(clist_yourid, ",");
+						while(stz2.hasMoreTokens()) {
+							String friend_id = stz2.nextToken();
+							fList = new Vector<>();
+							fList.add(friend_id);
+							pVO.setClist_yourid(friend_id);
+							sCtrl.addChatNick(pVO);
+						}
+					}
+					this.send(Protocol.ADDGROUP
+							+Protocol.seperator+pVO.getClist_code()
+							+Protocol.seperator+pVO.getClist_name());
+					
+
+				}
+					break;
+				case Protocol.LOGIN: {
+					// * 로그인 처리
+					mem_id = stz.nextToken();
+					mem_pw = stz.nextToken();
+					VOMem pVO = new VOMem();
+					pVO.setMem_id(mem_id);
+					pVO.setMem_pw(mem_pw);
+					sCtrl = new CtrlServer();
+					VOMem rVO = null;
+					rVO = sCtrl.send(pVO);
+					mem_id = rVO.getMem_id();// 성공 or 실패
+					String str = Protocol.LOGIN + Protocol.seperator + mem_id;
+					server.globalList.add(this);
+					this.send(str);
+					// 재접속했을 경우 원래 있던 방의 스레드 리스트에 add해줌
+					for (int i = 0; i < server.chatList.size(); i++) {
+						VOChatList clVO = server.chatList.get(i);
+						for (int j = 0; j < clVO.nameList.size(); j++) {
+							if (mem_id.equals(clVO.nameList.get(j))) {
+								clVO.userList.add(this);
+							}
+						}
+					}
+				}
+					break;
+				case Protocol.ROOM_CREATE: { // 개인톡 생성
+					// 내 아이디
+					String mem_id = stz.nextToken();
+					// 상대방아이디
+					String your_id = stz.nextToken();
+					// 구분
+					String gubun = stz.nextToken();
+					sCtrl = new CtrlServer();
+					VOChatList pVO = new VOChatList();
+					VOChatList rVO = new VOChatList();
+					pVO.setMem_id(mem_id);
+					pVO.setClist_yourid(your_id);
+					pVO.setClist_gubun(gubun);
+					rVO = sCtrl.send(pVO);
+					// 방코드로 입장하기 위해서
+					clist_code = rVO.getClist_code();
+					String clist_name = rVO.getClist_name();
+					// 서버의 글로벌 리스트의 사이즈만큼 돌리고
+					for (int i = 0; i < server.globalList.size(); i++) {
+						// 서버의 글로벌리스트의 i번째 스레드의 전역변수 mem_id와 비교
+						String id = server.globalList.get(i).mem_id;
+						// 상대방 이름이랑 같은 VO가 있을경우
+						if (your_id.equals(id)) {
+							// ChatVO의 nameList에 add해주고
+							rVO.nameList.add(id);
+							// ChatVO의 스레드List에도 add해줌
+							rVO.userList.add(server.globalList.get(i));
+						} else if (mem_id.equals(id)) {
+							rVO.nameList.add(id);
+							rVO.userList.add(server.globalList.get(i));
+						}
+					}
+					server.chatList.add(rVO);
+					// 방을 팔때는 방을 판 사람에게만 보냄
+					this.send(Protocol.ROOM_CREATE + Protocol.seperator + mem_id 
+							+ Protocol.seperator + clist_code
+							+ Protocol.seperator + clist_name);
+				}
+					break;
+				case Protocol.MESSAGE: {
+					// 클라이언트에서 보내준 코드
+					String clist_code = stz.nextToken();
+					String writer = stz.nextToken();
+					String date = stz.nextToken();
+					String time = stz.nextToken();
+					String content = stz.nextToken();
+					String imogi = stz.nextToken();
+					sCtrl = new CtrlServer();
+					Map<String, Object> pMap = new HashMap<>();
+					// clog 테이블에 인서트 해주기 위한 Map
+					pMap.put("clist_code", clist_code);
+					pMap.put("writer", writer);
+					pMap.put("date", date);
+					pMap.put("time", time);
+					pMap.put("content", content);
+					pMap.put("imogi", imogi);
+					// rMap 클라이언트에서 필요한 정보를 json 포멧으로 바꿔줌
+					Map<String, Object> rMap = null;
+					rMap = sCtrl.send(pMap);
+					JsonFormatter jf = new JsonFormatter();
+					String json = jf.toJson(rMap);
+					this.roomCasting(Protocol.MESSAGE + Protocol.seperator + json);
+				}
+					break;
+				case Protocol.EXIT: {
+
+				}
+					break run_start;
+				}/////// end of switch
+			} /////////// end of while
+		} catch (Exception e) {
+			e.printStackTrace();
+		} ////////////// end of try~catch
+	}////////////////// end of run
+}

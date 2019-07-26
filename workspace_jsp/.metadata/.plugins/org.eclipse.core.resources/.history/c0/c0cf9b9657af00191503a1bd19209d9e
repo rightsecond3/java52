@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE configuration     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="development">
+		<!-- 원시적인 방법 이용 시 -->
+		<environment id="development2">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@192.168.0.211:1521:orcl11" />
+				<property name="username" value="scott" />
+				<property name="password" value="tiger" />
+			</dataSource>
+		</environment>
+		<!-- 커넥션 풀 사용 이후 -->
+		<environment id="development">
+			<transactionManager type="MANAGED" />
+			<dataSource type="JNDI"> <!-- JavaNamingDirectoyInventory : 원격에 있는 객체를 소환하는 API-->
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@192.168.0.211:1521:orcl11" />
+				<property name="username" value="scott" />
+				<property name="password" value="tiger" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<!-- 쿼리문을 관리하는 xml 페이지 -->
+		<mapper resource="com/mybatis/mapper/member.xml" />
+		<mapper resource="com/mybatis/mapper/zipcode.xml" />
+		<mapper resource="com/mybatis/mapper/onLineTest.xml" />
+	</mappers>
+</configuration>

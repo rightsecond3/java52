@@ -10,6 +10,8 @@ public class Protocol {
 	public static final int CHANGEFRINICK = 50; //친구닉네임변경
 	public static final int DELETEFRIEND = 60; //친구삭제
 	public static final int SEARCHFRIEND = 70; //조건검색
+	public static final int GROUPLIST = 80; //단톡방 생성
+	public static final int ADDGROUP = 90; //단톡방 생성
 	public static final int LOGIN = 100; //로그인
 	public static final int ROOM_CREATE = 110; //톡방개설
 	public static final int ROOM_LIST = 120; //톡방이름목록

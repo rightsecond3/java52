@@ -93,4 +93,11 @@ b) lib : 오픈소스에 대한 XXX.jar배포(자바클래스)
 		<servlet-name>CookieLogin</servlet-name>
 		<url-pattern>/ch09/login.do</url-pattern>
 	</servlet-mapping>
+	<!-- 커넥션 풀 이름 등록하기 -->
+	<resource-ref>
+		<description>Connection</description>
+		<res-ref-name>jdbc/dbPool</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 </web-app>

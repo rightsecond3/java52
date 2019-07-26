@@ -35,7 +35,7 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">자격시험<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">자격시험 접수</a></li>
+						<li><a href="testReceipt.jsp">자격시험 접수</a></li>
 						<li><a href="reGoTest.jsp">자격시험 보기</a></li>
 					</ul></li>
 			</ul>

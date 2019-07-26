@@ -17,4 +17,18 @@ public class TestLogic {
 		return subjectList;
 	}
 
+	public int examReceipt(Map<String, Object> pMap) {
+		logger.info("TestLogic examReceipt");
+		int result = 0;
+		String exam_no = null;
+		//수험번호 채번하여 담기 - select
+		exam_no = tDao.getExamNo();
+		//위에서 채번한 수험번호를 파라미터에 넣기
+		pMap.put("exam_no", exam_no);
+		//시험 응시 접수처리 -select
+		//0이면 접수 실패, 1이면 접수 성공
+		result = tDao.examReceipt(pMap);
+		return result;
+	}
+
 }

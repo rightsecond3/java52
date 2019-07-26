@@ -67,4 +67,12 @@ public class CtrlServer {
 		rList = sLogic.searchFriend(pVO);
 		return rList;
 	}
+	//
+	public VOChatList createGroup(VOChatList pVO) {
+		pVO = sLogic.createGroup(pVO);
+		return pVO;
+	}
+	public void addChatNick(VOChatList pVO) {
+		sLogic.addChatNick(pVO);
+	}
 }

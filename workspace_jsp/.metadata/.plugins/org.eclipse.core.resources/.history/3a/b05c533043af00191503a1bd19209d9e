@@ -1,0 +1,31 @@
+package com.mvc1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.util.MyBatisCommonFactory;
+
+public class MyProcSimulation {
+	static SqlSessionFactory sqlSessionFactory = null;
+	static {
+		sqlSessionFactory =
+				MyBatisCommonFactory.getSqlSessionFactory();
+	}
+	public MyProcSimulation() {
+		
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			Map<String, Object> pMap = new HashMap<>();
+			sqlSession.selectOne("my_proc", pVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args) {
+		
+	}
+
+}

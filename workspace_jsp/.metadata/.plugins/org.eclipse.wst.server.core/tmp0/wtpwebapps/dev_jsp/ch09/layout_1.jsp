@@ -3,15 +3,17 @@
 <%
 	String c_name = null;
 	Cookie cookies[] = request.getCookies();
-	for(int i=0;i<cookies.length;i++) {
-		out.print("쿠키 정보 : "+cookies[i].getValue());
-		if(cookies[i].getName().equals("c_name")) {
-			c_name = cookies[i].getValue();
+	if(cookies!=null) {
+		for(int i=0;i<cookies.length;i++) {
+			out.print("쿠키 정보 : "+cookies[i].getValue());
+			if(cookies[i].getName().equals("c_name")) {
+				c_name = cookies[i].getValue();
+			}
 		}
 	}
-/* 	if(c_name==null) {
+ 	if(c_name==null) {
 		response.sendRedirect("a.jsp");
-	} */
+	} 
 %>
 <!DOCTYPE html>
 <html>

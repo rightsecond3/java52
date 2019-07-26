@@ -13,5 +13,9 @@
 	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/mybatis-3.4.6.jar"/>
 	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/commons-dbcp2-2.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/commons-pool2-2.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/p6spy-2.3.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

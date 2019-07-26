@@ -37,6 +37,7 @@
          UserDatabaseRealm to authenticate users
     -->
     <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+    <Resource auth="Container" driverClassName="com.p6spy.engine.spy.P6SpyDriver" maxIdle="50" maxTotal="100" maxWaitMillis="10000" name="jdbc/dbPool" password="tiger" type="javax.sql.DataSource" url="jdbc:p6spy:oracle:thin:@192.168.0.211:1521:orcl11" username="scott"/>
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share
@@ -149,6 +150,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
+      
       </Host>
     </Engine>
   </Service>
