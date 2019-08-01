@@ -46,4 +46,5 @@
 			#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=mVO}
 		)}
 	</select>
+
 </mapper>

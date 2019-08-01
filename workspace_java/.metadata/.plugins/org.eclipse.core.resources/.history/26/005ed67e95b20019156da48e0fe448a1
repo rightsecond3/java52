@@ -1,0 +1,17 @@
+package com.basic;
+
+import java.util.StringTokenizer;
+
+public class StzTest {
+
+	public static void main(String[] args) {
+		String msg = "jvm,";
+		StringTokenizer stz = new StringTokenizer(msg, ",");
+		while(stz.hasMoreTokens()) {
+			int i = 0;
+			System.out.println(i+"번째 : "+stz.nextToken());
+			i++;
+		}
+	}
+
+}

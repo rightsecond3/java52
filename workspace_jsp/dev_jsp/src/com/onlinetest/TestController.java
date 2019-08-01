@@ -1,7 +1,9 @@
 package com.onlinetest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +54,44 @@ public class TestController extends HttpServlet implements Action {
 			forward.setRedirect(isRedirect);
 			forward.setViewName(viewName);
 		}
-		
+		else if("onLineTest/swDesignExam".equals(crud)) {
+			logger.info("Ctrl 소프트웨어설계 문제 호출 성공");
+			Map<String, Object> pMap = new HashMap<String, Object>();
+			//pMap을 한번에 set할 수 없기 때문에 리스트로 보낸다
+			List<Map<String, Object>> designList = new ArrayList<Map<String,Object>>();
+			pMap = tLogic.swDesignExam2(pMap);
+			logger.info("Map의 클래스 : "+pMap.get("key").getClass());
+			// key 값의 value만 빼오기
+			List pList = null;
+			if(pMap != null) {
+				pList = (List) pMap.get("key");
+			}
+			// pList의 값 확인하기.
+			Iterator iter = pList.iterator();
+			while(iter.hasNext()) {
+				logger.info("iter.next() : "+iter.next());
+			}
+			req.setAttribute("designList", pList);
+			viewName = "jsonSwDesign.jsp";
+			isRedirect = false;
+			forward.setRedirect(isRedirect);
+			forward.setViewName(viewName);
+		}
+		// http://localhost:8000/onLineTest/isOk.kos?work=onLineTest&mem_id=test&exam_no=1907300017
+		else if("onLineTest/isOk".equals(crud)) {
+			String msg = null;
+			Map<String, Object> pMap = new HashMap<>();
+			String mem_id = req.getParameter("mem_id");
+			String exam_no = req.getParameter("exam_no");
+			pMap.put("mem_id", mem_id);
+			pMap.put("exam_no", exam_no);
+			msg = tLogic.isOk(pMap);
+			req.setAttribute("msg", msg);
+			viewName = "isOkResult.jsp";
+			isRedirect = false;
+			forward.setViewName(viewName);
+			forward.setRedirect(isRedirect);
+		}
 		return forward;
 	}
 

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="cb"/>
+		<item key="selection" value="dlg_confirm"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="dlg_confirm"/>
+			<item value="for(var i=0;i&lt;document.getElementById(&quot;f_test1&quot;).cb.length;i++) {"/>
+			<item value="java:comp/env/jdbc/dbPool"/>
 			<item value="cb_test1"/>
 			<item value="label"/>
 			<item value="Home"/>
 			<item value="mem_addr"/>
 			<item value="tb_ins"/>
-			<item value="tb_upd"/>
-			<item value="pencil"/>
-			<item value="icon-edit"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cb"/>

@@ -19,7 +19,7 @@ public class VOChatList {
 	private String clist_gubun   = null;
 	private String command       = null; //컨트롤계층에서 분기할 커맨드
 	private String result        = null; // 새창 아니면 clist_code
-	
+	private String addNameList   = null; // 서버가 기동 되었을때  nameList들에 넣어줄 mem_id들
 	
 	public String getClist_code() {
 		return clist_code;
@@ -33,11 +33,23 @@ public class VOChatList {
 	public void setClist_yourid(String clist_yourid) {
 		this.clist_yourid = clist_yourid;
 	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
 	public String getClist_count() {
 		return clist_count;
 	}
 	public void setClist_count(String clist_count) {
 		this.clist_count = clist_count;
+	}
+	public String getClist_img() {
+		return clist_img;
+	}
+	public void setClist_img(String clist_img) {
+		this.clist_img = clist_img;
 	}
 	public String getClist_name() {
 		return clist_name;
@@ -51,18 +63,6 @@ public class VOChatList {
 	public void setClist_gubun(String clist_gubun) {
 		this.clist_gubun = clist_gubun;
 	}
-	public String getClist_img() {
-		return clist_img;
-	}
-	public void setClist_img(String clist_img) {
-		this.clist_img = clist_img;
-	}
-	public String getMem_id() {
-		return mem_id;
-	}
-	public void setMem_id(String mem_id) {
-		this.mem_id = mem_id;
-	}
 	public String getCommand() {
 		return command;
 	}
@@ -75,6 +75,13 @@ public class VOChatList {
 	public void setResult(String result) {
 		this.result = result;
 	}
+	public String getAddNameList() {
+		return addNameList;
+	}
+	public void setAddNameList(String addNameList) {
+		this.addNameList = addNameList;
+	}
+	
 	
 	
 }

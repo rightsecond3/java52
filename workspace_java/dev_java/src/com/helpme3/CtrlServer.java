@@ -15,10 +15,10 @@ public class CtrlServer {
 		rVO = sLogic.login(pVO);
 		return rVO;
 	}
-	public VOChatList send(VOChatList pVO) {
-		VOChatList rVO = null;
-		rVO = sLogic.getRoomCreate(pVO);
-		return rVO;
+	public List<VOChatList> send(VOChatList pVO) {
+		List<VOChatList> rList = null;
+		rList = sLogic.getRoomCreate(pVO);
+		return rList;
 	}
 	//서버열때 해당 server.chatlist
 	public List<VOChatList> send(String command) {
@@ -26,11 +26,11 @@ public class CtrlServer {
 		rList = sLogic.getcList();
 		return rList;
 	}
-	//* 메시지를 보낼때 DB에 인서트하고 룸캐스팅으로 보내주는 거
-	public Map<String, Object> send(Map<String, Object> pMap) {
-		Map<String, Object> rMap = null;
-		rMap = sLogic.insMsgLogic(pMap); 
-		return rMap;
+	//* 메시지를 보낼때 룸캐스팅으로 보내주는 거
+	public List<Map<String, Object>> send(Map<String, Object> pMap) {
+		List<Map<String, Object>> rList = null;
+		rList = sLogic.insMsgLogic(pMap); 
+		return rList;
 	}
 	//* 아이디 중복 검사
 	public String overLap(String mem_id) {
@@ -72,7 +72,51 @@ public class CtrlServer {
 		pVO = sLogic.createGroup(pVO);
 		return pVO;
 	}
-	public void addChatNick(VOChatList pVO) {
-		sLogic.addChatNick(pVO);
+	// ****************** 박상범 수정 ****************** //
+	public List<VOChatList> getList() {
+		List<VOChatList> nList = null;
+		nList = sLogic.getList();
+		return nList;
+	}
+	// ****************** 박상범 수정 끝 ****************** //
+	public List<Map<String, Object>> chatList(String mem_id) {
+		List<Map<String, Object>> chatList = null;
+		chatList = sLogic.chatList(mem_id);
+		return chatList;
+	}
+	public List<Map<String, Object>> chatLog(String mem_id, String clist_code) {
+		List<Map<String, Object>> logList = null;
+		logList = sLogic.chatLog(mem_id, clist_code);
+		return logList;
+	}
+	public List<Map<String, Object>> roomIn(String mem_id, String clist_code) {
+		List<Map<String, Object>> rList = null;
+		rList = sLogic.roomIn(mem_id, clist_code);
+		return rList;
+	}
+	// ** 단톡방에서 대화방 친구 목록
+	public List<Map<String, Object>> roomInList(String clist_code, String login_id) {
+		List<Map<String, Object>> rList = null;
+		rList = sLogic.roomInList(clist_code, login_id);
+		return rList;
+	}
+	public List<Map<String, Object>> roomAddList(String clist_code, String login_id) {
+		List<Map<String, Object>> rList = null;
+		rList = sLogic.roomAddList(clist_code, login_id);
+		return rList;
+	}
+	// ROOMADD
+	public Map<String, Object> roomAddPerson(String clist_code, String addPerson, String login_id) {
+		Map<String, Object> rMap = null;
+		rMap = sLogic.roomAddPerson(clist_code, addPerson, login_id);
+		return rMap;
+	}
+	public List<Map<String, Object>> selyourid(String r_clistcode, String login_id) {
+		List<Map<String, Object>> rList = null;
+		rList = sLogic.selyourid(r_clistcode, login_id);
+		return rList;
+	}
+	public void exitRoom(String clist_code, String login_id) {
+		sLogic.exitRoom(clist_code, login_id);
 	}
 }

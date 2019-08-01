@@ -1,0 +1,7 @@
+package com.mvc2;
+
+import javax.servlet.http.HttpServlet;
+
+public class ActionServlet extends HttpServlet {
+
+}

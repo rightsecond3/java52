@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+<!-- 
+web.xml은 배치서술자 파일로써 서버가 기동할 때 먼저 스캔이 된다.
+이 때 클래스 정보도 스캔을 하므로 패키지명이나 클래스명이 다르면 에러 발생
+~> 에러 발생하면 무조건 404
+서버가 비정상이면 아무것도 요청할 수 없다.
+ -->
+<!-- 
+로그 정보는 하나의 프로젝트에서 공통관리되면 되므로 서버가 기동될 때
+읽어서 서버가 종료 될때까지 유지되면 됨. -> <context-param>
+WEB-INF 아래는 url로 접근이 불가
+a) classes : 자바클래스에 대한 컴파일된 파일된 파일 담김
+             컴파일이 일어날 때 마다 삭제 되었다가 다시 배포됨.
+b) lib : 오픈소스에 대한 XXX.jar배포(자바클래스)
+-->
+	<!-- Logger -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	<!-- 세션 타임을 분단위로 설정 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<!-- 에러 페이지 지정하기(운영서버) -->
+	<!--
+		<error-page>
+			<error-code>404</error-code>
+			<location>/error/error404.jsp</location>
+		</error-page> 
+	-->
+	<!-- ServletTest -->
+	<servlet>
+		<servlet-name>ServletTest</servlet-name>
+		<servlet-class>com.basic.HelloServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletTest</servlet-name>
+		<url-pattern>/hello.do</url-pattern>
+	</servlet-mapping>
+	<!-- HelloServlet -->
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>com.basic.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/login.nhn</url-pattern>
+	</servlet-mapping>
+	<!-- Test -->
+	<servlet>
+		<servlet-name>Test</servlet-name>
+		<servlet-class>com.basic.RequestTest</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>Test</servlet-name>
+		<url-pattern>/basic/requestTest.do</url-pattern>
+	</servlet-mapping>
+	<!-- Ch03Pet -->
+	<servlet>
+		<servlet-name>Ch03Pet</servlet-name>
+		<servlet-class>com.ch03.PetServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Ch03Pet</servlet-name>
+		<url-pattern>/ch03/petChoice.do</url-pattern>
+	</servlet-mapping>
+	<!-- ch05MemberServlet -->
+	<servlet>
+		<servlet-name>Ch05Member</servlet-name>
+		<servlet-class>com.ch05.MemberServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Ch05Member</servlet-name>
+		<url-pattern>/ch05/memberList.do</url-pattern>
+	</servlet-mapping>
+	<!-- com.mvc1 -->
+	<servlet>
+		<servlet-name>POJO_MVC1</servlet-name>
+		<servlet-class>com.mvc1.FrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>POJO_MVC1</servlet-name>
+		<url-pattern>*.kos</url-pattern>
+	</servlet-mapping>
+	<!-- 네아로 로그인 : 쿠키 -->
+	<servlet>
+		<servlet-name>CookieLogin</servlet-name>
+		<servlet-class>com.ch09.CookieServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CookieLogin</servlet-name>
+		<url-pattern>/ch09/login.do</url-pattern>
+	</servlet-mapping>
+	<!-- 커넥션 풀 이름 등록하기 -->
+	<resource-ref>
+		<description>Connection</description>
+		<res-ref-name>jdbc/dbPool</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+</web-app>

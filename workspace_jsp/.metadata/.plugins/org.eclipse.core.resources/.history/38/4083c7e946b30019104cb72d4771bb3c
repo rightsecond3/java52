@@ -1,0 +1,20 @@
+package com.mvc2;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class Test2Controller implements Controller {
+	//** 선언부
+	String requestName = null;
+	String crud = null;
+	//*** 생성자
+	public Test2Controller(String requestName, String crud) {
+		this.requestName = requestName;
+		this.crud = crud;
+	}
+	@Override
+	public String execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		return null;
+	}
+
+}

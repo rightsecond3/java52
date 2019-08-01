@@ -1,0 +1,9 @@
+package com.mvc2;
+
+public class ControllerMapping {
+	String crud = null;
+	public static Controller getController(String command, String crud) {
+		
+		return new Controller();
+	}
+}

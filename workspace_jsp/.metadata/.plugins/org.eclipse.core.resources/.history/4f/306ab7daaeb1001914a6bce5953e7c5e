@@ -1,0 +1,13 @@
+package com.vo;
+
+public class SwDesignVO {
+	private int    d_no     = 0; 
+	private int    sub_cd   = 0; 
+	private String question = null; 
+	private String answer1  = null; 
+	private String answer2  = null; 
+	private String answer3  = null; 
+	private String answer4  = null; 
+	private int    d_point  = 0; 
+	private int    dap      = 0; 
+}

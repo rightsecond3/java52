@@ -13,32 +13,35 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class HashMapBinder {
 	HttpServletRequest req = null;
+
 	public HashMapBinder(HttpServletRequest req) {
 		this.req = req;
 	}
-	//* getParameter의 name의 이름을 가져옴
+
+	// * getParameter의 name의 이름을 가져옴
 	public void bind(Map<String, Object> target) {
-		//파라미터로 넘어온 target안에 다른 정보가 담겨 있다면 제거
+		// 파라미터로 넘어온 target안에 다른 정보가 담겨 있다면 제거
 		target.clear();
 		Enumeration er = req.getParameterNames();
-		while(er.hasMoreElements()) {
+		while (er.hasMoreElements()) {
 			String name = (String) er.nextElement();// name,address,pet
-			if("pet".equals("name")) {
-				String values[] = req.getParameterValues(name);
-				String myPet = null;
-				if(values!=null) {
-					for(int i=0;i<values.length;i++) {
-						myPet+=values[i]+" ";
-					}
-					target.put("pet", myPet);
-				}
-			}
-			else {
-				//key : name, address, pet
-				//value : 값
-				//HangulConversion.toUTF() : POST일경우
-				target.put(name, req.getParameter(name));
-			}
+			// key : name, address, pet
+			// value : 값
+			// Tomcat의 server.xml에서 한글 처리를 해줬었음.
+			target.put(name, req.getParameter(name));
+		}
+	}
+	// * getParameter의 name의 이름을 가져옴
+	public void bindPost(Map<String, Object> target) {
+		// 파라미터로 넘어온 target안에 다른 정보가 담겨 있다면 제거
+		target.clear();
+		Enumeration er = req.getParameterNames();
+		while (er.hasMoreElements()) {
+			String name = (String) er.nextElement();// name,address,pet
+			// key : name, address, pet
+			// value : 값
+			// HangulConversion.toUTF() : POST일경우
+			target.put(name, HangulConversion.toUTF(req.getParameter(name)));
 		}
 	}
 }

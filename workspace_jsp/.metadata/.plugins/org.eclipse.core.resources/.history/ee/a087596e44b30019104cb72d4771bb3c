@@ -1,0 +1,19 @@
+package com.mvc2;
+
+public class ControllerMapping {
+	String crud = null;
+	/**********************
+	 * 
+	 * @param command : /onLineTest/getSubjectList.mo?work=onLineTest 
+	 * @param crud : 
+	 * @return
+	 **********************/
+	public static Controller getController(String command, String crud) {
+		String commands[] = command.split("/"); // "/"안의 문자열을 기준으로 썰어서 배열에 담아줌
+		String work = commands[0];
+		if("onLineTest".equals(work)) {
+			
+		}
+		return new Controller();
+	}
+}

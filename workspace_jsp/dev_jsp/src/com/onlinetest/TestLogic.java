@@ -31,4 +31,24 @@ public class TestLogic {
 		return result;
 	}
 
+	public List<Map<String, Object>> swDesignExam(Map<String, Object> pMap) {
+		logger.info("TestLogic swDesignExam");
+		List<Map<String, Object>> designList = null;
+		designList = tDao.swDesignExam(pMap);
+		return designList;
+	}
+	
+	//**** 내꺼
+	public Map<String, Object> swDesignExam2(Map<String, Object> pMap) {
+		tDao.swDesignExam2(pMap);
+		return pMap;
+	}
+	// 수험번호와 이름이 맞는지 확인하기
+	public String isOk(Map<String, Object> pMap) {
+		logger.info("TestLogic isOk");
+		String msg = null;
+		msg = tDao.isOk(pMap);
+		return msg;
+	}
+
 }

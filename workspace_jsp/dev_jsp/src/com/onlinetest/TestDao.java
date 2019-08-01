@@ -1,6 +1,7 @@
 package com.onlinetest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,45 @@ public class TestDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public List<Map<String, Object>> swDesignExam(Map<String, Object> pMap) {
+		logger.info("TestDao : swDesignExam");
+		List<Map<String, Object>> designList = new ArrayList<Map<String,Object>>();
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			designList = sqlSession.selectList("swDesignExam", pMap);
+			designList.add(pMap);
+			logger.info("designList : "+designList.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return designList;
+	} 
+	
+	public Map<String, Object> swDesignExam2(Map<String, Object> pMap) {
+		logger.info("TestDao : swDesignExam2");
+		Map<String, Object> swMap = new HashMap<String, Object>();
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			sqlSession.selectOne("swDesignExam",pMap);
+			logger.info(pMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pMap;
+	}
+
+	public String isOk(Map<String, Object> pMap) {
+		logger.info("TestDao isOk");
+		String msg = null;
+		try {
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			msg = sqlSession.selectOne("isOk", pMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return msg;
 	}
 
 }

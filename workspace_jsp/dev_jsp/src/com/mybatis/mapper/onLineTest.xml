@@ -16,4 +16,16 @@
 		              ,#{exam_date}, 0, 0, '00:00:00'
 		              ,'00:00:00', '9999-99-99', 0, TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 	</insert>
+	<resultMap type="java.util.Map" id="sMap" />
+	<select id="swDesignExam" parameterType="map" resultType="map" statementType="CALLABLE" >
+		{call proc_swDesign(
+			#{key, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=sMap}
+		)}
+	</select>
+	<select id="isOk" parameterType="map" resultType="java.lang.String">
+		<!-- 1)수험번호, 2) 세션에서 가져오는 mem_id -->
+		SELECT NVL((SELECT '승인' FROM take_examination WHERE exam_no=#{exam_no} AND mem_id=#{mem_id}) 
+            , '확인불가')
+  		  FROM dual
+	</select>
 </mapper>

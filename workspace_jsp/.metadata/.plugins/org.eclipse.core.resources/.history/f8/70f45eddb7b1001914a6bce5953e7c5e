@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.SubjectMapper">
+	<select id="subjectList" resultType="map">
+		SELECT sub_cd,sub_name FROM online_subject
+	</select>
+	<select id="getExamNo" parameterType="int" resultType="java.lang.String">
+		SELECT TO_CHAR(SYSDATE,'YY'||'MM'||'DD')||LPAD(seq_exam_no.nextval,4,0) as exam_no
+          FROM dual
+	</select>
+	<insert id="examReceipt" parameterType="map">
+		INSERT INTO take_examination(exam_no, mem_id, sub_cd, exam_chasi
+		                            ,exam_date ,get_point, is_pass, s_time
+		                            ,e_time,fee_date,is_payment,reg_date)
+		       VALUES(#{exam_no}, #{mem_id}, #{sub_cd}, 1
+		              ,#{exam_date}, 0, 0, '00:00:00'
+		              ,'00:00:00', '9999-99-99', 0, TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	</insert>
+	<resultMap type="com.vo.SwDesignVO" id="swDVO" />
+	<select id="swDesignExam" parameterType="map" statementType="CALLABLE">
+		{call proc_swDesign(
+			#{key, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=swDVO}
+		)}
+	</select>
+</mapper>

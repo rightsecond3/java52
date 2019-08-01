@@ -1,0 +1,67 @@
+package com.mvc2;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+public class ActionServlet extends HttpServlet {
+	//*** 선언부
+	Logger logger = Logger.getLogger(ActionServlet.class);
+	
+	private void doService(HttpServletRequest req, HttpServletResponse res) 
+	throws ServletException, IOException {
+		// dev_jsp/onLineTest/test.mo?crud=select
+		String requestURI = req.getRequestURI();
+		// /dev_jsp or /
+		String contextPath = req.getContextPath();
+		// onLineTest/test.mo?crud=select
+		String command = requestURI.substring(contextPath.length()+1);
+		logger.info("[doService] : command : "+command);
+		Controller controller = null;
+		String crud = req.getParameter("crud");
+		try {
+			controller = ControllerMapping.getController(command, crud);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(controller != null) {
+			// return "redirect:XXX.jsp";
+			String pageMove[] = null;
+			try {
+				String ret = controller.execute(req, res);
+				// pageMove[0] = redirect || forward
+				// pageMove[1] = 실제 이동할 요청 페이지 이름
+				pageMove = ret.split(":");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(pageMove != null) {
+				String path = pageMove[1];
+				if("redirect".equals(pageMove[0])) { //sendRedirect 일 때
+					res.sendRedirect(path);
+				} else { //forward 일때
+					if("forward".equals(pageMove[0])) {
+						RequestDispatcher reqDispatcher = req.getRequestDispatcher(path);
+						reqDispatcher.forward(req, res);
+					} else {
+						res.sendRedirect("/error/pageMoveFail.jsp");
+					}
+				}
+			}
+		}
+	}
+	public void doGet(HttpServletRequest req, HttpServletResponse res) 
+	throws ServletException, IOException {
+		doService(req, res);
+	}
+	public void doPost(HttpServletRequest req, HttpServletResponse res) 
+			throws ServletException, IOException {
+		doService(req, res);
+	}
+}

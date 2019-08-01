@@ -45,7 +45,11 @@
         }
     }
     function getBoardSold() {
+    	//비동기 통신 객체를 생성하기
         createRequest();
+    	//페이지를 갱신하지 않고 서버에 무언가를 요청할 수 있다.
+    	//요청을 받는 페이지가 jsp라면 모델1 방식이다.
+    	//요청을 받는 페이지가 servlet이면 모델2 방식이다.
         var url = "./boardSellAction.jsp?"+new Date().getTime();
         //첫번째 : 전송 방식 - get|post
         //두번째 : 이 요청을 처리할 페이지 이름

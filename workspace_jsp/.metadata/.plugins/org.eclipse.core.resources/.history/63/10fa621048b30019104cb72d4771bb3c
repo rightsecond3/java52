@@ -1,0 +1,24 @@
+package com.mvc2;
+
+public class ControllerMapping {
+	static String crud = null;
+	/**********************
+	 * 1차에서는 xxx.kos?work=onLineTest로 받았었다.
+	 * @param command : /onLineTest/getSubjectList.mo?crud=select
+	 * @param crud : 
+	 * @return
+	 **********************/
+	public static Controller getController(String command, String crud) {
+		Controller controller = null;
+		String commands[] = command.split("/"); // "/"안의 문자열을 기준으로 썰어서 배열에 담아줌
+		String work = commands[0];
+		String requestName = commands[1];
+		if("onLineTest".equals(work)) {
+			controller = new Test2Controller(requestName, ControllerMapping.crud);
+		}
+		else if("member".equals(work)) {
+			controller = new Member2Controller(requestName, ControllerMapping.crud);
+		}
+		return controller;
+	}
+}

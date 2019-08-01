@@ -51,10 +51,11 @@ public class MemberVO {
 	public void setR_status(String r_status) {
 		this.r_status = r_status;
 	}
-	public ArrayList getKey() {
+	public ArrayList<TakeExaminationVO> getKey() {
 		return key;
 	}
-	public void setKey(ArrayList key) {
+	public void setKey(ArrayList<TakeExaminationVO> key) {
 		this.key = key;
-	} 
+	}
+
 }

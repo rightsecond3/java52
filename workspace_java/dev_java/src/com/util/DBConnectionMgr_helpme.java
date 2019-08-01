@@ -118,11 +118,11 @@ public class DBConnectionMgr_helpme {
 	//** REF_CURSOR를 쓸때 **//
 	public void freeConnection(Connection con, CallableStatement cstmt, ResultSet rs, OracleCallableStatement ocstmt) {
 		try {
-			if (ocstmt!=null) {
-				ocstmt.close();
-			}
 			if (rs!=null) {
 				rs.close();
+			}
+			if (ocstmt!=null) {
+				ocstmt.close();
 			}
 			if (cstmt!=null) { // 자원반납은 객체 생성의 역순으로 해줘야 한다.
 				cstmt.close();

@@ -1,0 +1,9 @@
+package com.mvc2;
+
+public class ControllerMapping {
+	String crud = null;
+	public static Controller getController(String command, String crud) {
+		String commands[] = command.split("/"); // "/"안의 문자열을 기준으로 썰어서 배열에 담아줌
+		return new Controller();
+	}
+}
