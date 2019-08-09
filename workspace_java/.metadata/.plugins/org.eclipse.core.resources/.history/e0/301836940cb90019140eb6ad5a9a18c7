@@ -1,0 +1,16 @@
+package com.basic;
+
+public class ServerTest implements Runnable {
+	private final int PORT = 25573;
+	
+	public static void main(String[] args) {
+		new Thread(new ServerTest()).start();
+		
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

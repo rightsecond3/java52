@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/commons-pool2-2.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/p6spy-2.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/workspace_jsp/dev_jsp/WebContent/WEB-INF/lib/cos.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

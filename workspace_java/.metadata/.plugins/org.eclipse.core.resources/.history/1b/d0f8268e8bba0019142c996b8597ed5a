@@ -1,0 +1,19 @@
+package com.basic;
+
+import java.util.StringTokenizer;
+
+public class StzTest {
+
+	public static void main(String[] args) {
+		String msg = "jvm,kyeong ";
+		StringTokenizer stz = new StringTokenizer(msg, ",");
+		String jvm = null
+		String kyeong = null;
+		while(stz.hasMoreTokens()) {
+			jvm = stz.nextToken();
+			kyeong = stz.nextToken();
+		}
+		System.out.println(jvm+", "+kyeong);
+	}
+
+}

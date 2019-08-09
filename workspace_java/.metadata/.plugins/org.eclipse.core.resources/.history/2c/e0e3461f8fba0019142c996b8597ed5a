@@ -1,0 +1,27 @@
+package com.basic;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class FileFramTest extends JFrame {
+
+	public void init() {
+		JLabel jl = new JLabel();
+		JPanel jp_1 = new JPanel();
+		JLabel jl_1 = new JLabel("파일 이미지");
+		JButton jbtn = new JButton("다운로드");
+		jp_1.add(jl_1);
+		jp_1.add(jbtn);
+		jl.add(jbtn);
+		this.add(jl);
+		this.setVisible(true);
+		this.setSize(300, 300);
+	}
+	public static void main(String[] args) {
+		FileFramTest f = new FileFramTest();
+		f.init();
+	}
+
+}

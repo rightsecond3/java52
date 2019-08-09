@@ -1,0 +1,27 @@
+package com.basic;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class FileServerThread extends Thread {
+	FileServer fserver = null;
+	ObjectOutputStream oos = null;
+	ObjectInputStream ois = null;
+	
+	public FileServerThread(FileServer fserver) {
+		this.fserver = fserver;
+		try {
+			oos = new ObjectOutputStream(fserver.cSocket.getOutputStream());
+			ois = new ObjectInputStream(fserver.cSocket.getInputStream());
+			String msg = (String) ois.readObject();
+			fserver.jta_log.append(msg+"\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void run() {
+		
+	}
+}

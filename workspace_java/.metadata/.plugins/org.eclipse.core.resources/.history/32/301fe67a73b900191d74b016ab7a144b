@@ -1,0 +1,19 @@
+package com.basic;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class FileServerThread extends Thread {
+	FileServer fserver = null;
+	ObjectOutputStream oos = null;
+	ObjectInputStream ois = null;
+	
+	public FileServerThread(FileServer fserver) {
+		this.fserver = fserver;
+	}
+	
+	@Override
+	public void run() {
+		
+	}
+}

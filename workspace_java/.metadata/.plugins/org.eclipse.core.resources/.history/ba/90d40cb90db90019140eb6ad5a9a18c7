@@ -1,0 +1,15 @@
+package com.basic;
+
+public class ClientTest {
+	private String hostname = null;
+	private int port = 0;
+	
+	public static void main(String[] args) {
+		ServerTest st = new ServerTest("192.168.0.211", 25573);
+	}
+	
+	public ClientTest(String hostname, int port) {
+		this.hostname = hostname;
+		this.port = port;
+	}
+}

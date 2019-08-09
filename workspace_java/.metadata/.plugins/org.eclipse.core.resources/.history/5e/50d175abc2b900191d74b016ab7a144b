@@ -1,0 +1,18 @@
+package com.basic;
+
+import java.io.ObjectOutputStream;
+
+public class FileClientThread extends Thread {
+	FileClient fClient = null;
+	ObjectInputStream ois = null;
+	ObjectOutputStream oos = null;
+	
+	public FileClientThread(FileClient fileClient) {
+		this.fClient = fileClient;
+	}
+	
+	@Override
+	public void run() {
+		
+	}
+}

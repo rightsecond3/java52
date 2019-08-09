@@ -1,0 +1,50 @@
+package com.helpme3;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+public class LogicRoom {
+	DaoServer sDao = new DaoServer();
+	DaoRoom rDao = new DaoRoom();
+	// ADDGROUP : 단톡방생성
+	public VOChatList createGroup(VOChatList pVO) {
+		pVO = rDao.createGroup(pVO);
+		String yourid = pVO.getClist_name(); //jvm,kyeong,apple님과의 대화방
+		String realyourid = yourid.substring(0,yourid.length()-7);
+		if(realyourid!=null) {
+			StringTokenizer stz = new StringTokenizer(realyourid, ",");
+			int count = Integer.parseInt(pVO.getClist_count());
+			System.out.println("카운트 : "+count);
+			for(int i=0;i<count;i++) {
+				String chatid = stz.nextToken();
+				System.out.println("chatid : "+chatid);
+				rDao.insertchatnick(pVO, chatid);
+			}
+			
+		}
+		return pVO;
+	}
+	//더블클릭시 방생성(개인톡방만 잇을 경우) : ROOMCREATE
+	public List<VOChatList> getRoomCreate(VOChatList pVO) {
+		List<VOChatList> rList = new ArrayList<VOChatList>();
+		rList = sDao.getRoomCreate(pVO);
+		rList = rDao.getRoomCreate(pVO);
+		return rList;
+	}
+	// ROOM_IN
+	public List<Map<String, Object>> roomIn(String mem_id, String clist_code) {
+		List<Map<String, Object>> rList = null;
+		rList = sDao.roomIn(mem_id, clist_code);
+		rList = rDao.roomIn(mem_id, clist_code);
+		return rList;
+	}
+	// ROOM_INLIST
+	public List<Map<String, Object>> roomInList(String clist_code, String login_id) {
+		List<Map<String, Object>> rList = null;
+		rList = sDao.roomInList(clist_code, login_id);
+		rList = rDao.roomInList(clist_code, login_id);
+		return rList;
+	}
+}

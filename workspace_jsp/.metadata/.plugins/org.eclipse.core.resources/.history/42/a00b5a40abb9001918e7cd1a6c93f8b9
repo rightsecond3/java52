@@ -1,0 +1,95 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	List<Map<String, Object>> boardDetail 
+	= (List<Map<String, Object>>) request.getAttribute("boardDetail");
+	Map<String, Object> rMap = null;
+	if(boardDetail != null) {
+		rMap = boardDetail.get(0);
+	}
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<%@ include file="/common/JEasyUICommon.jsp"%>
+	<script type="text/javascript">
+		// 댓글쓰기
+		function repleForm() {
+			
+		}
+		// 수정
+		function editForm() {
+			
+		}
+		// 삭제
+		function deleteForm() {
+			
+		}
+		// 목록
+		function boardList() {
+			
+		}
+	</script>
+</head>
+
+<body>
+	<table id="pan_read" class="easyui-panel" title="글상세보기"
+	style="width: 670px; height: 380px; padding: 10px; background: #fafafa;"
+	data-options="footer:'#tb_read'">
+		<tr>
+			<td width="100px">&nbsp;&nbsp;제목</td>
+			<td width="500px">
+				<input class="easyui-textbox" id="bm_title" name="bm_title" 
+				value="<%=rMap.get("BM_TITLE") %>" required style="width: 400px;">
+			</td>
+		</tr>
+		<tr>
+			<td width="100px">&nbsp;&nbsp;작성자</td>
+			<td width="500px">
+				<input class="easyui-textbox" id="bm_wirter" name="bm_writer" 
+				value="<%=rMap.get("BM_WRITER") %>" required style="width: 400px;">
+			</td>
+		</tr>
+		<tr>
+			<td width="100px">&nbsp;&nbsp;이메일</td>
+			<td width="500px">
+				<input class="easyui-textbox" id="bm_email"
+				value="<%=rMap.get("BM_EMAIL") %>" name="bm_email" style="width: 400px;">
+			</td>
+		</tr>
+		<tr>
+			<td width="100px">&nbsp;&nbsp;내용</td>
+			<td width="500px">
+				<input class="easyui-textbox" id="bm_content"
+				name="bm_content" required style="width: 400px; height: 90px;"
+				value="<%=rMap.get("BM_CONTENT") %>" data-options="multiline:'true'">
+			</td>
+		</tr>
+		<tr>
+			<td width="100px">&nbsp;&nbsp;비밀번호</td>
+			<td width="500px"><input class="easyui-passwordbox" id="bm_pw"
+				name="bm_pw" style="width: 200px;"></td>
+		</tr>
+	</table>
+	<!-- ===========[수정, 삭제, 댓글, 목록 버튼]============ -->
+	<div id="tb_read" align="center">
+		<a href="javascript:repleForm()" class="easyui-linkbutton" plain='true'
+		iconCls='icon-tip'>댓글</a>
+		<a href="javascript:updateForm()" class="easyui-linkbutton" plain='true'
+		iconCls='icon-edit'>수정</a>
+		<a href="javascript:deleteForm()" class="easyui-linkbutton" plain='true'
+		iconCls='icon-cancel'>삭제</a>
+		<a href="javascript:boardList()" class="easyui-linkbutton" plain='true'
+		iconCls='icon-more'>목록</a>
+	</div>
+	<!-- ===================[댓글]==================== -->
+	<!-- ==================[글 수정]==================== -->
+	<!-- ==================[글 삭제]==================== -->
+
+</body>
+
+</html>

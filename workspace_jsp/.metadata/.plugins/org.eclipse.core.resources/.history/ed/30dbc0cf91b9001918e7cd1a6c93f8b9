@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.BoardMapper">
+	<!-- boardList -->
+	<select id="boardList" parameterType="com.vo.BoardMasterVO" resultType="map">
+		SELECT rno, bm_no, bm_title, bm_writer, bm_date, bs_file, bm_hit, bm_content
+          FROM (        
+                 SELECT rownum rno, bm_no, bm_title, bm_writer, bm_date, bs_file, bm_hit, bm_content
+                   FROM (   
+                         SELECT  bm.bm_no, bm.bm_title, bm.bm_writer, bm.bm_hit
+                                    ,bm.bm_group, bm.bm_step, bs.bs_file, bm.bm_date, bm_content
+                           FROM board_master_t bm, board_sub_t bs
+                          WHERE bm.bm_no = bs.bm_no(+)
+						  <if test="keyword!=null and cb_value.equals('bm_title')">
+						   	AND bm_title LIKE '%'||#{keyword}||'%' 
+						  </if>
+						  <if test="keyword!=null and cb_value.equals('bm_content')">
+						  	AND bm_content LIKE '%'||#{keyword}||'%' 
+						  </if>
+						  <if test="keyword!=null and cb_value.equals('bm_writer')">
+						  	AND bm_writer LIKE '%'||#{keyword}||'%' 
+						  </if>
+						  <if test="bm_date != null and bm_date.length()>0">
+						  	AND bm_date LIKE '%'||#{bm_date}||'%' 
+						  </if>
+				          <if test="bm_no>0">
+        				 	AND bm_no = #{bm_no}
+         			      </if>
+                          ORDER BY bm_group DESC, bm_step ASC
+                         )
+                   )
+         WHERE 1=1
+
+		 <if test="start>0 and end>0">
+		 	<!-- 부등호 같은 경우 태그로 인식하기 때문에 문제 발생 -->
+		 	<!-- 해결 : CDATA 태그 안에 있으면 전부 텍스트 처리해줌. -->
+		 	<![CDATA[AND rno BETWEEN #{start} AND #{end}]]>
+		 </if>
+            
+	</select>
+	<!--
+	 	글번호 채번하기
+	 	시퀀스의 문제점 - 번호를 채번하고 마스터 테이블에 추가한 후 서브 테이블에 추가할 때 그 번호를 유지할 수 있는 방법 X
+	 	Why - 채번한 후에 현재 시퀀스 값을 확인할 수 있는데 마스터 테이블에 insert하는 문장과
+	 	            서브 테이블에 insert하는 문장이 같은 쿼리문에 있지 않으므로 시퀀스를 사용하는 것이 불가능함.
+	 	            따라서 글 번호를 max값을 이용해서 채번하고 1을 더하여 다음 번호를 채번하도록 한다.
+	 	            만일 프로시저를 사용한다면 한 프로시저에서 처리하면 되니까 사용 가능하다.
+	 	두번 째 문제점 - 글 그룹번호도 글번호와 같은 상황 일 것이다.
+	 	                         시퀀스를 채번하여 사용하는 것이 아니라 원글에 대한 글그룹 번호를 가져와서 사용해야 하는데
+	 	                         채번하는 경우에는 에러가 발생하더라도 시퀀스 값은 무조건 새로운 값으로 채번이 일이나 연속되는
+	 	                         번호를 가질 수 없게 될 것이다.
+		                         물론 연속값을 꼭 가져와야 하는 것은 아니지만 여기서는 일반 컬럼에 인덱스를 생성할 수 있다는 것을 활용해서 처리 해본다.
+	-->
+	<select id="getBmno" parameterType="int" resultType="int">
+        SELECT NVL((SELECT /*+index_desc(board_master_t BOARD_MNO_PK) */ bm_no
+                      FROM board_master_t
+                     WHERE rownum=1),0)+1 bm_no
+          FROM dual
+	</select>
+	<select id="getBmgroup" parameterType="int" resultType="int">
+		SELECT NVL((SELECT /*+index_desc(board_master_t i_group) */ bm_no
+		              FROM board_master_t
+		             WHERE rownum=1
+		               AND bm_group>0),0)+1 bm_group
+		  FROM dual
+	</select>
+	
+	<!-- boardMAdd -->
+	<insert id="boardMAdd" parameterType="com.vo.BoardMasterVO">
+		INSERT INTO board_master_t(bm_no, bm_title, bm_writer, bm_content, bm_email
+		                           ,bm_pw, bm_date, bm_group, bm_pos, bm_step)
+		       VALUES(#{bm_no}, #{bm_title}, #{bm_writer}, #{bm_content}, #{bm_email}
+		              ,#{bm_pw}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), #{bm_group}, #{bm_pos}, #{bm_step}) 
+		              
+	</insert>
+	<!-- boardSAdd -->
+	<insert id="boardSAdd" parameterType="com.vo.BoardSubVO">
+		INSERT INTO board_sub_t(bm_no, bs_seq, bs_file, bs_size)
+		       VALUES(#{bm_no}, 1, #{bs_file}, #{bs_size})
+	</insert>
+	<!-- boardMUpd -->
+	<update id="boardMUpd" parameterType="com.vo.BoardMasterVO">
+		UPDATE board_master_t
+		   SET bm_title = #{bm_title},
+		       bm_writer = #{bm_writer},
+		       bm_content = #{bm_content},
+		       bm_date = TO_CHAR (SYSDATE, 'YYYY-MM-DD'),
+		       bm_pw = #{bm_pw},
+		       bm_emaill = #{bm_emaill}
+		WHERE bm_no=#{bm_no}
+	</update>
+	<!-- boardSUpd -->
+	<update id="boardSUpd" parameterType="com.vo.BoardSubVO">
+		UPDATE board_sub_t
+		   SET bm_no = #{bm_no},
+		       bs_seq = #{bs_seq},
+		       bs_file = #{bs_file},
+		       bs_size = #{bs_size}
+		WHERE bm_no = #{bm_no}
+		  AND bs_seq = #{bs_seq}
+	</update>
+	<!-- boardMDel -->
+	<delete id="boardMDel" parameterType="com.vo.BoardMasterVO">
+		DELETE FROM board_master_t WHERE bm_no = #{bm_no}
+	</delete>
+	<!-- boardSDel -->
+	<delete id="boardSDel" parameterType="com.vo.BoardSubVO">
+		DELETE FROM board_sub_t WHERE bm_no = #{bm_no} AND bs_seq = #{bs_seq}
+	</delete>
+	<!-- getTotal - count 함수에 *를 넣을 경우 pk를 기준으로 다 가져온다.-->
+	<select id="getTotal" parameterType="com.vo.BoardMasterVO" resultType="int">
+		SELECT COUNT(*)
+		  FROM board_master_t bm, board_sub_t bs
+		 WHERE bm.bm_no = bs.bm_no(+)
+	</select>
+	<!-- 댓글이 추가 될 경우 해당하는 번호 다음 번호들 다 밀어주기 -->
+	<update id="bmStepUpdate" parameterType="com.vo.BoardMasterVO">
+		UPDATE board_master_t
+           SET bm_step = bm_step+1
+		 WHERE bm_group = #{bm_group}
+ 		 <![CDATA[ AND bm_step > #{bm_step} ]]>
+	</update>
+</mapper>

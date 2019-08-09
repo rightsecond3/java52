@@ -1,0 +1,131 @@
+package com.mvc2;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
+import com.vo.BoardMasterVO;
+import com.vo.BoardSubVO;
+
+public class BoardLogic {
+	Logger logger = Logger.getLogger(BoardLogic.class);
+	BoardDao bDao = null;
+	
+	public BoardLogic() {
+		bDao = new BoardDao();
+	}
+	//* 전체조회
+	public List<Map<String, Object>> boardList(BoardMasterVO bmVO, HttpServletRequest req) {
+		logger.info("boardList 호출 성공");
+		List<Map<String, Object>> boardList = null;
+		int total = 0; // 전체 레코드 수
+		total = bDao.getTotal();
+		HttpSession session = req.getSession();
+		session.setAttribute("s_tot", total);
+		int pageNumber = 0; // 현재 바라보는 페이지 번호
+		int pageSize = 0; // 한 페이지에 뿌려질 수
+		int start = 0; // 시작 번호
+		int end = 0; // 끝 번호
+		if(bmVO.getPageNumber()>0 && bmVO.getPageSize()>0) {
+			pageNumber = bmVO.getPageNumber();
+			pageSize = bmVO.getPageSize();
+			start = ((pageNumber-1)*pageSize)+1;
+			end = pageNumber * pageSize;
+			bmVO.setStart(start);
+			if(end > total) {
+				bmVO.setEnd(total);
+			} else {
+				bmVO.setEnd(end);
+			}
+			logger.info(start+", "+end);
+		}
+		boardList = bDao.boardList(bmVO);
+		return boardList;
+	}
+	//* 입력
+	public int boardAdd(Map<String, Object> pMap) {
+		logger.info("boardAdd 호출 성공");
+		int bm_no = 0;
+		int bm_group = 0;
+		if(pMap.get("bm_group")!=null) {
+			bm_group = Integer.parseInt(pMap.get("bm_group").toString());
+		}
+		int mresult = 0;
+		int sresult = 0;
+		// max 값의 +1 해준 값 가져오기
+		bm_no = bDao.getBmno();
+		BoardMasterVO bmVO = new BoardMasterVO();
+		BoardSubVO bsVO = new BoardSubVO();
+		// 공통처리부분
+		bmVO.setBm_no(bm_no);
+		bmVO.setBm_title(pMap.get("bm_title").toString());
+		bmVO.setBm_writer(pMap.get("bm_writer").toString());
+		bmVO.setBm_content(pMap.get("bm_content").toString());
+		bmVO.setBm_pw(pMap.get("bm_pw").toString());
+		if(bmVO.getBm_email()!=null && bmVO.getBm_email().toString().length()>1) {
+			bmVO.setBm_email(pMap.get("bm_email").toString());
+		} else {
+			bmVO.setBm_email("없음");
+		}
+		bmVO.setBm_group(bm_group);
+		bmVO.setBm_pos(Integer.parseInt(pMap.get("bm_pos").toString()));
+		bmVO.setBm_step(Integer.parseInt(pMap.get("bm_step").toString()));
+		if(bm_group>0) { // 댓글인 경우
+			bmVO.setBm_pos((bmVO.getBm_pos()+1));
+			bmVO.setBm_step((bmVO.getBm_step()+1));
+		}
+		else { // 새 글인 경우
+			bm_group = bDao.getBmgroup();
+			bmVO.setBm_group(bm_group);
+			bmVO.setBm_pos(0);
+			bmVO.setBm_step(0);
+		}
+		mresult = bDao.boardMAdd(bmVO);
+		// 첨부파일이 존재
+		if(pMap.get("bs_file")!=null && pMap.get("bs_file").toString().length()>1) {
+			bsVO.setBm_no(bm_no);
+			bsVO.setBs_file(pMap.get("bs_file").toString());
+			bsVO.setBs_size(Double.parseDouble(pMap.get("bs_size").toString()));
+			sresult = bDao.boardSAdd(bsVO);
+		}
+		// 댓글인 경우 스탭 번호 1씩 증가 시켜주어야 한다.
+		if(mresult == 1) {
+			int result = bDao.bmStepUpdate(bmVO); // 그룹번호와 스탭번호
+		}
+		return mresult;
+	}
+	//* 수정
+	public int boardUpd(Map<String, Object> pMap) {
+		logger.info("boardUpd 호출 성공");
+		int mresult = 0;
+		int sresult = 0;
+		BoardMasterVO bmVO = new BoardMasterVO();
+		BoardSubVO bsVO = new BoardSubVO();
+		// 첨부파일이 존재
+		mresult = bDao.boardSUpd(bsVO);
+		// 첨부파일이 존재X
+		
+		// 공통처리부분
+		sresult = bDao.boardMUpd(bmVO);
+		return mresult;
+	}
+	//* 삭제
+	public int boardDel(Map<String, Object> pMap) {
+		logger.info("boardDel 호출 성공");
+		int mresult = 0;
+		int sresult = 0;
+		BoardMasterVO bmVO = new BoardMasterVO();
+		BoardSubVO bsVO = new BoardSubVO();
+		// 첨부파일이 존재
+		mresult = bDao.boardSDel(bsVO);
+		// 첨부파일이 존재X
+		
+		// 공통처리부분
+		sresult = bDao.boardMDel(bmVO);
+		return mresult;
+	}
+}

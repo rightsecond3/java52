@@ -1,0 +1,15 @@
+package com.helpme3;
+
+import java.util.Map;
+
+public class LogicMember {
+	DaoServer sDao = new DaoServer();
+	
+	DaoMember mDao = new DaoMember();
+	// :JOIN
+	public String join(Map<String, Object> pMap) {
+		String mem_id = null;
+		mem_id = sDao.join(pMap);
+		return mem_id;
+	}
+}

@@ -1,0 +1,46 @@
+package com.mvc2;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
+
+import com.util.MyBatisCommonFactory;
+import com.vo.BoardMasterVO;
+import com.vo.BoardSubVO;
+
+public class BoardDao {
+	//* 선언부
+	Logger logger = Logger.getLogger(BoardDao.class);
+	SqlSessionFactory sqlSessionFactory = null;
+	
+	//* 생성자
+	public BoardDao() {
+		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
+	}
+	
+	public int boardSAdd(BoardSubVO bsVO) {
+		logger.info("boardSAdd 호출성공");
+		return 0;
+	}
+
+	public int boardMAdd(BoardMasterVO bmVO) {
+		logger.info("boardMAdd 호출성공");
+		return 0;
+	}
+
+	public int boardSUpd(BoardSubVO bsVO) {
+		return 0;
+	}
+
+	public int boardMUpd(BoardMasterVO bmVO) {
+		return 0;
+	}
+
+	public int boardSDel(BoardSubVO bsVO) {
+		return 0;
+	}
+
+	public int boardMDel(BoardMasterVO bmVO) {
+		return 0;
+	}
+
+}

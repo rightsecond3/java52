@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MVC패턴을 적용한 계층형 게시판</title>
+<%@ include file="/common/JEasyUICommon.jsp" %>
+</head>
+
+<body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#dg_board").datagrid({
+				toolbar:'#tb_board'
+				//,url:jsonBoardList.jsp
+			    ,columns:[[
+			        {field:'bm_title',title:'제목',width:100},
+			        {field:'bm_writer',title:'작성자',width:100},
+			        {field:'bm_date',title:'작성일',width:100,align:'right'},
+			        {field:'bs_file',title:'첨부파일',width:100},
+			        {field:'bm_hit',title:'조회수',width:100},
+			    ]]
+			});
+		});
+	</script>
+	<!-- =============[글 목록 화면_jEqsyUI DataGrid API]============== -->
+	<!-- 1)익스프레션을 이용해서 화면처리  :td, td 태그를 직접 작성하여 처리 -->
+	<!-- 2)json포멧으로 처리해서 매핑  : field명만 맞춰주면 자동 매핑 -->
+	<table id="dg_board" class="easyui-datagrid" title="글목록">
+		
+	</table>
+	<!-- 툴바부분 -->
+    <div id="tb_board" style="padding:2px 5px;">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+    </div>
+	<!-- =============[글 쓰기 화면_jEasyUI Dialog API]============== -->
+	<div id="dlg_boardAdd" class="easyui-dialog">
+		
+	</div>
+</body>
+
+</html>

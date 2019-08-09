@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MVC패턴을 적용한 계층형 게시판</title>
+<%@ include file="/common/JEasyUICommon.jsp" %>
+</head>
+
+<body>
+	<!-- =============[글 목록 화면_jEqsyUI DataGrid API]============== -->
+	<!-- 1)익스프레션을 이용해서 화면처리  :td, td 태그를 직접 작성하여 처리 -->
+	<!-- 2)json포멧으로 처리해서 매핑  : field명만 맞춰주면 자동 매핑 -->
+	<table id="dg_board" class="easyui-datagrid">
+	
+	</table>
+	<!-- =============[글 쓰기 화면_jEasyUI Dialog API]============== -->
+	<div id="dlg_boardAdd" class="easyui-dialog"></div>
+</body>
+
+</html>

@@ -1,5 +1,12 @@
 package com.vo;
-
+/*
+ * 전역변수를 private으로 하는 것을 권장.
+ * 이유
+ * 인스턴스화 하기
+ * 네이버 1초당 2000명이 입장
+ * 그 중에서 200명이 회원가입 진행 한다.
+ * 해당 VO는 그 회원에 대한 정보만 담고 있다.
+ */
 import java.util.ArrayList;
 
 public class MemberVO {

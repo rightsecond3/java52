@@ -1,0 +1,12 @@
+package com.basic;
+
+import java.util.StringTokenizer;
+
+public class StringTokenizerTest {
+
+	public static void main(String[] args) {
+		String msg = "A|B|"
+		StringTokenizer stz = new StringTokenizer(msg, "|");
+	}
+
+}

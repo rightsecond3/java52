@@ -1,0 +1,21 @@
+package com.basic;
+
+import java.net.ServerSocket;
+
+public class ServerTest implements Runnable {
+	private final int PORT = 25573;
+	
+	public static void main(String[] args) {
+		new Thread(new ServerTest()).start();
+	}
+	@Override
+	public void run() {
+		ServerSocket s = null;
+		try {
+			s = new ServerSocket(PORT);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

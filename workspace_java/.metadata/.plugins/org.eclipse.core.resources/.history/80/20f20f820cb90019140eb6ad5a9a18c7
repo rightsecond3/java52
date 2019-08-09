@@ -1,0 +1,11 @@
+package com.basic;
+
+public class ServerTest implements Runnable {
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

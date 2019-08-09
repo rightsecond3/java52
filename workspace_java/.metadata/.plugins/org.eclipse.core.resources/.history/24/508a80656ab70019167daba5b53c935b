@@ -1,0 +1,109 @@
+package com.helpme3;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.util.DBConnectionMgr_helpme;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+
+public class DaoRoom {
+	DBConnectionMgr_helpme dbMgr = null;
+	Connection con = null;
+	CallableStatement cstmt = null;// query
+	PreparedStatement pstmt = null;// procedure
+	OracleCallableStatement ocstmt = null;// refcursor
+	ResultSet rs = null;
+	
+	// ADDGROUP
+	public VOChatList createGroup(VOChatList pVO) {
+		try {
+			con = dbMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_newroom2(?,?,?,?,?)}");
+			int i = 0;
+			cstmt.setString(++i, pVO.getMem_id());
+			cstmt.setString(++i, pVO.getClist_yourid());
+			cstmt.setString(++i, pVO.getClist_gubun());
+			cstmt.registerOutParameter(++i, OracleTypes.VARCHAR);
+			cstmt.registerOutParameter(++i, OracleTypes.CURSOR);
+			cstmt.execute();
+			String result = cstmt.getString(4);
+			ocstmt = (OracleCallableStatement) cstmt;
+			rs = ocstmt.getCursor(5);
+			while(rs.next()) {
+				pVO.setClist_code(rs.getString("clist_code"));
+				pVO.setClist_yourid(rs.getString("clist_yourid"));
+				pVO.setClist_count(rs.getString("clist_count"));
+				pVO.setClist_name(rs.getString("clist_name"));
+				pVO.setClist_gubun(rs.getString("clist_gubun"));
+				pVO.setClist_img(rs.getString("clist_img"));
+				pVO.setMem_id(rs.getString("mem_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pVO;
+	}
+	//ADDGROUP을 한 후 CHATNICK에 따로따로 상대가 설정한 닉네임으로 넣어주기 위한 메소드
+	public void insertchatnick(VOChatList pVO, String chatid) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" INSERT INTO chatnick(chat_nick,clist_code,chat_id) ");
+		sql.append(" VALUES(?,?,?) ");
+		try {
+			con = dbMgr.getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			int i = 0;
+			///////////////수정 삭제
+			System.out.println("님과의 대화방 테스트"+pVO.getClist_name());
+			pstmt.setString(++i, pVO.getClist_name());
+			pstmt.setString(++i, pVO.getClist_code());
+			pstmt.setString(++i, chatid);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// 개인톡 더블클릭 시 ROOMCREATE
+		public List<VOChatList> getRoomCreate(VOChatList pVO) {
+			String mem_id = pVO.getMem_id();
+			System.out.println(mem_id);
+			String your_id = pVO.getClist_yourid();
+			System.out.println(your_id);
+			String gubun = pVO.getClist_gubun();
+			List<VOChatList> rList = new ArrayList<VOChatList>();
+			VOChatList rVO = null;
+			try {
+				con = dbMgr.getConnection();
+				cstmt = con.prepareCall("{call proc_newroom2(?, ?, ?, ?, ?)}");
+				cstmt.setString(1, mem_id);
+				cstmt.setString(2, your_id);
+				cstmt.setString(3, gubun);
+				cstmt.registerOutParameter(4, OracleTypes.VARCHAR);
+				cstmt.registerOutParameter(5, OracleTypes.CURSOR);
+				cstmt.execute();
+				ocstmt = (OracleCallableStatement) cstmt;
+				rs = ocstmt.getCursor(5);
+				while (rs.next()) {
+					rVO = new VOChatList();
+					rVO.setResult(cstmt.getString(4)); // 새창, clist
+					rVO.setClist_code(rs.getString("clist_code"));
+					rVO.setClist_count(rs.getString("clist_count"));
+					rVO.setClist_name(rs.getString("chat_nick"));
+					rVO.setClist_gubun(rs.getString("clist_gubun"));
+					rVO.setClist_img(rs.getString("clist_img"));
+					rVO.setMem_id(rs.getString("chat_id"));
+					rList.add(rVO);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				// dbMgr.freeConnection(con, cstmt, rs, ocstmt);
+			}
+			return rList;
+		}
+}

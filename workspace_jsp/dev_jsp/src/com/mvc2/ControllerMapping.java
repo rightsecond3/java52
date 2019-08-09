@@ -14,11 +14,14 @@ public class ControllerMapping {
 		String commands[] = command.split("/"); // "/"안의 문자열을 기준으로 썰어서 배열에 담아줌
 		String work = commands[0]; // onLineTest
 		String requestName = commands[1];// getSubjectList.mo?crud=select
-		if("onLineTest".equals(work)) {
+		if("onLineTestVer2".equals(work)) {
 			controller = new Test2Controller(requestName, ControllerMapping.crud);
 		}
 		else if("member".equals(work)) {
 			controller = new Member2Controller(requestName, ControllerMapping.crud);
+		}
+		else if("board".equals(work)) {
+			controller = new BoardController(requestName, ControllerMapping.crud);
 		}
 		return controller;
 	}

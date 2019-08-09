@@ -6,16 +6,16 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="CtrlServer"/>
+		<item key="selection" value="message"/>
 		<list key="findhistory">
-			<item value="chatlist"/>
-			<item value="CtrlServer"/>
-			<item value="Gson"/>
-			<item value="login"/>
-			<item value="addgroup"/>
-			<item value="사이즈"/>
-			<item value="메세지"/>
-			<item value="mess"/>
+			<item value="message"/>
+			<item value="room_log"/>
+			<item value="jbtn_file"/>
+			<item value="jmi_exit"/>
+			<item value="ROOM_SEARCH"/>
+			<item value="Protocol.CHANGE"/>
+			<item value="ROOM_LIST"/>
+			<item value="searchfriend"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cont"/>

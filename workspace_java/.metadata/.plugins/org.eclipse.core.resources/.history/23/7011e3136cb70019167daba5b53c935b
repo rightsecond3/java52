@@ -1,0 +1,42 @@
+package com.helpme3;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Map;
+
+import com.util.DBConnectionMgr_helpme;
+
+import oracle.jdbc.OracleCallableStatement;
+
+public class DaoMessage {
+	DBConnectionMgr_helpme dbMgr = null;
+	Connection con = null;
+	CallableStatement cstmt = null;// query
+	PreparedStatement pstmt = null;// procedure
+	OracleCallableStatement ocstmt = null;// refcursor
+	ResultSet rs = null;
+	
+	// INSERTMESSAGE
+	public void insMsg(Map<String, Object> pMap) {
+		Map<String, Object> rMap = null;
+		try {
+			con = dbMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_insertmessage(?,?,?,?,?,?)}");
+			int i = 0;
+			cstmt.setString(++i, pMap.get("writer").toString());
+			cstmt.setString(++i, pMap.get("content").toString());
+			cstmt.setString(++i, pMap.get("date").toString());
+			cstmt.setString(++i, pMap.get("time").toString());
+			cstmt.setString(++i, pMap.get("clist_code").toString());
+			cstmt.setString(++i, pMap.get("imogi").toString());
+			cstmt.executeUpdate();
+			System.out.println("insertmessage clist_code : "+pMap.get("clist_code"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// dbMgr.freeConnection(con, cstmt, rs, ocstmt);
+		}
+	}
+}

@@ -1,0 +1,37 @@
+package com.basic;
+
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.net.Socket;
+
+public class ClientThreadTest implements Runnable {
+	ClientTest ct = null;
+	
+	public ClientThreadTest(ClientTest ct) {
+		this.ct = ct;
+	}
+	@Override
+	public void run() {
+		try {
+			BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
+			FileInputStream fileIn = new FileInputStream("C:\\Users\\kosmo_15\\Documents");
+			byte[] buffer = new byte[8192];
+			int bytesRead = 0;
+			while((bytesRead = fileIn.read(buffer))>0) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+			out.close();
+			fileIn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			try {
+				socket.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+	}
+
+}

@@ -1,0 +1,22 @@
+package com.basic;
+
+import java.util.StringTokenizer;
+
+public class StringTokenizerTest {
+
+	public static void main(String[] args) {
+		String msg = "A|";
+		StringTokenizer stz = new StringTokenizer(msg, "|");
+		String a = stz.nextToken();
+		System.out.println(a);
+		String b = null;
+		do {
+			b = "빈문자열";
+		} 
+		while(stz.hasMoreElements()) {
+			b = stz.nextToken();
+		}
+		System.out.println(b);
+	}
+
+}

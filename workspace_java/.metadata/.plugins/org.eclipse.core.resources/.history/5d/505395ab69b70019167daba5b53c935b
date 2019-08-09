@@ -1,0 +1,24 @@
+package com.helpme3;
+
+import java.util.StringTokenizer;
+
+public class LogicRoom {
+	DaoRoom rDao = new DaoRoom();
+	public VOChatList createGroup(VOChatList pVO) {
+		pVO = sDao.createGroup(pVO);
+		String yourid = pVO.getClist_name(); //jvm,kyeong,apple님과의 대화방
+		String realyourid = yourid.substring(0,yourid.length()-7);
+		if(realyourid!=null) {
+			StringTokenizer stz = new StringTokenizer(realyourid, ",");
+			int count = Integer.parseInt(pVO.getClist_count());
+			System.out.println("카운트 : "+count);
+			for(int i=0;i<count;i++) {
+				String chatid = stz.nextToken();
+				System.out.println("chatid : "+chatid);
+				sDao.insertchatnick(pVO, chatid);
+			}
+			
+		}
+		return pVO;
+	}
+}

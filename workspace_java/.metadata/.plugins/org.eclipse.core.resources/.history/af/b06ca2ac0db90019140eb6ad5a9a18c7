@@ -1,0 +1,10 @@
+package com.basic;
+
+public class ClientTest {
+	private String hostname = null;
+	private int port = 0;
+	
+	public static void main(String[] args) {
+		ServerTest st = new ServerTest("locallhost", 25573);
+	}
+}

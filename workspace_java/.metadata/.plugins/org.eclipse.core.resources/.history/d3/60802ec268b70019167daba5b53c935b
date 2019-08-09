@@ -1,0 +1,38 @@
+package com.helpme3;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.util.DBConnectionMgr_helpme;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+
+public class DaoFriend {
+	DBConnectionMgr_helpme dbMgr = null;
+	Connection con = null;
+	CallableStatement cstmt = null;// query
+	PreparedStatement pstmt = null;// procedure
+	OracleCallableStatement ocstmt = null;// refcursor
+	ResultSet rs = null;
+	
+	// FRIEND : 친구 추가
+	public String addFriend(VOFriend pVO) {
+		String result = null;
+		try {
+			con = dbMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_addfriend(?,?,?)}");
+			int i = 0;
+			cstmt.setString(++i, pVO.getMem_id());
+			cstmt.setString(++i, pVO.getFri_fid());
+			cstmt.registerOutParameter(++i, OracleTypes.VARCHAR);
+			cstmt.execute();
+			result = cstmt.getString(3);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+}

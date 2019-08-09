@@ -1,0 +1,31 @@
+package com.helpme3;
+
+import java.util.List;
+import java.util.Map;
+
+public class LogicFriend {
+	DaoServer sDao = new DaoServer();
+	DaoFriend fDao = new DaoFriend();
+	
+	// FRIEND : 친구 추가
+	public String addFriend(VOFriend pVO) {
+		String result = fDao.addFriend(pVO);
+		return result;
+	}
+	// FRIENDLIST : 친구목록
+	public List<Map<String, Object>> friendList(String mem_id) {
+		List<Map<String, Object>> rList = null;
+		rList = sDao.friendList(mem_id);
+		rList = fDao.friendList(mem_id);
+		return rList;
+	}
+	// CHANGEFRINICK : 친구닉네임변경
+	public void changeFriNick(VOFriend pVO) {
+		sDao.changeFriNick(pVO);
+		fDao.changeFriNick(pVO);
+	}
+	public void deleteFriend(VOFriend pVO) {
+		sDao.deleteFriend(pVO);
+		fDao.deleteFriend(pVO);
+	}
+}

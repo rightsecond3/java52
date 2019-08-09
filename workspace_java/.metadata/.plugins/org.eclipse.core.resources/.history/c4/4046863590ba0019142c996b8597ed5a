@@ -1,0 +1,21 @@
+package com.basic;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class FileFramTest extends JFrame {
+
+	public void init() {
+		JLabel jl = new JLabel("너 뭐임?");
+		String fileName = "text.txt";
+		jl.setText("<img border=0 src='/images/bu_a.gif'>");
+		this.add(jl);
+		this.setVisible(true);
+		this.setSize(300, 300);
+	}
+	public static void main(String[] args) {
+		FileFramTest f = new FileFramTest();
+		f.init();
+	}
+
+}

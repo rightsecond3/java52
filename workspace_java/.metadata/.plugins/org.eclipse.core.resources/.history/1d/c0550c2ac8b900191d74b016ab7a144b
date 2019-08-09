@@ -1,0 +1,104 @@
+package com.basic;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
+public class FileClient extends JFrame {
+	InputStream in = null;
+	DataInputStream dis = null;
+	OutputStream out = null;
+	DataOutputStream dos = null;
+	
+	Socket mySocket = null;
+	String ip = "192.168.0.211";
+	int port = 7000;
+	FileClientThread fct = null;
+	
+	JFileChooser jfc = new JFileChooser();
+	JButton jbtn_choose = new JButton("선택");
+	JButton jbtn_send = new JButton("전송");
+	
+	public FileClient() {
+		// 소켓
+		try {
+			mySocket = new Socket(ip, port);
+			//oos = new ObjectOutputStream(mySocket.getOutputStream());
+			//ois = new ObjectInputStream(mySocket.getInputStream());
+			//oos.write(mySocket.getLocalPort());
+			in = mySocket.getInputStream();
+			dis = new DataInputStream(in);
+			out = mySocket.getOutputStream();
+			dos = new DataOutputStream(out);
+			
+			fct = new FileClientThread(this);
+			fct.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void initDisplay() {
+		//이벤트
+		jbtn_choose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int ret = jfc.showOpenDialog(FileClient.this);
+				if(ret == JFileChooser.APPROVE_OPTION) {
+					try {
+						File myFile = jfc.getSelectedFile();
+						String filename = myFile.getName();
+						System.out.println(filename);
+						dos.writeUTF(filename);
+						System.out.println("테스트1");
+						FileOutputStream fos = new FileOutputStream(filename);
+						System.out.println("테스트2");
+						BufferedOutputStream bos = new BufferedOutputStream(fos);
+						byte[] buffer = new byte[1024];
+						while(true) {
+							System.out.println("테스트3");
+							System.out.println(buffer);
+							int data=dis.read(buffer);
+							System.out.println(data);
+							if(data==-1) break;
+							System.out.println("테스트4");
+							fos.write(data);
+							System.out.println("테스트5");
+							bos.write(buffer,0,data);
+						}
+						fos.close();
+						dos.close();
+						dis.close();
+						out.close();
+						in.close();
+					} catch (Exception e2) {
+						// TODO: handle exception
+					}
+				}
+			}
+		});
+
+		// 화면
+		this.setLayout(new GridLayout(1,2));
+		this.add(jbtn_choose);
+		this.add(jbtn_send);
+		this.setVisible(true);
+		this.setSize(300, 150);
+		this.setTitle("파일전송테스트");
+	}
+	public static void main(String[] args) {
+		FileClient fc = new FileClient();
+		fc.initDisplay();
+	}
+}

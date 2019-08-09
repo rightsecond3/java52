@@ -1,0 +1,28 @@
+package com.basic;
+
+import java.net.Socket;
+
+public class ClientTest {
+	private String hostname = null;
+	private int port = 0;
+	ClientThreadTest ctt = null;
+	
+	public static void main(String[] args) {
+		ClientTest st = new ClientTest("192.168.0.211", 25573);
+	}
+	
+	public ClientTest(String hostname, int port) {
+		this.hostname = hostname;
+		this.port = port;
+		connect();
+	}
+	private void connect() {
+		try {
+			Socket s = new Socket(hostname, port);
+			ctt = new ClientThreadTest(this);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+}

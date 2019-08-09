@@ -1,0 +1,19 @@
+package com.mvc2;
+
+import org.apache.log4j.Logger;
+
+import com.vo.BoardMasterVO;
+import com.vo.BoardSubVO;
+
+public class BoardDao {
+	Logger logger = Logger.getLogger(BoardDao.class);
+	
+	public int boardSAdd(BoardSubVO bsVO) {
+		return 0;
+	}
+
+	public int boardMAdd(BoardMasterVO bmVO) {
+		return 0;
+	}
+
+}

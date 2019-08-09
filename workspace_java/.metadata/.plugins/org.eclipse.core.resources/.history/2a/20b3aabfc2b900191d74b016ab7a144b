@@ -1,0 +1,59 @@
+package com.basic;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
+public class FileClient extends JFrame {
+	ObjectOutputStream oos = null;
+	ObjectInputStream ois = null;
+	Socket mySocket = null;
+	String ip = "192.168.0.211";
+	int port = 5050;
+	FileClientThread fct = null;
+	
+	JFileChooser jfc = new JFileChooser();
+	JButton jbtn_choose = new JButton("선택");
+	JButton jbtn_send = new JButton("전송");
+	
+	public void initDisplay() {
+		//이벤트
+		jbtn_choose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int ret = jfc.showOpenDialog(FileClient.this);
+				if(ret == JFileChooser.APPROVE_OPTION) {
+					
+				}
+			}
+		});
+		// 소켓
+		try {
+			mySocket = new Socket(ip, port);
+			oos = new ObjectOutputStream(mySocket.getOutputStream());
+			ois = new ObjectInputStream(mySocket.getInputStream());
+			fct = new FileClientThread(this);
+			fct.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 화면
+		this.setLayout(new GridLayout(1,2));
+		this.add(jbtn_choose);
+		this.add(jbtn_send);
+		this.setVisible(true);
+		this.setSize(300, 150);
+		this.setTitle("파일전송테스트");
+	}
+	public static void main(String[] args) {
+		FileClient fc = new FileClient();
+		fc.initDisplay();
+	}
+}

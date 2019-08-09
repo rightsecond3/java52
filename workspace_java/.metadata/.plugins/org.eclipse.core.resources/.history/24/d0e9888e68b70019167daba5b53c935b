@@ -1,0 +1,23 @@
+package com.helpme3;
+
+import oracle.jdbc.OracleTypes;
+
+public class DaoFriend {
+	// 친구 추가
+	public String addFriend(VOFriend pVO) {
+		String result = null;
+		try {
+			con = dbMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_addfriend(?,?,?)}");
+			int i = 0;
+			cstmt.setString(++i, pVO.getMem_id());
+			cstmt.setString(++i, pVO.getFri_fid());
+			cstmt.registerOutParameter(++i, OracleTypes.VARCHAR);
+			cstmt.execute();
+			result = cstmt.getString(3);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+}

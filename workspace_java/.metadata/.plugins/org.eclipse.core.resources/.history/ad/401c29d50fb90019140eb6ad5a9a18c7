@@ -1,0 +1,45 @@
+package com.basic;
+
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.net.Socket;
+
+public class ClientTest {
+	private String hostname = null;
+	private int port = 0;
+	ClientThreadTest ctt = null;
+	
+	public static void main(String[] args) {
+		ClientTest st = new ClientTest("192.168.0.211", 25573);
+	}
+	
+	public ClientTest(String hostname, int port) {
+		this.hostname = hostname;
+		this.port = port;
+		connect();
+	}
+	private void connect() {
+		try {
+			Socket s = new Socket(hostname, port);
+			ctt = new ClientThreadTest(this);
+			BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
+			FileInputStream fileIn = new FileInputStream("C:\\Users\\kosmo_15\\Documents");
+			byte[] buffer = new byte[8192];
+			int bytesRead = 0;
+			while((bytesRead = fileIn.read(buffer))>0) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+			out.close();
+			fileIn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			try {
+				socket.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+	}
+}

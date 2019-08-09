@@ -1,0 +1,15 @@
+package com.basic;
+
+
+public class FileClientThread extends Thread {
+	FileClient fClient = null;
+	
+	public FileClientThread(FileClient fileClient) {
+		this.fClient = fileClient;
+	}
+	
+	@Override
+	public void run() {
+	}
+	
+}

@@ -1,0 +1,602 @@
+package com.helpme4;
+
+import java.awt.Container;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.text.SimpleAttributeSet;
+
+import com.google.gson.Gson;
+
+public class ClientThread extends Thread {
+
+	//////////// 선언부
+	Login login = null;
+	MainView mv = null;
+	ChatView cv = null;
+	ChatRight cr = null;
+	ChatLeft cl = null;
+	ShowMessage sm = null;
+	String imgPath = "C:\\workspace_java\\dev_java\\src\\images\\";
+	List<ChatView> chatList = new ArrayList<>();
+
+	//////////// 생성자
+	public ClientThread(Login login) {
+		this.login = login;
+	}
+
+	//////////// 스타일 그려주는 메소드
+	public SimpleAttributeSet makeAttribute() {
+		SimpleAttributeSet sas = new SimpleAttributeSet();
+		return sas;
+	}
+
+	///////////////// 메세지 메소드 =========================================
+	public void message(Map<String, Object> map, ChatView chatview) {
+		String mem_id = (String) map.get("clog_writer");
+		String message = (String) map.get("clog_contents");
+		String imgChoice = (String) map.get("clog_imo");
+		String mem_img = (String) map.get("mem_img");
+		String nickName = (String) map.get("fri_fnick");
+		String time = (String) map.get("clog_time");
+		// 메세지일때
+		if (imgChoice.equals("default")) {
+			// 내가 보낸 메세지 일 경우
+			if (login.mem_id.equals(mem_id)) {
+				try {
+					cr = new ChatRight();
+					cr.jlb_rightimg.setText(message);
+					cr.jlb_time.setText(time);
+					chatview.jtp_center.insertComponent(cr);
+					chatview.sd_center.insertString(chatview.sd_center.getLength(), "\n", null);
+					chatview.jtp_center.setCaretPosition(chatview.jtp_center.getDocument().getLength());
+				} catch (Exception ae) {
+					ae.printStackTrace();
+				}
+				chatview.jtp_south.setText("");
+			}
+			// 상대방이 보낸 메세지일 경우
+			else {
+				try {
+					cl = new ChatLeft();
+					cl.jlb_leftimg.setText(message);
+					ImageIcon img = new ImageIcon(imgPath + mem_img + ".png");
+					Image originImg = img.getImage();
+					Image changedImg = originImg.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+					cl.jlb_left.setIcon(new ImageIcon(changedImg));
+					cl.jlb_nick.setText(nickName);
+					cl.jlb_time.setText(time);
+					chatview.jtp_center.insertComponent(cl);
+					chatview.sd_center.insertString(chatview.sd_center.getLength(), "\n", null);
+					chatview.jtp_center.setCaretPosition(chatview.jtp_center.getDocument().getLength());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		// 이모티콘 일때
+		else {
+			// 내가 보낸 이모티콘 일 경우
+			if (login.mem_id.equals(mem_id)) {
+				try {
+					cr = new ChatRight();
+					cr.jlb_rightimg.setIcon(new ImageIcon(imgPath + imgChoice));
+					cr.jlb_time.setText(time);
+					chatview.jtp_center.insertComponent(cr);
+					chatview.sd_center.insertString(chatview.sd_center.getLength(), "\n", null);
+					chatview.jtp_center.setCaretPosition(chatview.jtp_center.getDocument().getLength());
+				} catch (Exception ae) {
+					ae.printStackTrace();
+				}
+				chatview.jtp_south.setText("");
+			}
+			// 상대방이 보낸 이모티콘일 경우
+			else {
+				try {
+					cl = new ChatLeft();
+					cl.jlb_leftimg.setIcon(new ImageIcon(imgPath + imgChoice));
+					ImageIcon img = new ImageIcon(imgPath + mem_img + ".png");
+					Image originImg = img.getImage();
+					Image changedImg = originImg.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+					cl.jlb_left.setIcon(new ImageIcon(changedImg));
+					cl.jlb_nick.setText(nickName);
+					cl.jlb_time.setText(time);
+					chatview.jtp_center.insertComponent(cl);
+					chatview.sd_center.insertString(chatview.sd_center.getLength(), "\n", null);
+					chatview.jtp_center.setCaretPosition(chatview.jtp_center.getDocument().getLength());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	//////////// Run메소드=============================================
+	public void run() {
+		String msg = null;
+		boolean isStop = false;
+		while (!isStop) {
+			try {
+				msg = (String) login.ois.readObject();
+				StringTokenizer st = null;
+				int protocol = 0;
+
+				if (msg != null) {
+					st = new StringTokenizer(msg, Protocol.seperator);
+					protocol = Integer.parseInt(st.nextToken());
+				}
+				System.out.println("pro" + protocol);
+				run_start: switch (protocol) {
+				////////////////////// 로그인 하고 메인 뷰 띄워줌.
+				case Protocol.LOGIN: {
+					String mem_id = st.nextToken();
+					System.out.println(mem_id);
+					if ("실패".equals(mem_id)) {
+						JOptionPane.showMessageDialog(login, "아이디와 비번을 확인해 주세요.");
+					} else {
+						login.setVisible(false);
+						login.jtf_id.setText("");
+						login.jpf_pw.setText("");
+						mv = new MainView(mem_id, login);
+						mv.setTitle(mem_id + "님의 몽톡");
+					}
+				}
+					break;
+
+				//////////////////////// 갠톡방만들기
+				case Protocol.ROOM_CREATE: {
+					// 서버스레드에서 방을 생성한 사람의 아이디를 받아온다.
+					String json = st.nextToken();
+					System.out.println("방 생성 : " + json);
+					Gson g = new Gson();
+					List<Map<String, Object>> cList = new ArrayList<>();
+					cList = (List<Map<String, Object>>) g.fromJson(json, cList.getClass());
+					Map<String, Object> map = new HashMap<>();
+					for (int i = 0; i < cList.size(); i++) {
+						map = cList.get(i);
+						if (map.get("chat_id").equals(login.mem_id)) {
+							System.out.println("cr1" + map.get("chat_id"));
+							System.out.println("cr2" + login.mem_id);
+
+							break;
+						}
+					}
+					String mem_id = (String) map.get("chat_id");
+					String room_code = (String) map.get("clist_code");
+					String room_title = (String) map.get("chat_nick");
+					for (int i = 0; i < chatList.size(); i++) {
+						ChatView chatview = chatList.get(i);
+						if (chatview.room_code.equals(room_code)) {
+							chatview.setVisible(true);
+							break run_start;
+						}
+					}
+					/////////////// 개인 채팅방 생성 및 room_code주입.
+					cv = new ChatView(room_code, login);
+					/////////////// 클라이언트 스레드에 채팅방에 대한 주소 저장.
+					chatList.add(cv);
+					cv.setTitle(room_title);
+					Map<String, Object> map1 = new HashMap<>();
+					for (int i = 0; i < cList.size(); i++) {
+						map1 = cList.get(i);
+						if (map1.get("chat_id").equals(login.mem_id)) {
+						} else {
+							cv.your_ids.add((String) map1.get("chat_id"));
+							System.out.println("방생성 나 빼고 아이디" + map1.get("chat_id"));
+						}
+					}
+					try {
+						login.oos.writeObject(
+								Protocol.CHATLOG + Protocol.seperator + login.mem_id + Protocol.seperator + room_code);
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+					break;////////////////////////////////// end of roomcreate
+
+				case Protocol.CHATLOG: {
+					String json = st.nextToken();
+					System.out.println("챗 로그: " + json);
+					Gson g = new Gson();
+					List<Map<String, Object>> cList = new ArrayList<>();
+					cList = (List<Map<String, Object>>) g.fromJson(json, cList.getClass());
+					/*
+					 * Map<String,Object> map = new HashMap<>(); List<Map<String,Object>> gList =
+					 * new ArrayList<>(); for(int i=0;i<cList.size();i++) { map = cList.get(i);
+					 * if(login.mem_id.equals((String)map.get("your_id"))) { gList.add(map); } }
+					 */
+					/////////////// DB에서 해당 room_code에 있는 채팅 로그를 가져옴.
+					// List<Map<String,Object>> loglist = dao.getLog(room_code);
+					/////////////// 로그의 갯수만큼 반복문 돌려서 작성자아이디와 내아이디가 같으면 오른쪽에 다르면 왼쪽에 말풍선 붙임.
+					for (int i = 0; i < cList.size(); i++) {
+						Map<String, Object> rMap = cList.get(i);
+						///////// 메세지 로그
+						if ("default".equals((String) rMap.get("clog_imo"))) {////////// 이모티콘이 아닌경우
+							if (login.mem_id.equals(rMap.get("clog_writer"))) {//////////// 내 아이디랑 글 작성자 체크
+								String log = (String) rMap.get("clog_contents");///////// 로그에 있는거 담기
+								try {
+									if (log.length() != 0) {/////////// 버블 씌운후 채팅창에 넣기
+										cr = new ChatRight();
+										cr.jlb_rightimg.setText(log);
+										cr.jlb_time.setText((String) rMap.get("clog_time"));
+										cv.jtp_center.insertComponent(cr);
+										cv.sd_center.insertString(cv.sd_center.getLength(), "\n", null);
+										cv.jtp_center.setCaretPosition(cv.jtp_center.getDocument().getLength());
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							} else {///////////// 내가 아닌 다른 사람이 작성한 경우
+								String log = (String) rMap.get("clog_contents");
+								try {//////////// 쓴사람 닉네임 프로필 채팅내용 시간 담기
+									if (log.length() != 0) {
+										cl = new ChatLeft();
+										cl.jlb_leftimg.setText(log);
+										ImageIcon img = new ImageIcon(
+												imgPath + rMap.get("mem_img").toString() + ".png");
+										Image originImg = img.getImage();
+										Image changedImg = originImg.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+										cl.jlb_left.setIcon(new ImageIcon(changedImg));
+										cl.jlb_nick.setText((String) rMap.get("fri_fnick"));
+										cl.jlb_time.setText((String) rMap.get("clog_time"));
+										cv.jtp_center.insertComponent(cl);
+										cv.sd_center.insertString(cv.sd_center.getLength(), "\n", null);
+										cv.jtp_center.setCaretPosition(cv.jtp_center.getDocument().getLength());
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
+						///////// 이모티콘 로그
+						else {
+							////////// 내가 이모티콘 보냈을 경우
+							if (login.mem_id.equals(rMap.get("clog_writer"))) {
+								cr = new ChatRight();
+								cr.jlb_rightimg.setIcon(new ImageIcon(imgPath + rMap.get("clog_imo").toString()));
+								cr.jlb_time.setText((String) rMap.get("clog_time"));
+								cv.jtp_center.insertComponent(cr);
+								cv.sd_center.insertString(cv.sd_center.getLength(), "\n", null);
+								cv.jtp_center.setCaretPosition(cv.jtp_center.getDocument().getLength());
+							}
+							///////// 상대방이 이모티콘 보냈을 경우
+							else {
+								cl = new ChatLeft();
+								cl.jlb_leftimg.setIcon(new ImageIcon(imgPath + rMap.get("clog_imo").toString()));
+								ImageIcon img = new ImageIcon(imgPath + rMap.get("mem_img").toString() + ".png");
+								Image originImg = img.getImage();
+								Image changedImg = originImg.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+								cl.jlb_left.setIcon(new ImageIcon(changedImg));
+								cl.jlb_nick.setText((String) rMap.get("fri_fnick"));
+								cl.jlb_time.setText((String) rMap.get("clog_time"));
+								cv.jtp_center.insertComponent(cl);
+								cv.sd_center.insertString(cv.sd_center.getLength(), "\n", null);
+								cv.jtp_center.setCaretPosition(cv.jtp_center.getDocument().getLength());
+							}
+						}
+					}
+					cv.jtp_south.setText("");
+				}
+					break;
+				/////////// ====================================메세지
+				/////////// 보내는거================================//////////
+				case Protocol.MESSAGE: {
+					String json = st.nextToken();
+					System.out.println(json);
+					Gson g = new Gson();
+					List<Map<String, Object>> list = new ArrayList<>();
+					Map<String, Object> map = new LinkedHashMap<>();
+					list = (List<Map<String, Object>>) g.fromJson(json, list.getClass());
+					for (int i = 0; i < list.size(); i++) {
+						map = list.get(i);
+						System.out.println("message : " + map.get("chat_id "));
+						if (login.mem_id.equals((String) map.get("chat_id "))) {
+							break;
+						}
+					}
+					String room_code = (String) map.get("clist_code");
+					String nickName = (String) map.get("fri_fnick");
+
+					if (chatList.size() == 0) {////// 방리스트에 아무것도 안담겨 있을경우
+						/////// 채팅창 안켰을 때 알림창 띄우기
+						if (sm != null) {////// 알림창이 켜져있으면 닫고 새로운 알림창 켜기
+							sm.dispose();
+							sm = new ShowMessage();
+							sm.jlb_msg.setText("새로운 메세지가 도착하였습니다.");
+							sm.setTitle(nickName + "님의 메세지");
+						} else {
+							sm = new ShowMessage();
+							sm.jlb_msg.setText("새로운 메세지가 도착하였습니다.");
+							sm.setTitle(nickName + "님의 메세지");
+						}
+					}
+					chatList: for (int i = 0; i < chatList.size(); i++) {//////// 방을 한번이라도 켰으면 방 갯수만큼 for문 돌리기
+						ChatView chatview = chatList.get(i);
+						System.out.println("size" + (chatList.size() - 1));
+						if (chatview.room_code.equals(room_code)) {
+							//////// 채팅방을 한번 들어갔으나 다시 나갔을때
+							if (chatview.isVisible() == false) {
+								if (sm != null) {
+									sm.dispose();
+									sm = new ShowMessage();
+									sm.jlb_msg.setText("새로운 메세지가 도착하였습니다.");
+									sm.setTitle(nickName + "님의 메세지");
+									message(map, chatview);//////// 메시지 메소드 호출 이름 프로필 내용등 담아서 채팅창이랑 같이 넘김
+								} else {
+									sm = new ShowMessage();
+									sm.jlb_msg.setText("새로운 메세지가 도착하였습니다.");
+									sm.setTitle(nickName + "님의 메세지");
+									message(map, chatview);
+								}
+							} else {
+								message(map, chatview);
+							}
+							break chatList;
+						} //////////// end of 2 if
+						else if (i == chatList.size() - 1) {
+							/////// 채팅창 안켰을 때 알림창 띄우기
+							if (sm != null) {
+								sm.dispose();
+								sm = new ShowMessage();
+								sm.jlb_msg.setText("새로운 메세지가 도착하였습니다.");
+								sm.setTitle(nickName + "님의 메세지");
+							} else {
+								sm = new ShowMessage();
+								sm.jlb_msg.setText("새로운 메세지가 도착하였습니다.");
+								sm.setTitle(nickName + "님의 메세지");
+							}
+						}
+					} //////////////// end of for
+				}
+					break;////////////// end of case MESSAGE
+				case Protocol.ADDFRIEND: {
+					String status = st.nextToken();// 성공 or 실패
+					System.out.println("add" + status);
+					if ("실패".equals(status)) {
+						JOptionPane.showMessageDialog(mv.frl.af, "아이디가 존재하지 않습니다.");
+					} else {
+						JOptionPane.showMessageDialog(mv.frl.af, "친구추가에 성공하였습니다.");
+						login.oos.writeObject(Protocol.FRIENDLIST + Protocol.seperator + login.mem_id);
+						mv.frl.af.dispose();
+					}
+				}
+					break;/////////////// end of case ADDFRIEND
+				///// ===========================친구목록 불러오기=============================
+				case Protocol.FRIENDLIST: {
+					mv.f_num = 0;
+					String fList = st.nextToken();
+					Gson g = new Gson();
+					List<Map<String, Object>> List = new ArrayList<>();
+					/////////// json포맷으로 넘어오는 값을 list<map>으로 변환
+					List = (List<Map<String, Object>>) g.fromJson(fList, List.getClass());
+					for (int i = 0; i < List.size(); i++) {
+						mv.f_num = mv.f_num + 1;
+					}
+					mv.jl_friend.setText("    친구 : " + mv.f_num + "명");
+					////////// 메인뷰 패널 변경하기 매번 갱신하는것
+					Container cont = mv.getContentPane();
+					if (mv.jp_view != null) {
+						cont.remove(mv.jp_view);
+						mv.jp_view = null;
+					}
+					mv.frl = new FriendView(List, mv.mem_id, login);
+					mv.jp_view = mv.frl;
+					mv.add("Center", mv.jp_view);
+					cont.revalidate();
+					cont.repaint();
+				}
+					break;/////////////// end of case FRIENDLIST
+				case Protocol.SEARCHFRIEND: {/////// 친구찾기
+					String fList = st.nextToken();
+					Gson g = new Gson();
+					List<Map<String, Object>> List = new ArrayList<>();
+					List = (List<Map<String, Object>>) g.fromJson(fList, List.getClass());
+					Container cont = mv.getContentPane();
+					if (mv.jp_view != null) {
+						cont.remove(mv.jp_view);
+						mv.jp_view = null;
+					}
+					mv.frl = new FriendView(List, mv.mem_id, login);
+					mv.jp_view = mv.frl;
+					mv.add("Center", mv.jp_view);
+					cont.revalidate();
+					cont.repaint();
+				}
+					break;////////////// end of case SERACHFRIEND
+				case Protocol.GROUPLIST: {
+					String fList = st.nextToken();
+					Gson g = new Gson();
+					List<Map<String, Object>> List = new ArrayList<>();
+					List = (List<Map<String, Object>>) g.fromJson(fList, List.getClass());
+					mv.frl.fgl = new FriendGroupList(login, List);
+				}
+					break;////////////// end of case GROUPLIST
+				case Protocol.ADDGROUP: {
+					Gson g = new Gson();
+					List<String> f_list = new ArrayList<>();
+					String room_code = st.nextToken();
+					String room_title = st.nextToken();
+					String json = st.nextToken();
+					f_list = (List<String>) g.fromJson(json, f_list.getClass());
+					if (room_code != null && json != null && room_title != null) {
+
+						mv.frl.fgl.dispose();
+						mv.frl.fgl = null;
+						/////////////// 개인 채팅방 생성 및 room_code주입.
+						cv = new ChatView(room_code, login);
+						/////////////// 클라이언트 스레드에 채팅방에 대한 주소 저장.
+						chatList.add(cv);
+						cv.setTitle(room_title);
+						cv.your_ids = f_list;
+					}
+				}
+					break;////////////// end of case ADDGROUP
+				case Protocol.CHATLIST: {
+					String fList = st.nextToken();
+					System.out.println("CHATLIST :" + fList);
+					Gson g = new Gson();
+					List<Map<String, Object>> List = new ArrayList<>();
+					/////////// json포맷으로 넘어오는 값을 list<map>으로 변환
+					List = (List<Map<String, Object>>) g.fromJson(fList, List.getClass());
+					////////// 메인뷰 패널 변경하기 매번 갱신하는것
+					Container cont = mv.getContentPane();
+					if (mv.jp_view != null) {
+						cont.remove(mv.jp_view);
+						mv.jp_view = null;
+					}
+					mv.clv = new ChatListView(List, mv.mem_id, login);
+					mv.jp_view = mv.clv;
+					mv.add("Center", mv.jp_view);
+					cont.revalidate();
+					cont.repaint();
+				}
+					break;///////////////// end of case CHATLIST
+				case Protocol.ROOM_INLIST: {////////////// 채팅방에 들어와 있는 사람 목록
+					String fList = st.nextToken();
+					Gson g = new Gson();
+					List<Map<String, Object>> List = new ArrayList<>();
+					List = (List<Map<String, Object>>) g.fromJson(fList, List.getClass());
+					cv.cml = new ChatMemberList(login, List);
+				}
+					break;///////////////// end of case ROOM_INLIST
+				case Protocol.ROOM_ADDLIST: {///////////// 채팅방에 추가하기 위한 목록창 부르기
+					String fList = st.nextToken();
+					String clist_code = st.nextToken();
+					System.out.println(fList);
+					Gson g = new Gson();
+					List<Map<String, Object>> List = new ArrayList<>();
+					List = (List<Map<String, Object>>) g.fromJson(fList, List.getClass());
+					cv.cfa = new ChatFriendAdd(login, List, clist_code);
+				}
+					break;///////////////// end of case ROOM_ADDLIST
+				case Protocol.ROOM_ADD: {////////////// 채팅방에 친구 추가하기
+					String clist_code = st.nextToken();
+					String status = st.nextToken();
+					String msg_title = st.nextToken();
+					String json = st.nextToken();
+					Gson g = new Gson();
+					List<Map<String, Object>> List = new ArrayList<>();
+					List = (List<Map<String, Object>>) g.fromJson(json, List.getClass());
+					List<String> fList = new ArrayList<>();
+					for (int i = 0; i < List.size(); i++) {
+						Map<String, Object> rMap = List.get(i);
+						fList.add((String) rMap.get("yourid"));
+					}
+
+					if ("단톡".equals(status)) {
+						for (int i = 0; i < chatList.size(); i++) {
+							ChatView chat = chatList.get(i);
+							if (clist_code.equals(chat.room_code)) {
+								chat.sd_center.insertString(chat.sd_center.getLength(), msg_title + "\n", null);
+								chat.jtp_center.setCaretPosition(chat.jtp_center.getDocument().getLength());
+								chat.your_ids = fList;
+								break;
+							}
+						}
+					} else {
+						ChatView chat = new ChatView(clist_code, login);
+						chatList.add(chat);
+						chat.setTitle(msg_title + " 님과의 대화방");
+						chat.your_ids = fList;
+					}
+				}
+					break;
+				case Protocol.ROOM_SEARCH: {
+					String jsonRoomSearch = st.nextToken();
+					Gson g = new Gson();
+					List<Map<String, Object>> rList = new ArrayList<>();
+					rList = (List<Map<String, Object>>) g.fromJson(jsonRoomSearch, rList.getClass());
+					Container cont = mv.getContentPane();
+					if (mv.jp_view != null) {
+						cont.remove(mv.jp_view);
+						mv.jp_view = null;
+					}
+					mv.clv = new ChatListView(rList, mv.mem_id, login);
+					mv.jp_view = mv.clv;
+					mv.add("Center", mv.jp_view);
+					cont.revalidate();
+					cont.repaint();
+				}
+					break;
+				case Protocol.ROOM_OUT: {
+					String room_code = st.nextToken();
+					String mem_id = st.nextToken();
+
+					for (int i = 0; i < chatList.size(); i++) {
+						ChatView chat = chatList.get(i);
+						if (chat.room_code.equals(room_code)) {
+							if (login.mem_id.equals(mem_id)) {
+								chatList.remove(i);
+								System.out.println("내가 나가기 완료");
+								break;
+							} else {
+								chat.your_ids.remove(mem_id);
+								System.out.println(chat.your_ids.remove(mem_id));
+								break;
+							}
+						}
+					}
+					try {
+						System.out.println("CHATLIST");
+						login.oos.writeObject(Protocol.CHATLIST + Protocol.seperator + login.mem_id);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+					break;////////////////////////// end of Protocol ROOM_OUT
+				case Protocol.SETTING: {
+					String json = st.nextToken();
+					Gson g = new Gson();
+					Map<String, Object> map = new HashMap<String, Object>();
+					map = g.fromJson(json, map.getClass());
+					Container cont = mv.getContentPane();
+					if (mv.jp_view != null) {
+						cont.remove(mv.jp_view);
+						mv.jp_view = null;
+					}
+					mv.sv = new SettingView(map, login);
+					mv.jp_view = mv.sv;
+					mv.add("Center", mv.jp_view);
+					cont.revalidate();
+					cont.repaint();
+				}
+					break;////////////////////////// end of Protocol SETTING
+				case Protocol.SETNICK: {
+					try {
+						login.oos.writeObject(Protocol.SETTING + Protocol.seperator + login.mem_id);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+					break;////////////////////////// end of Protocol SETNICK
+				case Protocol.SETSTATUS: {
+					try {
+						login.oos.writeObject(Protocol.SETTING + Protocol.seperator + login.mem_id);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+					break;////////////////////////// end of Protocol SETSTATUS
+				case Protocol.SETIMG: {
+					try {
+						login.oos.writeObject(Protocol.SETTING + Protocol.seperator + login.mem_id);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

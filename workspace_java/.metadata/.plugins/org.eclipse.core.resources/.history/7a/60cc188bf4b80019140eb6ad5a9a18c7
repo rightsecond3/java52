@@ -1,0 +1,41 @@
+package com.helpme4;
+/*
+ * 프로토콜
+ */
+public class Protocol {
+	public static final int JOIN = 10; //회원가입
+	public static final int OVERLAP = 20; //중복검사
+	public static final int LOGIN = 100; //대기상태
+	public static final int EXIT = 500; //종료
+	//
+	public static final int FRIEND_ADD = 30; //친구추가
+	public static final int FRIEND_LIST = 40; //친구목록 부르기
+	public static final int FRIEND_CHANGE_NICK = 50; //친구 닉네임 변경
+	public static final int FRIEND_DELETE = 60; //친구 삭제
+	public static final int FRIEND_SEARCH = 70; //친구 검색
+	public static final int FRIEND_LIST_GROUP = 80; //단톡방 생성시 친구 추가 할 목록 부르기
+	//
+	public static final int ROOM_CREATE_GROUP= 90; //단톡방 생성
+	public static final int ROOM_CREATE_PERSONAL = 110; //갠톡방개설
+	public static final int ROOM_LIST = 120; //톡방목록부르기
+	public static final int ROOM_IN = 130; //톡방 입장
+	public static final int ROOM_IN_LIST = 140; //톡방에 있는 사람 목록
+	public static final int ROOM_ADD_LIST = 150; //톡방에 초대할 사람 목록
+	public static final int ROOM_ADD = 160; //톡방에 초대하기
+	public static final int ROOM_SEARCH = 170; //톡방목록조건검색
+	public static final int ROOM_OUT = 190; //톡방 나가기
+	public static final int ROOM_LOG = 230; //챗창 로그 불러오기
+	//
+	public static final int CHATLIST = 310; //채팅방 목록 불러오기
+	//
+	public static final int MESSAGE = 200; //일반대화
+	//
+	public static final int CHANGE = 300; //대화명변경
+	public static final int SETTING = 400; //세팅창 켜기 불러오기
+	public static final int SETNICK = 410; //닉네임 변경
+	public static final int SETSTATUS = 420; //상태메세지 변경
+	public static final int SETIMG = 430; //프로필사진 변경
+	public static String seperator="|"; //구분자
+	// 구현?
+	public static final int WHISPER = 210; //1:1
+}

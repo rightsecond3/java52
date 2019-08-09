@@ -23,7 +23,7 @@ import com.vo.ZipCodeVO;
 public class MemberCont extends HttpServlet implements Action {
 	Logger logger = Logger.getLogger(MemberCont.class);
 	MemberLogic memLogic = new MemberLogic();
-	
+
 	@Override
 	public ActionForward execuete(HttpServletRequest req, HttpServletResponse res)
 	throws ServletException, IOException {

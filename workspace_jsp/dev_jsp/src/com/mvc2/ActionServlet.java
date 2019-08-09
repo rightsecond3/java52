@@ -34,10 +34,10 @@ public class ActionServlet extends HttpServlet {
 		String contextPath = req.getContextPath();
 		// onLineTest/test.mo -> 쿼리스트링은 출력되지않음
 		String command = requestURI.substring(contextPath.length()+1);
-		logger.info("[ActionServlet_doService] command : "+command);
+		logger.info("command : "+command);
 		Controller controller = null;
 		String crud = req.getParameter("crud");
-		logger.info("[ActionServlet_doService] crud : "+crud);
+		logger.info("로그의 시작 - crud : "+crud);
 		try {
 			controller = ControllerMapping.getController(command, crud);
 		} catch (Exception e) {
@@ -57,8 +57,8 @@ public class ActionServlet extends HttpServlet {
 			}
 			if(pageMove != null) {
 				String path = pageMove[1];
-				logger.info("[ActionServlet_doService] forward || redirect : "+pageMove[0]);
-				logger.info("[ActionServlet_doService] path :"+path);
+				logger.info("forward || redirect : "+pageMove[0]);
+				logger.info("path :"+path);
 				if("redirect".equals(pageMove[0])) { //sendRedirect 일 때
 					res.sendRedirect(path);
 				} else { //forward 일때

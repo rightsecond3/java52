@@ -1,0 +1,49 @@
+package com.helpme3;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.util.DBConnectionMgr_helpme;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+
+public class DaoRoom {
+	DBConnectionMgr_helpme dbMgr = null;
+	Connection con = null;
+	CallableStatement cstmt = null;// query
+	PreparedStatement pstmt = null;// procedure
+	OracleCallableStatement ocstmt = null;// refcursor
+	ResultSet rs = null;
+	
+	public VOChatList createGroup(VOChatList pVO) {
+		try {
+			con = dbMgr.getConnection();
+			cstmt = con.prepareCall("{call proc_newroom2(?,?,?,?,?)}");
+			int i = 0;
+			cstmt.setString(++i, pVO.getMem_id());
+			cstmt.setString(++i, pVO.getClist_yourid());
+			cstmt.setString(++i, pVO.getClist_gubun());
+			cstmt.registerOutParameter(++i, OracleTypes.VARCHAR);
+			cstmt.registerOutParameter(++i, OracleTypes.CURSOR);
+			cstmt.execute();
+			String result = cstmt.getString(4);
+			ocstmt = (OracleCallableStatement) cstmt;
+			rs = ocstmt.getCursor(5);
+			while(rs.next()) {
+				pVO.setClist_code(rs.getString("clist_code"));
+				pVO.setClist_yourid(rs.getString("clist_yourid"));
+				pVO.setClist_count(rs.getString("clist_count"));
+				pVO.setClist_name(rs.getString("clist_name"));
+				pVO.setClist_gubun(rs.getString("clist_gubun"));
+				pVO.setClist_img(rs.getString("clist_img"));
+				pVO.setMem_id(rs.getString("mem_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pVO;
+	}
+}

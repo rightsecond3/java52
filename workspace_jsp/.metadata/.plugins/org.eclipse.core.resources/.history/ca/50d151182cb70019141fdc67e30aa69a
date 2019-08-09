@@ -1,0 +1,18 @@
+package com.mvc2;
+
+import com.vo.BoardMasterVO;
+import com.vo.BoardSubVO;
+
+public class BoardDao {
+
+	public int boardSAdd(BoardSubVO bsVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int boardMAdd(BoardMasterVO bmVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
